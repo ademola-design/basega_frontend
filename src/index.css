@@ -172,6 +172,28 @@ input[type="checkbox"], input[type="radio"] { cursor: pointer; }
 /* Fills whatever avatar box the parent defines, keeping its shape. */
 .avatar-img { width: 100%; height: 100%; object-fit: cover; border-radius: inherit; display: block; }
 
+/* ── Nomination form alert ────────────────────────────── */
+.nom-alert {
+  display: flex; align-items: flex-start; gap: .7rem;
+  padding: .85rem 1rem; margin-bottom: 1.5rem;
+  background: #FDECEC; border: 1px solid #F5C2C2; border-left: 4px solid #C62828;
+  border-radius: var(--r-md); color: #8E2020; font-size: .88rem; line-height: 1.5;
+}
+.nom-alert-icon {
+  flex-shrink: 0; width: 20px; height: 20px; border-radius: 50%;
+  background: #C62828; color: var(--white);
+  display: flex; align-items: center; justify-content: center;
+  font-size: .75rem; font-weight: 800;
+}
+.nom-alert-link { color: #8E2020; font-weight: 700; text-decoration: underline; }
+.nom-alert-info {
+  background: var(--green-50); border-color: var(--green-200);
+  border-left-color: var(--green-600); color: var(--green-900);
+}
+.nom-alert-info .nom-alert-icon { background: var(--green-600); }
+.nom-alert-info .nom-alert-link { color: var(--green-800); }
+.btn-submit-nom:disabled { opacity: .6; cursor: not-allowed; }
+
 /* ── Member picker (nomination form) ──────────────────── */
 .mp-wrap { position: relative; }
 .mp-dropdown {

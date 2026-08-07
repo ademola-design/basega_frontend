@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { nominationsAPI } from '../api/client'
 import { useAuth } from '../context/AuthContext'
@@ -32,6 +32,8 @@ export default function Nominate() {
   const isLoggedIn = !!user
   const [loading, setLoading]     = useState(false)
   const [submitError, setSubmitError] = useState('')
+  const [errorAttempt, setErrorAttempt] = useState(0)
+  const alertRef = useRef(null)
 
   // The nominee is a member row from the directory, not typed-in text — that
   // link is what lets their profile photo appear on the honoree feature.
@@ -76,8 +78,43 @@ export default function Nominate() {
     return all.length === 0
   }
 
+  /**
+   * The submit button sits below the fold, so a silent failure looks like a
+   * dead button. Record the problem and bump attempt — the effect below then
+   * scrolls it into view.
+   *
+   * attempt increments even when the message repeats, so a second identical
+   * failure still scrolls instead of being swallowed as "no state change".
+   */
+  function showProblem(message) {
+    setSubmitError(message)
+    setErrorAttempt(n => n + 1)
+  }
+
+  // useEffect (not requestAnimationFrame) — it runs after React commits the
+  // DOM, and unlike rAF it is not throttled when the tab is in the background.
+  useEffect(() => {
+    if (!errorAttempt) return
+    const target = alertRef.current || document.querySelector('.input-error')
+    if (!target) return
+
+    // scrollTo with a computed offset rather than scrollIntoView, so the
+    // sticky navbar cannot cover the message we just scrolled to.
+    const NAV_CLEARANCE = 90
+    const top = target.getBoundingClientRect().top + window.scrollY - NAV_CLEARANCE
+    window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' })
+  }, [errorAttempt])
+
   async function handleSubmit() {
-    if (!validate()) return
+    if (!isLoggedIn) {
+      showProblem('Please sign in to submit a nomination.')
+      return
+    }
+    if (!validate()) {
+      showProblem('Please complete the highlighted fields below.')
+      return
+    }
+
     setLoading(true)
     setSubmitError('')
     try {
@@ -88,8 +125,7 @@ export default function Nominate() {
       setSubmitted(true)
       window.scrollTo({ top: 0, behavior: 'smooth' })
     } catch (err) {
-      setSubmitError(err.message || 'Failed to submit nomination.')
-      window.scrollTo({ top: 0, behavior: 'smooth' })
+      showProblem(err.message || 'Failed to submit nomination.')
     } finally {
       setLoading(false)
     }
@@ -132,6 +168,32 @@ export default function Nominate() {
           <div className="nom-layout">
             <div>
               <div className="nom-form-card">
+
+                {/* Why a submit attempt failed. Without this, the button below
+                    the fold looked dead when validation or the API rejected. */}
+                {submitError && (
+                  <div className="nom-alert" role="alert" ref={alertRef}>
+                    <span className="nom-alert-icon">!</span>
+                    <div>
+                      {submitError}
+                      {!isLoggedIn && (
+                        <> <Link to="/login" className="nom-alert-link">Log in</Link> or{' '}
+                        <Link to="/register" className="nom-alert-link">create an account</Link>.</>
+                      )}
+                    </div>
+                  </div>
+                )}
+
+                {!isLoggedIn && !submitError && (
+                  <div className="nom-alert nom-alert-info">
+                    <span className="nom-alert-icon">i</span>
+                    <div>
+                      You need to be signed in to submit a nomination.{' '}
+                      <Link to="/login" className="nom-alert-link">Log in</Link> or{' '}
+                      <Link to="/register" className="nom-alert-link">create an account</Link>.
+                    </div>
+                  </div>
+                )}
 
                 {/* Nominee Info */}
                 <div className="nom-section">
@@ -227,8 +289,12 @@ export default function Nominate() {
                 {/* Submit */}
                 <div className="nom-submit-bar">
                   <span className="form-security-note">Your information is kept confidential</span>
-                  <button className="btn-submit-nom" onClick={handleSubmit}>
-                    Submit Nomination
+                  <button
+                    className="btn-submit-nom"
+                    onClick={handleSubmit}
+                    disabled={loading}
+                  >
+                    {loading ? 'Submitting…' : 'Submit Nomination'}
                   </button>
                 </div>
 
