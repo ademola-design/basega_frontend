@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link, useNavigate, useLocation, Navigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
+import PasswordInput from '../components/PasswordInput'
 
 export default function Login() {
   const navigate = useNavigate()
@@ -10,7 +11,6 @@ export default function Login() {
   const [remember, setRemember] = useState(false)
   const [error, setError]     = useState('')
   const [loading, setLoading] = useState(false)
-  const [showPw, setShowPw]   = useState(false)
 
   function handle(e) {
     setForm(f => ({ ...f, [e.target.name]: e.target.value }))
@@ -87,25 +87,14 @@ export default function Login() {
 
             <div className="login-field">
               <label htmlFor="password">Password</label>
-              <div className="login-pw-wrap">
-                <input
-                  id="password"
-                  type={showPw ? 'text' : 'password'}
-                  name="password"
-                  value={form.password}
-                  onChange={handle}
-                  placeholder="Enter your password"
-                  autoComplete="current-password"
-                />
-                <button
-                  type="button"
-                  className="login-pw-toggle"
-                  onClick={() => setShowPw(s => !s)}
-                  tabIndex={-1}
-                >
-                  {showPw ? 'Hide' : 'Show'}
-                </button>
-              </div>
+              <PasswordInput
+                id="password"
+                name="password"
+                value={form.password}
+                onChange={handle}
+                placeholder="Enter your password"
+                autoComplete="current-password"
+              />
             </div>
 
             <div className="login-options">

@@ -1623,13 +1623,16 @@ textarea.form-control { resize: vertical; min-height: 90px; }
   outline: none;
 }
 .login-field input:focus { border-color: #1B6B35; box-shadow: 0 0 0 3px rgba(27,107,53,.12); background: var(--white); }
-.login-pw-wrap { position: relative; }
-.login-pw-wrap input { padding-right: 2.75rem; }
-.login-pw-toggle {
+/* Shared by every PasswordInput. .login-pw-* are kept as aliases so the
+   login page's existing markup keeps its exact look. */
+.pw-wrap, .login-pw-wrap { position: relative; }
+.pw-wrap input, .login-pw-wrap input { padding-right: 2.75rem; width: 100%; }
+.pw-toggle, .login-pw-toggle {
   position: absolute; right: .75rem; top: 50%; transform: translateY(-50%);
   background: none; border: none; cursor: pointer; font-size: .75rem; font-weight: 600; line-height: 1;
   color: var(--gray-500); padding: 0; letter-spacing: .02em;
 }
+.pw-toggle:hover, .login-pw-toggle:hover { color: var(--green-700); }
 .login-options { display: flex; justify-content: space-between; align-items: center; margin: .5rem 0 1.5rem; }
 .login-remember { display: flex; align-items: center; gap: .45rem; cursor: pointer; font-size: .825rem; color: var(--gray-600); }
 .login-remember input { width: 14px; height: 14px; accent-color: #1B6B35; cursor: pointer; }

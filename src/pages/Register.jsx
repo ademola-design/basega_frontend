@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { authAPI } from '../api/client'
+import PasswordInput from '../components/PasswordInput'
 
 const NIGERIAN_STATES = [
   'Abia','Adamawa','Akwa Ibom','Anambra','Bauchi','Bayelsa','Benue','Borno',
@@ -288,12 +289,26 @@ export default function Register() {
                       <div className="form-row-2">
                         <div className="form-group">
                           <label className="form-label">Password <span className="req">*</span></label>
-                          <input type="password" className={`form-control${err('password') || err('passwordShort') ? ' input-error' : ''}`} value={form.password} onChange={set('password')} placeholder="Minimum 6 characters" />
+                          <PasswordInput
+                            className="form-control"
+                            invalid={err('password') || err('passwordShort')}
+                            value={form.password}
+                            onChange={set('password')}
+                            placeholder="Minimum 6 characters"
+                            autoComplete="new-password"
+                          />
                           {err('passwordShort') && <div className="form-error" style={{ color: 'var(--red-600)', fontSize: '0.8rem', marginTop: 4 }}>Password must be at least 6 characters.</div>}
                         </div>
                         <div className="form-group">
                           <label className="form-label">Confirm Password <span className="req">*</span></label>
-                          <input type="password" className={`form-control${err('confirmPassword') || err('passwordMismatch') ? ' input-error' : ''}`} value={form.confirmPassword} onChange={set('confirmPassword')} placeholder="Confirm your password" />
+                          <PasswordInput
+                            className="form-control"
+                            invalid={err('confirmPassword') || err('passwordMismatch')}
+                            value={form.confirmPassword}
+                            onChange={set('confirmPassword')}
+                            placeholder="Confirm your password"
+                            autoComplete="new-password"
+                          />
                           {err('passwordMismatch') && <div className="form-error" style={{ color: 'var(--red-600)', fontSize: '0.8rem', marginTop: 4 }}>Passwords do not match.</div>}
                         </div>
                       </div>
