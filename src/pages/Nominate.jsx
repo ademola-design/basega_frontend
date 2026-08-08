@@ -47,11 +47,7 @@ export default function Nominate() {
 
   useEffect(() => {
     nominationsAPI.current()
-      .then(nom => {
-        if (!nom) return
-        const h = honoree(nom)
-        setCurrentHonoree({ ...h, monthYear: nom.month_year })
-      })
+      .then(nom => { if (nom) setCurrentHonoree(honoree(nom)) })
       .catch(() => {})   // a quiet sidebar beats blocking the form
   }, [])
 
@@ -321,12 +317,15 @@ export default function Nominate() {
             <aside className="nom-sidebar">
               {currentHonoree ? (
                 <Link to="/alumni-of-month" className="current-featured">
+                  <div className="cf-title">Alumni of the Month</div>
                   <Avatar
                     photoUrl={currentHonoree.photoUrl}
                     name={currentHonoree.name}
                     className="cf-avatar"
                   />
-                  <div className="cf-badge">{currentHonoree.monthYear}</div>
+                  {currentHonoree.monthYear && (
+                    <div className="cf-badge">for {currentHonoree.monthYear}</div>
+                  )}
                   <div className="cf-name">{currentHonoree.name}</div>
                   <div className="cf-role">{currentHonoree.subtitle}</div>
                 </Link>

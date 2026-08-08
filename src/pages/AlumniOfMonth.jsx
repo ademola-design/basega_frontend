@@ -51,7 +51,7 @@ export default function AlumniOfMonth() {
       {/* Hero */}
       <div className="aom-hero">
         <div className="container">
-          <div className="aom-hero-eyebrow">{featured.month_year} Honoree</div>
+          <div className="aom-hero-eyebrow">{h.monthYear || 'Current'} Honoree</div>
           <h1>Alumni of the Month</h1>
           <div className="aom-hero-divider" />
         </div>
@@ -72,7 +72,8 @@ export default function AlumniOfMonth() {
                 <div className="feat-overlay-name">{h.name}</div>
                 <div className="feat-overlay-role">{h.subtitle}</div>
                 <div className="feat-overlay-meta">
-                  <span>{h.company || 'Honoree'}</span>
+                  <span className="feat-overlay-honour">{h.honour}</span>
+                  {h.company && <span>{h.company}</span>}
                 </div>
               </div>
             </div>

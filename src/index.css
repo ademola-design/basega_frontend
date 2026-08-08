@@ -1237,6 +1237,7 @@ a.current-featured:hover { transform: translateY(-2px); box-shadow: var(--shadow
 /* overflow:hidden clips a real profile photo to the circle; the smaller font
    keeps two initials inside the 60px when there is no photo. */
 .cf-avatar { width: 60px; height: 60px; border-radius: 50%; background: linear-gradient(145deg,#C9622F,#E8956B); font-size: 1.35rem; font-weight: 800; overflow: hidden; display: flex; align-items: center; justify-content: center; margin: 0 auto .75rem; border: 2px solid rgba(255,255,255,.2); }
+.cf-title  { font-size: .68rem; font-weight: 800; letter-spacing: .09em; text-transform: uppercase; color: rgba(255,255,255,.6); margin-bottom: .85rem; }
 .cf-badge  { display: inline-block; background: #d4a843; color: var(--white); font-size: .65rem; font-weight: 800; letter-spacing: .07em; text-transform: uppercase; padding: .2rem .65rem; border-radius: 999px; margin-bottom: .5rem; }
 .cf-name   { font-size: .95rem; font-weight: 800; margin-bottom: .2rem; }
 .cf-role   { font-size: .78rem; color: rgba(255,255,255,.65); line-height: 1.4; }
@@ -1264,7 +1265,9 @@ a.current-featured:hover { transform: translateY(-2px); box-shadow: var(--shadow
 .featured-photo-overlay { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(to top,rgba(0,0,0,.85) 0%,rgba(0,0,0,.5) 70%,transparent 100%); padding: 3rem 1.25rem 1.25rem; color: var(--white); }
 .feat-overlay-name { font-size: 1.25rem; font-weight: 800; margin-bottom: .2rem; }
 .feat-overlay-role { font-size: .82rem; color: #d4a843; margin-bottom: .75rem; line-height: 1.4; }
-.feat-overlay-meta { display: flex; align-items: center; gap: 1rem; font-size: .75rem; color: rgba(255,255,255,.7); }
+.feat-overlay-meta { display: flex; align-items: center; gap: 1rem; font-size: .75rem; color: rgba(255,255,255,.7); flex-wrap: wrap; }
+/* The honour and its month, tied to the person rather than the page heading. */
+.feat-overlay-honour { color: #d4a843; font-weight: 700; }
 .feat-section-title { display: flex; align-items: center; gap: .5rem; font-size: 1rem; font-weight: 800; color: var(--gray-700); margin-bottom: 1rem; }
 .feat-bio { color: var(--gray-700); line-height: 1.85; font-size: .975rem; margin-bottom: 1.25rem; }
 .feat-quote-alt { position: relative; background: var(--gray-100); border-radius: var(--radius-lg); padding: 1.5rem 1.5rem 1.25rem; margin-bottom: 1.75rem; }

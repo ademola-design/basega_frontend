@@ -9,6 +9,15 @@
  * ("Ada Okonkwo (Class of 1998 - Surgeon)"), so fall back to parsing it. Those
  * have no photo and render as initials.
  */
+/**
+ * "Alumni of the Month · August 2026" — the honour and the month it was for,
+ * stated together. Falls back to the bare title on legacy rows that never
+ * recorded a month.
+ */
+export function honourLabel(monthYear) {
+  return monthYear ? `Alumni of the Month · ${monthYear}` : 'Alumni of the Month'
+}
+
 export function honoree(nom) {
   if (!nom) return null
 
@@ -20,12 +29,14 @@ export function honoree(nom) {
     ].filter(Boolean)
 
     return {
-      name:     `${title}${nom.nominee_first_name} ${nom.nominee_last_name}`,
-      subtitle: bits.join(' · ') || 'Alumnus',
-      photoUrl: nom.nominee_photo_url,
-      memberId: nom.nominee_member_id,
-      company:  nom.nominee_company,
-      location: [nom.nominee_city, nom.nominee_state].filter(Boolean).join(', '),
+      name:      `${title}${nom.nominee_first_name} ${nom.nominee_last_name}`,
+      subtitle:  bits.join(' · ') || 'Alumnus',
+      photoUrl:  nom.nominee_photo_url,
+      memberId:  nom.nominee_member_id,
+      company:   nom.nominee_company,
+      location:  [nom.nominee_city, nom.nominee_state].filter(Boolean).join(', '),
+      monthYear: nom.month_year,
+      honour:    honourLabel(nom.month_year),
     }
   }
 
@@ -36,5 +47,10 @@ export function honoree(nom) {
     name = parts[0]
     subtitle = parts[1].replace(')', '')
   }
-  return { name, subtitle, photoUrl: null, memberId: null, company: null, location: '' }
+  return {
+    name, subtitle,
+    photoUrl: null, memberId: null, company: null, location: '',
+    monthYear: nom.month_year,
+    honour:    honourLabel(nom.month_year),
+  }
 }

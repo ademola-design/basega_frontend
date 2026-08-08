@@ -133,7 +133,7 @@ export default function Home() {
                 <div className="excellence-card">
                   <Avatar photoUrl={h.photoUrl} name={h.name} className="excellence-card-ph" />
                   <div className="excellence-card-info">
-                    <div className="alumni-label">Alumni of the Month</div>
+                    <div className="alumni-label">{h.honour}</div>
                     <h3>{h.name}</h3>
                     <p>{h.subtitle}</p>
                   </div>
