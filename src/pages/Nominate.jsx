@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom'
 import { nominationsAPI } from '../api/client'
 import { useAuth } from '../context/AuthContext'
 import MemberPicker from '../components/MemberPicker'
+import Avatar from '../components/Avatar'
+import { honoree } from '../lib/honoree'
 
 const CATEGORIES = [
   'Professional Excellence',
@@ -38,6 +40,20 @@ export default function Nominate() {
   // The nominee is a member row from the directory, not typed-in text — that
   // link is what lets their profile photo appear on the honoree feature.
   const [nominee, setNominee] = useState(null)
+
+  // Sidebar spotlight. Null until loaded, and stays null when no one has been
+  // crowned yet — the sidebar shows a placeholder rather than inventing a name.
+  const [currentHonoree, setCurrentHonoree] = useState(null)
+
+  useEffect(() => {
+    nominationsAPI.current()
+      .then(nom => {
+        if (!nom) return
+        const h = honoree(nom)
+        setCurrentHonoree({ ...h, monthYear: nom.month_year })
+      })
+      .catch(() => {})   // a quiet sidebar beats blocking the form
+  }, [])
 
   const [form, setForm] = useState({
     category: '', reason: '', achievements: '',
@@ -303,12 +319,24 @@ export default function Nominate() {
 
             {/* Sidebar */}
             <aside className="nom-sidebar">
-              <div className="current-featured">
-                <div className="cf-avatar">TA</div>
-                <div className="cf-badge">May 2026</div>
-                <div className="cf-name">Dr. Titilawale Adekiya</div>
-                <div className="cf-role">Senior Consultant Physician<br />Lagos University Teaching Hospital</div>
-              </div>
+              {currentHonoree ? (
+                <Link to="/alumni-of-month" className="current-featured">
+                  <Avatar
+                    photoUrl={currentHonoree.photoUrl}
+                    name={currentHonoree.name}
+                    className="cf-avatar"
+                  />
+                  <div className="cf-badge">{currentHonoree.monthYear}</div>
+                  <div className="cf-name">{currentHonoree.name}</div>
+                  <div className="cf-role">{currentHonoree.subtitle}</div>
+                </Link>
+              ) : (
+                <div className="current-featured">
+                  <div className="cf-avatar">★</div>
+                  <div className="cf-name">No honoree yet</div>
+                  <div className="cf-role">Your nomination could be the first.</div>
+                </div>
+              )}
 
               <div className="info-card">
                 <h4>Selection Criteria</h4>

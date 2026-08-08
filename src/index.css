@@ -1231,8 +1231,12 @@ textarea.form-control { resize: vertical; min-height: 90px; }
 .info-card ul { list-style: none; display: flex; flex-direction: column; gap: .5rem; }
 .info-card li { font-size: .825rem; color: var(--gray-700); line-height: 1.5; }
 .info-card a  { color: var(--green-700); }
-.current-featured { background: linear-gradient(135deg, var(--green-900), var(--green-700)); border-radius: var(--radius-lg); padding: 1.25rem; color: var(--white); text-align: center; }
-.cf-avatar { width: 60px; height: 60px; border-radius: 50%; background: linear-gradient(145deg,#C9622F,#E8956B); font-size: 1.8rem; display: flex; align-items: center; justify-content: center; margin: 0 auto .75rem; border: 2px solid rgba(255,255,255,.2); }
+.current-featured { display: block; background: linear-gradient(135deg, var(--green-900), var(--green-700)); border-radius: var(--radius-lg); padding: 1.25rem; color: var(--white); text-align: center; transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease); }
+/* It links through to the honoree's full story when someone is crowned. */
+a.current-featured:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+/* overflow:hidden clips a real profile photo to the circle; the smaller font
+   keeps two initials inside the 60px when there is no photo. */
+.cf-avatar { width: 60px; height: 60px; border-radius: 50%; background: linear-gradient(145deg,#C9622F,#E8956B); font-size: 1.35rem; font-weight: 800; overflow: hidden; display: flex; align-items: center; justify-content: center; margin: 0 auto .75rem; border: 2px solid rgba(255,255,255,.2); }
 .cf-badge  { display: inline-block; background: #d4a843; color: var(--white); font-size: .65rem; font-weight: 800; letter-spacing: .07em; text-transform: uppercase; padding: .2rem .65rem; border-radius: 999px; margin-bottom: .5rem; }
 .cf-name   { font-size: .95rem; font-weight: 800; margin-bottom: .2rem; }
 .cf-role   { font-size: .78rem; color: rgba(255,255,255,.65); line-height: 1.4; }
