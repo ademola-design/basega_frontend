@@ -9,9 +9,9 @@ export default function MemberCard({ member }) {
 
   return (
     <div className="member-card">
-      {isFin && <span className="member-bookmark" title="Financial Member">★</span>}
+      {/* {isFin && <span className="member-bookmark" title="Financial Member">★</span>} */}
 
-      <div className={`member-avatar-wrap ${isFin ? 'fin-ring' : ''}`}>
+      <div className={`member-avatar-wrap`}>
         <div className="member-avatar">
           {member.photo
             ? <img src={member.photo} alt={member.name} />
@@ -35,10 +35,10 @@ export default function MemberCard({ member }) {
         </div>
       </div>
 
-      <div style={{ marginTop: '0.75rem', width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <span className={isFin ? 'badge-fin' : 'badge-inact'}>
+      <div style={{ marginTop: '0.75rem', width: '100%', display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
+        {/* <span className={isFin ? 'badge-fin' : 'badge-inact'}>
           {isFin ? 'Financial' : 'Inactive'}
-        </span>
+        </span> */}
         <Link to={`/members/${member.id}`} className="btn btn-outline btn-xs">
           View Profile
         </Link>

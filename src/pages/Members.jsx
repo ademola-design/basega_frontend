@@ -81,12 +81,12 @@ export default function Members() {
               >
                 All Approved Members
               </button>
-              <button
+              {/* <button
                 className={`tab-sw-btn ${tab === 'financial' ? 'active' : ''}`}
                 onClick={() => setTab('financial')}
               >
                 Financial Members
-              </button>
+              </button> */}
             </div>
           </div>
 

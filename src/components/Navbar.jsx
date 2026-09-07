@@ -4,18 +4,18 @@ import { useAuth } from '../context/AuthContext'
 import { imageUrl } from '../api/client'
 
 const links = [
-  { to: '/',                 label: 'Home' },
-  { to: '/about',            label: 'About' },
-  { to: '/payment',          label: 'Payments' },
-  { to: '/members',          label: 'Members' },
-  { to: '/news',             label: 'Announcements' },
-  { to: '/alumni-of-month',  label: 'Alumni of the Month' },
-  { to: '/jubilee',          label: 'Jubilee', line2: '50th', highlight: true },
+  { to: '/', label: 'Home' },
+  { to: '/about', label: 'About' },
+  // { to: '/payment',          label: 'Payments' }, // Delayed for now
+  { to: '/members', label: 'Members' },
+  { to: '/news', label: 'Announcements' },
+  { to: '/alumni-of-month', label: 'Alumni of the Month' },
+  { to: '/jubilee', label: 'Jubilee', line2: '50th', highlight: true },
 ]
 
 function initials(user) {
   const first = user.firstName?.[0] || user.email?.[0] || 'M'
-  const last  = user.lastName?.[0]  || ''
+  const last = user.lastName?.[0] || ''
   return (first + last).toUpperCase()
 }
 
@@ -110,9 +110,12 @@ export default function Navbar() {
                   <Link to={`/members/${user.id}`} className="nav-dropdown-item" role="menuitem">
                     My Profile
                   </Link>
-                  <Link to="/payment" className="nav-dropdown-item" role="menuitem">
-                    Pay Dues
+                  <Link to="/" className="nav-dropdown-item" role="menuitem">
+                    Public Site
                   </Link>
+                  {/* <Link to="/payment" className="nav-dropdown-item" role="menuitem">
+                    Pay Dues
+                  </Link> */}
                   {isAdmin && (
                     <Link to="/admin" className="nav-dropdown-item" role="menuitem">
                       Admin Panel
@@ -133,11 +136,11 @@ export default function Navbar() {
             </div>
           ) : (
             <>
-              <Link to="/login"    className="nav-btn-login">Login</Link>
+              <Link to="/login" className="nav-btn-login">Login</Link>
               <Link to="/register" className="nav-btn-register">Register</Link>
             </>
           )}
-          <Link to="/payment"  className="nav-btn-gold">Pay Dues</Link>
+          {/* <Link to="/payment"  className="nav-btn-gold">Pay Dues</Link> */}
         </div>
 
         <button
@@ -175,10 +178,11 @@ export default function Navbar() {
             </div>
             <Link to="/dashboard" className="nav-link" onClick={() => setOpen(false)}>My Dashboard</Link>
             <Link to={`/members/${user.id}`} className="nav-link" onClick={() => setOpen(false)}>My Profile</Link>
+            <Link to="/" className="nav-link" onClick={() => setOpen(false)}>Public Site</Link>
             {isAdmin && (
               <Link to="/admin" className="nav-link" onClick={() => setOpen(false)}>Admin Panel</Link>
             )}
-            <Link to="/payment" className="nav-link" onClick={() => setOpen(false)}>Pay Dues</Link>
+            {/* <Link to="/payment" className="nav-link" onClick={() => setOpen(false)}>Pay Dues</Link> */}
             <button
               type="button"
               className="nav-link nav-mobile-logout"
@@ -189,9 +193,9 @@ export default function Navbar() {
           </>
         ) : (
           <>
-            <Link to="/login"    className="nav-link" onClick={() => setOpen(false)}>Login</Link>
+            <Link to="/login" className="nav-link" onClick={() => setOpen(false)}>Login</Link>
             <Link to="/register" className="nav-link" onClick={() => setOpen(false)}>Register</Link>
-            <Link to="/payment"  className="nav-link" onClick={() => setOpen(false)}>Pay Dues</Link>
+            {/* <Link to="/payment"  className="nav-link" onClick={() => setOpen(false)}>Pay Dues</Link> */}
           </>
         )}
       </div>

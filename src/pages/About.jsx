@@ -2,18 +2,18 @@ import { Link } from 'react-router-dom'
 import PageHeader from '../components/PageHeader'
 
 const milestones = [
-  { year: '1985', side: 'left',  title: 'Foundation',              desc: 'BASEGA School was founded with a vision to provide world-class education rooted in discipline, moral values, and academic excellence.' },
-  { year: '1992', side: 'right', title: 'First Graduating Set',    desc: 'The pioneer set graduated with distinction, setting the standard for generations to come. 36% gained university admission.' },
-  { year: '2000', side: 'left',  title: 'New Campus Expansion',    desc: 'A state-of-the-art science laboratory, library complex, and sports facilities were commissioned, transforming the learning environment.' },
+  { year: '1985', side: 'left', title: 'Foundation', desc: 'BASEGA School was founded with a vision to provide world-class education rooted in discipline, moral values, and academic excellence.' },
+  { year: '1992', side: 'right', title: 'First Graduating Set', desc: 'The pioneer set graduated with distinction, setting the standard for generations to come. 36% gained university admission.' },
+  { year: '2000', side: 'left', title: 'New Campus Expansion', desc: 'A state-of-the-art science laboratory, library complex, and sports facilities were commissioned, transforming the learning environment.' },
   { year: '2005', side: 'right', title: 'Alumni Association Founded', desc: 'Former students officially formed the BASEGA Alumni Association to maintain bonds, give back to the school, and support current students.' },
-  { year: '2012', side: 'left',  title: 'International Recognition', desc: 'BASEGA School received accreditation from the Cambridge International Examinations board, opening doors for students globally.' },
-  { year: '2018', side: 'right', title: 'Scholarship Fund Launch',  desc: 'The Alumni Association launched a ₦50M scholarship endowment fund to sponsor brilliant students from underprivileged backgrounds.' },
-  { year: '2024', side: 'left',  title: '₦100M Milestone',         desc: 'Combined alumni contributions surpassed ₦100 Million — funding infrastructure, scholarships, and community outreach programs.' },
+  { year: '2012', side: 'left', title: 'International Recognition', desc: 'BASEGA School received accreditation from the Cambridge International Examinations board, opening doors for students globally.' },
+  { year: '2018', side: 'right', title: 'Scholarship Fund Launch', desc: 'The Alumni Association launched a ₦50M scholarship endowment fund to sponsor brilliant students from underprivileged backgrounds.' },
+  { year: '2024', side: 'left', title: '₦100M Milestone', desc: 'Combined alumni contributions surpassed ₦100 Million — funding infrastructure, scholarships, and community outreach programs.' },
 ]
 
 const values = [
-  { title: 'Our Mission',           desc: 'To nurture well-rounded individuals equipped with knowledge, character and the confidence to lead in a rapidly changing world.' },
-  { title: 'Academic Excellence',   desc: 'We maintain rigorous academic standards, blending the Nigerian and Cambridge curricula to prepare students for both local and international success.' },
+  { title: 'Our Mission', desc: 'To nurture well-rounded individuals equipped with knowledge, character and the confidence to lead in a rapidly changing world.' },
+  { title: 'Academic Excellence', desc: 'We maintain rigorous academic standards, blending the Nigerian and Cambridge curricula to prepare students for both local and international success.' },
   { title: 'Community and Service', desc: 'We instil in every student a sense of responsibility to give back — to their community, and the nation at large.' },
 ]
 
@@ -85,25 +85,27 @@ export default function About() {
 
       {/* ── Our History ── */}
       <div className="history-intro">
-        <p className="eyebrow-gold">Est. 1985</p>
-        <h2>Our History</h2>
-        <p>
-          BASEGA School was established in 1985 by a group of visionary educators who believed that every
-          Nigerian child deserves access to world-class education. What began as a modest primary school with
-          45 students and 6 teachers has grown into one of the most respected educational institutions in the country.
-        </p>
-        <p>
-          Over the decades, BASEGA has expanded to include a nursery, primary, secondary, and sixth form college —
-          all united by a shared commitment to academic excellence, moral integrity, and holistic development. Our
-          motto, <span className="highlight-green">"Knowledge, Discipline, Service"</span> continues to guide every
-          student who walks through our gates.
-        </p>
-        <p>
-          Today, BASEGA School stands as a beacon of educational excellence, with alumni making significant
-          contributions across every sector — from medicine and law to technology, the arts, and public service.
-          Our graduates carry the BASEGA spirit wherever they go: a relentless pursuit of excellence and a deep
-          commitment to community.
-        </p>
+        <div style={{ maxWidth: '900px', margin: '0 auto' }}>
+          <p className="eyebrow-gold">Est. 1985</p>
+          <h2>Our History</h2>
+          <p>
+            BASEGA School was established in 1985 by a group of visionary educators who believed that every
+            Nigerian child deserves access to world-class education. What began as a modest primary school with
+            45 students and 6 teachers has grown into one of the most respected educational institutions in the country.
+          </p>
+          <p>
+            Over the decades, BASEGA has expanded to include a nursery, primary, secondary, and sixth form college —
+            all united by a shared commitment to academic excellence, moral integrity, and holistic development. Our
+            motto, <span className="highlight-green">"Knowledge, Discipline, Service"</span> continues to guide every
+            student who walks through our gates.
+          </p>
+          <p>
+            Today, BASEGA School stands as a beacon of educational excellence, with alumni making significant
+            contributions across every sector — from medicine and law to technology, the arts, and public service.
+            Our graduates carry the BASEGA spirit wherever they go: a relentless pursuit of excellence and a deep
+            commitment to community.
+          </p>
+        </div>
       </div>
 
       {/* ── Mission & Core Values ── */}
@@ -139,10 +141,10 @@ export default function About() {
           </div>
           <div className="achievements-grid">
             {[
-              { title: 'Academic Excellence',  desc: 'BASEGA students have consistently dominated national science olympiads, debate competitions, and inter-school championships.' },
-              { title: 'Outstanding Alumni',    desc: 'Over four decades, BASEGA has produced thousands of graduates excelling in medicine, law, engineering, business, and the arts.' },
-              { title: 'Global Recognition',   desc: 'Multiple students ranked among the top performers worldwide in Cambridge International Examinations.' },
-              { title: 'Scholarship Impact',   desc: 'Through the alumni scholarship fund, over 200 students have received full or partial tuition support.' },
+              { title: 'Academic Excellence', desc: 'BASEGA students have consistently dominated national science olympiads, debate competitions, and inter-school championships.' },
+              { title: 'Outstanding Alumni', desc: 'Over four decades, BASEGA has produced thousands of graduates excelling in medicine, law, engineering, business, and the arts.' },
+              { title: 'Global Recognition', desc: 'Multiple students ranked among the top performers worldwide in Cambridge International Examinations.' },
+              { title: 'Scholarship Impact', desc: 'Through the alumni scholarship fund, over 200 students have received full or partial tuition support.' },
             ].map(a => (
               <div key={a.title} className="purpose-card">
                 <h3>{a.title}</h3>
@@ -215,11 +217,6 @@ export default function About() {
                 <Link to="/payment" className="btn btn-outline">Join / Pay Dues</Link>
               </div>
             </div>
-            <div className="assoc-photo-grid">
-              {['Reunions', 'Mentorship', 'Awards', 'Gallery'].map((e, i) => (
-                <div key={i} className="assoc-photo">{e}</div>
-              ))}
-            </div>
           </div>
         </div>
       </section>
@@ -233,9 +230,9 @@ export default function About() {
           </div>
           <div className="values-grid">
             {[
-              { title: 'Excellence',    desc: 'Striving for the highest standards in all endeavours, academic and professional.' },
-              { title: 'Brotherhood',   desc: 'Fostering lifelong bonds of solidarity and mutual support among all BASEGA graduates.' },
-              { title: 'Service',       desc: 'Giving back to the school, community, and nation that shaped who we are.' },
+              { title: 'Excellence', desc: 'Striving for the highest standards in all endeavours, academic and professional.' },
+              { title: 'Brotherhood', desc: 'Fostering lifelong bonds of solidarity and mutual support among all BASEGA graduates.' },
+              { title: 'Service', desc: 'Giving back to the school, community, and nation that shaped who we are.' },
             ].map(v => (
               <div key={v.title} className="value-card">
                 <h4>{v.title}</h4>

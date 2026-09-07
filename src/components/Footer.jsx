@@ -33,7 +33,7 @@ export default function Footer() {
             <ul>
               <li><Link to="/about">About the Association</Link></li>
               <li><Link to="/members">Alumni Directory</Link></li>
-              <li><Link to="/payment">Pay Annual Dues</Link></li>
+              {/* <li><Link to="/payment">Pay Annual Dues</Link></li> */}
               <li><Link to="/news">News &amp; Events</Link></li>
               <li><Link to="/alumni-of-month">Alumni of the Month</Link></li>
             </ul>

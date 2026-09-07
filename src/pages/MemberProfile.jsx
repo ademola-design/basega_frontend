@@ -21,10 +21,14 @@ export default function MemberProfile() {
           name: `${data.title ? data.title + ' ' : ''}${data.first_name} ${data.last_name}`,
           photo: data.photo_url ? imageUrl(data.photo_url) : null,
           classYear: data.class_set,
+          gender: data.gender,
+          house: data.house,
+          alumniOfMonthCount: Number(data.alumni_of_month_count) || 0,
           profession: data.profession,
-          location: `${data.city}, ${data.state}`,
+          company: data.company,
+          industry: data.industry,
+          location: [data.city, data.state].filter(Boolean).join(', '),
           status: data.status === 'financial' ? 'Financial' : 'Inactive',
-          about: data.bio,
           email: data.email,
           phone: data.phone,
           linkedin: data.linkedin,
@@ -70,7 +74,7 @@ export default function MemberProfile() {
               }
             </div>
             <div className="profile-info">
-              <h1>{member.name}</h1>
+              <h1>{member.name} <span className="status-badge">{member.status}</span></h1>
               <div className="profile-class">Class of {member.classYear} · BASEGA School</div>
               <div className="profile-tags">
                 <span className="profile-tag">{member.profession}</span>
@@ -91,10 +95,29 @@ export default function MemberProfile() {
         <div className="container">
           <div className="profile-layout">
             <div className="profile-main">
-              {/* About */}
+              {/* Member Details */}
               <div className="profile-card">
-                <h3>About</h3>
-                <p>{member.about}</p>
+                <h3>Member Details</h3>
+                <div className="info-row">
+                  <span className="lbl">Class Year</span>
+                  <span className="val">{member.classYear || 'Not provided'}</span>
+                </div>
+                <div className="info-row">
+                  <span className="lbl">House / Set</span>
+                  <span className="val">{member.house || 'Not provided'}</span>
+                </div>
+                <div className="info-row">
+                  <span className="lbl">Gender</span>
+                  <span className="val">{member.gender || 'Not provided'}</span>
+                </div>
+                <div className="info-row">
+                  <span className="lbl">Location</span>
+                  <span className="val">{member.location || 'Not provided'}</span>
+                </div>
+                <div className="info-row">
+                  <span className="lbl">Alumni of the Month</span>
+                  <span className="val">{member.alumniOfMonthCount} time{member.alumniOfMonthCount === 1 ? '' : 's'}</span>
+                </div>
               </div>
 
               {/* Professional Background */}
@@ -102,19 +125,19 @@ export default function MemberProfile() {
                 <h3>Professional Background</h3>
                 <div className="info-row">
                   <span className="lbl">Profession</span>
-                  <span className="val">{member.profession}</span>
+                  <span className="val">{member.profession || 'Not provided'}</span>
                 </div>
                 <div className="info-row">
                   <span className="lbl">Industry</span>
-                  <span className="val">{member.profession}</span>
+                  <span className="val">{member.industry || 'Not provided'}</span>
+                </div>
+                <div className="info-row">
+                  <span className="lbl">Company</span>
+                  <span className="val">{member.company || 'Not provided'}</span>
                 </div>
                 <div className="info-row">
                   <span className="lbl">Location</span>
-                  <span className="val">{member.location}</span>
-                </div>
-                <div className="info-row">
-                  <span className="lbl">Class Year</span>
-                  <span className="val">{member.classYear}</span>
+                  <span className="val">{member.location || 'Not provided'}</span>
                 </div>
               </div>
 
@@ -144,19 +167,32 @@ export default function MemberProfile() {
                 <h3>Contact Information</h3>
                 <div className="info-row">
                   <span className="lbl">Email</span>
-                  <a href={`mailto:${member.email}`} style={{ color: 'var(--green-700)', fontSize: '0.88rem' }}>{member.email}</a>
+                  {member.email ? (
+                    <a href={`mailto:${member.email}`} style={{ color: 'var(--green-700)', fontSize: '0.88rem' }}>
+                      {member.email}
+                    </a>
+                  ) : (
+                    <span className="val" style={{ fontSize: '0.88rem', color: 'var(--gray-500)' }}>Not provided</span>
+                  )}
                 </div>
                 <div className="info-row">
                   <span className="lbl">Phone</span>
-                  <span className="val" style={{ fontSize: '0.88rem' }}>{member.phone}</span>
+                  <span className="val" style={{ fontSize: '0.88rem' }}>{member.phone || 'Not provided'}</span>
                 </div>
-                <button className="btn btn-primary btn-sm mt-16" style={{ width: '100%' }}>
-                  Send Message
-                </button>
+                <div className="info-row">
+                  <span className="lbl">LinkedIn</span>
+                  {member.linkedin ? (
+                    <a href={member.linkedin.startsWith('http') ? member.linkedin : `https://${member.linkedin}`} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--green-700)', fontSize: '0.88rem', wordBreak: 'break-all' }}>
+                      {member.linkedin}
+                    </a>
+                  ) : (
+                    <span className="val" style={{ fontSize: '0.88rem', color: 'var(--gray-500)' }}>Not provided</span>
+                  )}
+                </div>
               </div>
 
               {/* Membership Status */}
-              <div className="profile-card">
+              {/* <div className="profile-card">
                 <h3>Membership</h3>
                 <div style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 12 }}>
                   <span className="badge badge-green">Active Member</span>
@@ -169,7 +205,7 @@ export default function MemberProfile() {
                   <span className="lbl">Status</span>
                   <span className="val" style={{ fontSize: '0.88rem', color: 'var(--green-600)' }}>Paid Up</span>
                 </div>
-              </div>
+              </div> */}
 
               {/* Back */}
               <Link to="/members" className="btn btn-outline" style={{ justifyContent: 'center' }}>

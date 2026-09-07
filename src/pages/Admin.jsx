@@ -6,14 +6,14 @@ import Avatar from '../components/Avatar'
 import { honoree } from '../lib/honoree'
 
 const navItems = [
-  { key: 'dashboard',  label: 'Dashboard',          icon: '📊' },
-  { key: 'members',    label: 'Members',             icon: '👥' },
-  { key: 'approvals',  label: 'Pending Approvals',   icon: '⏳' },
-  { key: 'nominations',label: 'Nominations',         icon: '🏆' },
-  { key: 'news',       label: 'News & Posts',        icon: '📰' },
-  { key: 'events',     label: 'Events',              icon: '📅' },
-  { key: 'messages',   label: 'Messages',            icon: '💬' },
-  { key: 'settings',   label: 'Settings',            icon: '⚙️' },
+  { key: 'dashboard', label: 'Dashboard', icon: '📊' },
+  { key: 'members', label: 'Members', icon: '👥' },
+  { key: 'approvals', label: 'Pending Approvals', icon: '⏳' },
+  { key: 'nominations', label: 'Nominations', icon: '🏆' },
+  { key: 'news', label: 'News & Posts', icon: '📰' },
+  { key: 'events', label: 'Events', icon: '📅' },
+  { key: 'messages', label: 'Messages', icon: '💬' },
+  { key: 'settings', label: 'Settings', icon: '⚙️' },
 ]
 
 function initials(name) {
@@ -46,7 +46,7 @@ export default function Admin() {
       setNewsFormData({ title: '', excerpt: '', category: 'General', body: '', imageUrl: '' })
       const updatedNews = await newsAPI.adminAll()
       setNewsList(updatedNews)
-    } catch(err) {
+    } catch (err) {
       alert(err.message || 'Failed to create article')
     }
   }
@@ -56,7 +56,7 @@ export default function Admin() {
     try {
       await newsAPI.remove(id)
       setNewsList(list => list.filter(n => n.id !== id))
-    } catch(err) {
+    } catch (err) {
       alert(err.message || 'Failed to delete article')
     }
   }
@@ -80,7 +80,7 @@ export default function Admin() {
       await nominationsAPI.select(nom.id)
       const data = await nominationsAPI.all()
       setNominationsList(data)
-    } catch(err) {
+    } catch (err) {
       alert(err.message || 'Failed to approve nomination')
     }
   }
@@ -90,7 +90,7 @@ export default function Admin() {
       await nominationsAPI.reject(id)
       const data = await nominationsAPI.all()
       setNominationsList(data)
-    } catch(err) {
+    } catch (err) {
       alert(err.message || 'Failed to reject nomination')
     }
   }
@@ -100,7 +100,7 @@ export default function Admin() {
     try {
       await nominationsAPI.remove(id)
       setNominationsList(list => list.filter(n => n.id !== id))
-    } catch(err) {
+    } catch (err) {
       alert(err.message || 'Failed to delete nomination')
     }
   }
@@ -160,7 +160,7 @@ export default function Admin() {
   async function removeUser(id) {
     if (!window.confirm('Are you sure you want to remove this member?')) return
     try {
-      await membersAPI.delete(id)
+      await membersAPI.remove(id)
       setMembersList(list => list.filter(m => m.id !== id))
       const updatedStats = await membersAPI.stats()
       setStats(updatedStats)
@@ -173,7 +173,10 @@ export default function Admin() {
     const query = e.target.value
     setSearchQuery(query)
     try {
-      const data = await membersAPI.all(query, searchStatus)
+      const params = {}
+      if (query) params.search = query
+      if (searchStatus) params.status = searchStatus
+      const data = await membersAPI.all(params)
       setMembersList(data)
     } catch (err) {
       console.error(err)
@@ -183,7 +186,10 @@ export default function Admin() {
   async function handleStatusFilter(status) {
     setSearchStatus(status)
     try {
-      const data = await membersAPI.all(searchQuery, status)
+      const params = {}
+      if (searchQuery) params.search = searchQuery
+      if (status) params.status = status
+      const data = await membersAPI.all(params)
       setMembersList(data)
     } catch (err) {
       console.error(err)
@@ -195,14 +201,14 @@ export default function Admin() {
   }
 
   const pageTitles = {
-    dashboard:   'Dashboard',
-    members:     'Members Management',
-    approvals:   'Pending Approvals',
+    dashboard: 'Dashboard',
+    members: 'Members Management',
+    approvals: 'Pending Approvals',
     nominations: 'Alumni Nominations',
-    news:        'News & Posts',
-    events:      'Events Management',
-    messages:    'Messages',
-    settings:    'Settings',
+    news: 'News & Posts',
+    events: 'Events Management',
+    messages: 'Messages',
+    settings: 'Settings',
   }
 
   return (
@@ -414,7 +420,7 @@ export default function Admin() {
                     >
                       <option value="">All Statuses</option>
                       <option value="approved">Approved</option>
-                      <option value="financial">Financial</option>
+                      {/* <option value="financial">Financial</option> */}
                       <option value="pending">Pending</option>
                       <option value="rejected">Rejected</option>
                     </select>
@@ -506,7 +512,7 @@ export default function Admin() {
                             <td>
                               <div className="a-actions">
                                 <button className="btn btn-success btn-sm" onClick={() => approveUser(m.id)}>✓ Approve</button>
-                                <button className="btn btn-danger btn-sm"  onClick={() => rejectUser(m.id)}>✗ Reject</button>
+                                <button className="btn btn-danger btn-sm" onClick={() => rejectUser(m.id)}>✗ Reject</button>
                               </div>
                             </td>
                           </tr>
@@ -539,46 +545,47 @@ export default function Admin() {
                       {nominationsList.map(n => {
                         const h = honoree(n)
                         return (
-                        <tr key={n.id}>
-                          <td>
-                            <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                              <Avatar photoUrl={h.photoUrl} name={h.name} className="mp-option-avatar" />
-                              <div>
-                                <div style={{ fontWeight: 600 }}>{h.name}</div>
-                                <div style={{ fontSize: '.78rem', color: 'var(--gray-500)' }}>{h.subtitle}</div>
+                          <tr key={n.id}>
+                            <td>
+                              <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                                <Avatar photoUrl={h.photoUrl} name={h.name} className="mp-option-avatar" />
+                                <div>
+                                  <div style={{ fontWeight: 600 }}>{h.name}</div>
+                                  <div style={{ fontSize: '.78rem', color: 'var(--gray-500)' }}>{h.subtitle}</div>
+                                </div>
                               </div>
-                            </div>
-                          </td>
-                          <td>{n.nominator_first_name ? `${n.nominator_first_name} ${n.nominator_last_name}` : 'Unknown'}</td>
-                          <td>{n.month_year || '—'}</td>
-                          <td style={{ maxWidth: 200, fontSize: '0.85rem' }}>
-                            <div style={{ maxHeight: '60px', overflowY: 'auto' }}>
-                              {n.reason}
-                            </div>
-                          </td>
-                          <td>
-                            <span className={`badge badge-${n.status === 'selected' ? 'green' : n.status === 'rejected' ? 'red' : 'yellow'}`} style={n.status === 'pending' ? { background: '#FFC107', color: '#000' } : {}}>
-                              {n.status === 'selected' ? 'Alumni of the Month' : n.status}
-                            </span>
-                          </td>
-                          <td>
-                            <div className="a-actions">
-                              {n.status !== 'selected' && (
-                                <button
-                                  className="btn btn-success btn-xs"
-                                  onClick={() => selectNomination(n, h.name)}
-                                >
-                                  Make Alumni of the Month
-                                </button>
-                              )}
-                              {n.status === 'pending' && (
-                                <button className="btn btn-danger btn-xs" onClick={() => rejectNomination(n.id)}>Reject</button>
-                              )}
-                              <button className="btn btn-outline btn-xs" style={{ color: 'red', borderColor: 'red' }} onClick={() => deleteNomination(n.id)}>Delete</button>
-                            </div>
-                          </td>
-                        </tr>
-                      )})}
+                            </td>
+                            <td>{n.nominator_first_name ? `${n.nominator_first_name} ${n.nominator_last_name}` : 'Unknown'}</td>
+                            <td>{n.month_year || '—'}</td>
+                            <td style={{ maxWidth: 200, fontSize: '0.85rem' }}>
+                              <div style={{ maxHeight: '60px', overflowY: 'auto' }}>
+                                {n.reason}
+                              </div>
+                            </td>
+                            <td>
+                              <span className={`badge badge-${n.status === 'selected' ? 'green' : n.status === 'rejected' ? 'red' : 'yellow'}`} style={n.status === 'pending' ? { background: '#FFC107', color: '#000' } : {}}>
+                                {n.status === 'selected' ? 'Alumni of the Month' : n.status}
+                              </span>
+                            </td>
+                            <td>
+                              <div className="a-actions">
+                                {n.status !== 'selected' && (
+                                  <button
+                                    className="btn btn-success btn-xs"
+                                    onClick={() => selectNomination(n, h.name)}
+                                  >
+                                    Make Alumni of the Month
+                                  </button>
+                                )}
+                                {n.status === 'pending' && (
+                                  <button className="btn btn-danger btn-xs" onClick={() => rejectNomination(n.id)}>Reject</button>
+                                )}
+                                <button className="btn btn-outline btn-xs" style={{ color: 'red', borderColor: 'red' }} onClick={() => deleteNomination(n.id)}>Delete</button>
+                              </div>
+                            </td>
+                          </tr>
+                        )
+                      })}
                       {nominationsList.length === 0 && (
                         <tr><td colSpan={6} style={{ textAlign: 'center', padding: '40px', color: 'var(--gray-500)' }}>No nominations found.</td></tr>
                       )}
@@ -710,15 +717,15 @@ export default function Admin() {
           <div style={{ background: '#fff', padding: '24px', borderRadius: '8px', width: '90%', maxWidth: '500px', boxShadow: '0 4px 20px rgba(0,0,0,0.1)' }}>
             <h3 style={{ marginBottom: '16px' }}>Create New Article</h3>
             <form onSubmit={handleCreateNews} style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-              <input required type="text" placeholder="Article Title" value={newsFormData.title} onChange={e => setNewsFormData({...newsFormData, title: e.target.value})} style={{ padding: '10px', border: '1px solid #ccc', borderRadius: '4px', fontSize: '1rem' }} />
-              <input type="text" placeholder="Short Excerpt (optional)" value={newsFormData.excerpt} onChange={e => setNewsFormData({...newsFormData, excerpt: e.target.value})} style={{ padding: '10px', border: '1px solid #ccc', borderRadius: '4px', fontSize: '1rem' }} />
-              <select value={newsFormData.category} onChange={e => setNewsFormData({...newsFormData, category: e.target.value})} style={{ padding: '10px', border: '1px solid #ccc', borderRadius: '4px', fontSize: '1rem' }}>
+              <input required type="text" placeholder="Article Title" value={newsFormData.title} onChange={e => setNewsFormData({ ...newsFormData, title: e.target.value })} style={{ padding: '10px', border: '1px solid #ccc', borderRadius: '4px', fontSize: '1rem' }} />
+              <input type="text" placeholder="Short Excerpt (optional)" value={newsFormData.excerpt} onChange={e => setNewsFormData({ ...newsFormData, excerpt: e.target.value })} style={{ padding: '10px', border: '1px solid #ccc', borderRadius: '4px', fontSize: '1rem' }} />
+              <select value={newsFormData.category} onChange={e => setNewsFormData({ ...newsFormData, category: e.target.value })} style={{ padding: '10px', border: '1px solid #ccc', borderRadius: '4px', fontSize: '1rem' }}>
                 <option value="General">General</option>
                 <option value="Announcements">Announcements</option>
                 <option value="Careers">Careers</option>
               </select>
-              <input type="text" placeholder="Cover Image URL (optional)" value={newsFormData.imageUrl} onChange={e => setNewsFormData({...newsFormData, imageUrl: e.target.value})} style={{ padding: '10px', border: '1px solid #ccc', borderRadius: '4px', fontSize: '1rem' }} />
-              <textarea required placeholder="Full Article Body" value={newsFormData.body} onChange={e => setNewsFormData({...newsFormData, body: e.target.value})} style={{ padding: '10px', border: '1px solid #ccc', borderRadius: '4px', minHeight: '150px', fontSize: '1rem', fontFamily: 'inherit' }}></textarea>
+              <input type="text" placeholder="Cover Image URL (optional)" value={newsFormData.imageUrl} onChange={e => setNewsFormData({ ...newsFormData, imageUrl: e.target.value })} style={{ padding: '10px', border: '1px solid #ccc', borderRadius: '4px', fontSize: '1rem' }} />
+              <textarea required placeholder="Full Article Body" value={newsFormData.body} onChange={e => setNewsFormData({ ...newsFormData, body: e.target.value })} style={{ padding: '10px', border: '1px solid #ccc', borderRadius: '4px', minHeight: '150px', fontSize: '1rem', fontFamily: 'inherit' }}></textarea>
               <div style={{ display: 'flex', gap: '12px', justifyContent: 'flex-end', marginTop: '12px' }}>
                 <button type="button" className="btn btn-outline" onClick={() => setShowNewsModal(false)}>Cancel</button>
                 <button type="submit" className="btn btn-primary">Publish Article</button>

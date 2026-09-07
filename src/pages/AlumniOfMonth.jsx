@@ -12,9 +12,15 @@ export default function AlumniOfMonth() {
   useEffect(() => {
     nominationsAPI.list()
       .then(data => {
+        const currentMonthYear = new Date().toLocaleString('en-GB', { month: 'long', year: 'numeric' })
         if (data.length > 0) {
-          setFeatured(data[0])
-          setPast(data.slice(1))
+          if (data[0].month_year === currentMonthYear) {
+            setFeatured(data[0])
+            setPast(data.slice(1))
+          } else {
+            setFeatured(null)
+            setPast(data)
+          }
         }
       })
       .catch(console.error)

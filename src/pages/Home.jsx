@@ -89,7 +89,7 @@ export default function Home() {
               outstanding professionals and leaders.
             </p>
             <div className="hero-buttons">
-              <Link to="/payment"  className="btn btn-hero-primary btn-lg">Pay Annual Dues →</Link>
+              {/* <Link to="/payment"  className="btn btn-hero-primary btn-lg">Pay Annual Dues →</Link> */}
               <Link to="/members"  className="btn btn-hero-outline btn-lg">View Members Directory</Link>
             </div>
             <div className="hero-jubilee-badge">
@@ -108,8 +108,8 @@ export default function Home() {
               <div className="stat-box-lbl">Registered Alumni</div>
             </div>
             <div className="stat-box">
-              <div className="stat-box-num">1,850</div>
-              <div className="stat-box-lbl">Financial Members</div>
+              <div className="stat-box-num">15</div>
+              <div className="stat-box-lbl">Active Chapters</div>
             </div>
             <div className="stat-box">
               <div className="stat-box-num">25</div>
@@ -201,7 +201,7 @@ export default function Home() {
       </section>
 
       {/* ── Financial Member CTA ── */}
-      <section className="financial-cta">
+      {/* <section className="financial-cta">
         <div className="container">
           <h2>Are you a Financial Member?</h2>
           <p>
@@ -210,7 +210,7 @@ export default function Home() {
           </p>
           <Link to="/payment" className="btn-gold-cta">Pay 2026 Dues Now (₦25,000)</Link>
         </div>
-      </section>
+      </section> */}
 
     </div>
   )

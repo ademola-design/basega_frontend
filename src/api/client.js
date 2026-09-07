@@ -58,6 +58,9 @@ export const authAPI = {
   login:          (email, password) => post('/api/auth/login', { email, password }),
   me:             ()                => get('/api/auth/me'),
   changePassword: (data)            => put('/api/auth/change-password', data),
+  forgotPassword: (email)           => post('/api/auth/forgot-password', { email }),
+  verifyIdentity: (data)            => post('/api/auth/verify-identity', data),
+  resetPassword:  (token, password) => post('/api/auth/reset-password', { token, password }),
 }
 
 // ──────────────────────────────────────────
