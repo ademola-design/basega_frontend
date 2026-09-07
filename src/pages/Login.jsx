@@ -24,6 +24,12 @@ export default function Login() {
   const [forgotSuccess, setForgotSuccess] = useState('')
   const [forgotLoading, setForgotLoading] = useState(false)
 
+  function handle(e) {
+    const { name, value } = e.target
+    setForm(current => ({ ...current, [name]: value }))
+    if (error) setError('')
+  }
+
   function openForgotModal() {
     setShowForgot(true)
     setForgotStep(1)
