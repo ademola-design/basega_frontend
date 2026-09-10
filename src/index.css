@@ -2975,6 +2975,10 @@ input[type="radio"] {
   padding: 24px;
   box-shadow: var(--shadow-sm);
 }
+.profile-sidebar .profile-card {
+  min-width: 0;
+  overflow: hidden;
+}
 .profile-card h3 {
   font-size: 1rem;
   font-weight: 700;
@@ -3003,9 +3007,17 @@ input[type="radio"] {
   font-weight: 600;
   color: var(--gray-700);
   min-width: 110px;
+  flex-shrink: 0;
 }
 .info-row .val {
   color: var(--gray-900);
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.profile-sidebar .info-row > a {
+  min-width: 0;
+  max-width: 100%;
+  overflow-wrap: anywhere;
 }
 @media (max-width: 768px) {
   .profile-layout {
