@@ -154,7 +154,7 @@ export default function Home() {
               </>
             )
           })() : (
-            <div className="excellence-inner" style={{ textAlign: 'center', width: '100%' }}>
+            <div className="excellence-inner excellence-empty">
               <h2>Celebrating Excellence</h2>
               <p>Check back soon to see our next Alumni of the Month feature!</p>
               <Link to="/nominate" className="btn btn-outline" style={{ marginTop: 15 }}>Nominate Someone</Link>
@@ -170,7 +170,7 @@ export default function Home() {
             <h2>Latest Updates</h2>
             <p>Stay informed about association news, upcoming events, and important announcements.</p>
           </div>
-          <div className="news-grid">
+          <div className={`news-grid${latestNews.length === 0 ? ' news-grid-empty' : ''}`}>
             {latestNews.length > 0 ? latestNews.map((n, i) => (
               <div key={n.id} className="news-home-card">
                 <div
@@ -192,7 +192,7 @@ export default function Home() {
                   <p className="news-home-excerpt">{n.excerpt ? (n.excerpt.length > 80 ? n.excerpt.substring(0, 80) + '...' : n.excerpt) : ''}</p>
                 </div>
               </div>
-            )) : <p style={{ gridColumn: '1 / -1', textAlign: 'center', color: 'var(--gray-500)' }}>No news published yet.</p>}
+            )) : <p className="news-empty-message">No news published yet.</p>}
           </div>
           <div className="updates-footer">
             <Link to="/news" className="btn btn-outline">View All News</Link>

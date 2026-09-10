@@ -1543,6 +1543,10 @@ input[type="radio"] {
   flex: 1;
   max-width: 560px;
 }
+.excellence-empty {
+  max-width: none;
+  text-align: center;
+}
 .excellence-inner h2 {
   font-size: clamp(1.7rem, 3vw, 2.3rem);
   font-weight: 800;
@@ -1615,6 +1619,15 @@ input[type="radio"] {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1.5rem;
+}
+.news-grid-empty {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+.news-empty-message {
+  color: var(--gray-500);
+  margin: 0;
 }
 .news-home-card {
   background: var(--white);
