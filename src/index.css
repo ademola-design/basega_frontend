@@ -3022,7 +3022,13 @@ input[type="radio"] {
 .profile-sidebar .info-row > a {
   min-width: 0;
   max-width: 100%;
+  margin-left: auto;
+  text-align: right;
   overflow-wrap: anywhere;
+}
+.profile-sidebar .info-row > .val {
+  margin-left: auto;
+  text-align: right;
 }
 @media (max-width: 768px) {
   .profile-layout {
