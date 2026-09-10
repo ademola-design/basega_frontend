@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { authAPI, membersAPI, newsAPI, eventsAPI, nominationsAPI } from '../api/client'
 import { useAuth } from '../context/AuthContext'
 import Avatar from '../components/Avatar'
+import PasswordInput from '../components/PasswordInput'
 import { honoree } from '../lib/honoree'
 
 const navItems = [
@@ -749,9 +750,9 @@ export default function Admin() {
                   <div className="admin-card-body" style={{ padding: 24 }}>
                     <p style={{ color: 'var(--gray-500)', marginTop: 0 }}>Update the password for the admin account currently signed in.</p>
                     <form onSubmit={changeAdminPassword} style={{ maxWidth: 520 }}>
-                      <label className="db-field"><span>Current Password</span><input className="form-control" type="password" name="currentPassword" value={passwordForm.currentPassword} onChange={setPasswordField} required autoComplete="current-password" /></label>
-                      <label className="db-field"><span>New Password</span><input className="form-control" type="password" name="newPassword" value={passwordForm.newPassword} onChange={setPasswordField} required minLength="6" autoComplete="new-password" /></label>
-                      <label className="db-field"><span>Confirm New Password</span><input className="form-control" type="password" name="confirmPassword" value={passwordForm.confirmPassword} onChange={setPasswordField} required minLength="6" autoComplete="new-password" /></label>
+                      <label className="db-field"><span>Current Password</span><PasswordInput className="form-control" name="currentPassword" value={passwordForm.currentPassword} onChange={setPasswordField} required autoComplete="current-password" /></label>
+                      <label className="db-field"><span>New Password</span><PasswordInput className="form-control" name="newPassword" value={passwordForm.newPassword} onChange={setPasswordField} required minLength="6" autoComplete="new-password" /></label>
+                      <label className="db-field"><span>Confirm New Password</span><PasswordInput className="form-control" name="confirmPassword" value={passwordForm.confirmPassword} onChange={setPasswordField} required minLength="6" autoComplete="new-password" /></label>
                       {passwordState.message && <p className="db-form-success">{passwordState.message}</p>}
                       {passwordState.error && <p className="db-form-error">{passwordState.error}</p>}
                       <button className="btn btn-primary" type="submit" disabled={passwordState.saving}>{passwordState.saving ? 'Updating...' : 'Update Admin Password'}</button>
