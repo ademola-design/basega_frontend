@@ -74,9 +74,11 @@ export default function Dashboard() {
     if (!photoFile) return
     setPhotoState({ saving: true, message: '', error: '' })
     try {
-      await membersAPI.uploadPhoto(photoFile)
-      const fresh = await authAPI.me()
-      setProfile(fresh)
+      const result = await membersAPI.uploadPhoto(photoFile)
+      setProfile(current => ({
+        ...current,
+        photo_url: result.photoUrl ? `${result.photoUrl}?v=${Date.now()}` : current.photo_url,
+      }))
       setPhotoFile(null)
       if (photoPreview) URL.revokeObjectURL(photoPreview)
       setPhotoPreview('')
