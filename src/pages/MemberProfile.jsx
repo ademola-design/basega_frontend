@@ -28,7 +28,7 @@ export default function MemberProfile() {
           company: data.company,
           industry: data.industry,
           location: [data.city, data.state].filter(Boolean).join(', '),
-          status: data.status === 'financial' ? 'Financial' : 'Inactive',
+          status: data.status === 'financial' ? 'Financial' : data.status === 'approved' ? 'Registered' : 'Inactive',
           email: data.email,
           phone: data.phone,
           linkedin: data.linkedin,
