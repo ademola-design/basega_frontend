@@ -73,6 +73,11 @@ export const membersAPI = {
   },
   getById: (id)          => get(`/api/members/${id}`),
   update:  (id, data)    => put(`/api/members/${id}`, data),
+  uploadPhoto: (file) => {
+    const fd = new FormData()
+    fd.append('photo', file)
+    return postFD('/api/members/me/photo', fd)
+  },
   // Admin
   all:     (params = {}) => {
     const qs = new URLSearchParams(params).toString()

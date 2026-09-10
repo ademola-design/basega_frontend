@@ -25,6 +25,9 @@ export default function Dashboard() {
   const [passwordForm, setPasswordForm] = useState({ currentPassword: '', newPassword: '', confirmPassword: '' })
   const [profileState, setProfileState] = useState({ saving: false, message: '', error: '' })
   const [passwordState, setPasswordState] = useState({ saving: false, message: '', error: '' })
+  const [photoFile, setPhotoFile] = useState(null)
+  const [photoPreview, setPhotoPreview] = useState('')
+  const [photoState, setPhotoState] = useState({ saving: false, message: '', error: '' })
 
   // ProtectedRoute has already confirmed the session, so this only needs to
   // load the fuller profile. An expired token surfaces as a 401, which
@@ -47,6 +50,40 @@ export default function Dashboard() {
   function setProfileField(event) {
     const { name, value } = event.target
     setProfileForm(current => ({ ...current, [name]: value }))
+  }
+
+  function selectPhoto(event) {
+    const file = event.target.files?.[0]
+    event.target.value = ''
+    if (!file) return
+    if (!file.type.startsWith('image/')) {
+      setPhotoState({ saving: false, message: '', error: 'Please choose an image file.' })
+      return
+    }
+    if (file.size > 3 * 1024 * 1024) {
+      setPhotoState({ saving: false, message: '', error: 'That image is too large. Please use a file under 3MB.' })
+      return
+    }
+    if (photoPreview) URL.revokeObjectURL(photoPreview)
+    setPhotoFile(file)
+    setPhotoPreview(URL.createObjectURL(file))
+    setPhotoState({ saving: false, message: '', error: '' })
+  }
+
+  async function uploadPhoto() {
+    if (!photoFile) return
+    setPhotoState({ saving: true, message: '', error: '' })
+    try {
+      await membersAPI.uploadPhoto(photoFile)
+      const fresh = await authAPI.me()
+      setProfile(fresh)
+      setPhotoFile(null)
+      if (photoPreview) URL.revokeObjectURL(photoPreview)
+      setPhotoPreview('')
+      setPhotoState({ saving: false, message: 'Profile picture updated successfully.', error: '' })
+    } catch (error) {
+      setPhotoState({ saving: false, message: '', error: error.message || 'Unable to update your profile picture.' })
+    }
   }
 
   async function saveProfile(event) {
@@ -192,6 +229,20 @@ export default function Dashboard() {
               <div className="db-section-head">
                 <h2>Edit Profile</h2>
                 <p>Keep your member information current.</p>
+              </div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 24, paddingBottom: 20, borderBottom: '1px solid var(--gray-200)' }}>
+                <Avatar
+                  photoUrl={photoPreview || profile?.photo_url || user?.photoUrl}
+                  name={displayName}
+                  className="db-avatar"
+                />
+                <div style={{ flex: 1 }}>
+                  <label className="db-field" style={{ marginBottom: 8 }}><span>Profile Picture</span><input className="form-control" type="file" accept="image/jpeg,image/png,image/webp" onChange={selectPhoto} /></label>
+                  <small style={{ color: 'var(--gray-500)' }}>JPG, PNG, or WebP. Maximum 3MB.</small>
+                  {photoState.message && <p className="db-form-success">{photoState.message}</p>}
+                  {photoState.error && <p className="db-form-error">{photoState.error}</p>}
+                  {photoFile && <button className="btn btn-primary" type="button" onClick={uploadPhoto} disabled={photoState.saving}>{photoState.saving ? 'Uploading...' : 'Save Profile Picture'}</button>}
+                </div>
               </div>
               <form onSubmit={saveProfile}>
                 <div className="db-form-grid">
