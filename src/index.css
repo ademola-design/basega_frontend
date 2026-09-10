@@ -2978,6 +2978,11 @@ input[type="radio"] {
 .profile-sidebar .profile-card {
   min-width: 0;
   overflow: hidden;
+  text-align: left;
+}
+.profile-sidebar .profile-card .info-row {
+  justify-content: flex-start;
+  text-align: left;
 }
 .profile-card h3 {
   font-size: 1rem;
