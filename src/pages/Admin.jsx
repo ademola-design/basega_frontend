@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { membersAPI, newsAPI, eventsAPI, nominationsAPI } from '../api/client'
+import { authAPI, membersAPI, newsAPI, eventsAPI, nominationsAPI } from '../api/client'
 import { useAuth } from '../context/AuthContext'
 import Avatar from '../components/Avatar'
 import { honoree } from '../lib/honoree'
@@ -33,6 +33,8 @@ export default function Admin() {
   const [loading, setLoading] = useState(true)
   const [searchQuery, setSearchQuery] = useState('')
   const [searchStatus, setSearchStatus] = useState('')
+  const [passwordForm, setPasswordForm] = useState({ currentPassword: '', newPassword: '', confirmPassword: '' })
+  const [passwordState, setPasswordState] = useState({ saving: false, message: '', error: '' })
 
   // Modals state
   const [showNewsModal, setShowNewsModal] = useState(false)
@@ -48,6 +50,37 @@ export default function Admin() {
       setNewsList(updatedNews)
     } catch (err) {
       alert(err.message || 'Failed to create article')
+    }
+  }
+
+  function setPasswordField(event) {
+    const { name, value } = event.target
+    setPasswordForm(current => ({ ...current, [name]: value }))
+  }
+
+  async function changeAdminPassword(event) {
+    event.preventDefault()
+    setPasswordState({ saving: false, message: '', error: '' })
+
+    if (passwordForm.newPassword !== passwordForm.confirmPassword) {
+      setPasswordState({ saving: false, message: '', error: 'New passwords do not match.' })
+      return
+    }
+    if (passwordForm.newPassword.length < 6) {
+      setPasswordState({ saving: false, message: '', error: 'New password must be at least 6 characters.' })
+      return
+    }
+
+    setPasswordState({ saving: true, message: '', error: '' })
+    try {
+      await authAPI.changePassword({
+        currentPassword: passwordForm.currentPassword,
+        newPassword: passwordForm.newPassword,
+      })
+      setPasswordForm({ currentPassword: '', newPassword: '', confirmPassword: '' })
+      setPasswordState({ saving: false, message: 'Admin password updated successfully.', error: '' })
+    } catch (error) {
+      setPasswordState({ saving: false, message: '', error: error.message || 'Unable to update the admin password.' })
     }
   }
 
@@ -690,21 +723,40 @@ export default function Admin() {
 
             {/* ===== SETTINGS ===== */}
             {activeNav === 'settings' && (
-              <div className="admin-card">
-                <div className="admin-card-hdr"><h3>System Settings</h3></div>
-                <div className="admin-card-body" style={{ padding: 24 }}>
-                  {[
-                    { label: 'Site Name', value: 'BASEGA Alumni Association' },
-                    { label: 'Contact Email', value: 'info@basega.org' },
-                    { label: 'Membership Registration', value: 'Open' },
-                    { label: 'Email Notifications', value: 'Enabled' },
-                  ].map(s => (
-                    <div key={s.label} className="info-row">
-                      <span className="lbl">{s.label}</span>
-                      <span className="val">{s.value}</span>
-                      <button className="btn btn-outline btn-xs" style={{ marginLeft: 'auto' }}>Edit</button>
-                    </div>
-                  ))}
+              <div style={{ display: 'grid', gap: 20 }}>
+                <div className="admin-card">
+                  <div className="admin-card-hdr"><h3>System Settings</h3></div>
+                  <div className="admin-card-body" style={{ padding: 24 }}>
+                    {[
+                      { label: 'Site Name', value: 'BASEGA Alumni Association' },
+                      { label: 'Contact Email', value: 'info@basega.org' },
+                      { label: 'Membership Registration', value: 'Open' },
+                      { label: 'Email Notifications', value: 'Enabled' },
+                    ].map(s => (
+                      <div key={s.label} className="info-row">
+                        <span className="lbl">{s.label}</span>
+                        <span className="val">{s.value}</span>
+                        <button className="btn btn-outline btn-xs" style={{ marginLeft: 'auto' }}>Edit</button>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="admin-card">
+                  <div className="admin-card-hdr">
+                    <h3>Change Admin Password</h3>
+                  </div>
+                  <div className="admin-card-body" style={{ padding: 24 }}>
+                    <p style={{ color: 'var(--gray-500)', marginTop: 0 }}>Update the password for the admin account currently signed in.</p>
+                    <form onSubmit={changeAdminPassword} style={{ maxWidth: 520 }}>
+                      <label className="db-field"><span>Current Password</span><input className="form-control" type="password" name="currentPassword" value={passwordForm.currentPassword} onChange={setPasswordField} required autoComplete="current-password" /></label>
+                      <label className="db-field"><span>New Password</span><input className="form-control" type="password" name="newPassword" value={passwordForm.newPassword} onChange={setPasswordField} required minLength="6" autoComplete="new-password" /></label>
+                      <label className="db-field"><span>Confirm New Password</span><input className="form-control" type="password" name="confirmPassword" value={passwordForm.confirmPassword} onChange={setPasswordField} required minLength="6" autoComplete="new-password" /></label>
+                      {passwordState.message && <p className="db-form-success">{passwordState.message}</p>}
+                      {passwordState.error && <p className="db-form-error">{passwordState.error}</p>}
+                      <button className="btn btn-primary" type="submit" disabled={passwordState.saving}>{passwordState.saving ? 'Updating...' : 'Update Admin Password'}</button>
+                    </form>
+                  </div>
                 </div>
               </div>
             )}
