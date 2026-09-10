@@ -241,6 +241,7 @@ export default function Dashboard() {
                 <div style={{ flex: 1 }}>
                   <label className="db-field" style={{ marginBottom: 8 }}><span>Profile Picture</span><input className="form-control" type="file" accept="image/jpeg,image/png,image/webp" onChange={selectPhoto} /></label>
                   <small style={{ color: 'var(--gray-500)' }}>JPG, PNG, or WebP. Maximum 3MB.</small>
+                  {photoFile && <small style={{ display: 'block', marginTop: 6, color: 'var(--green-800)', fontWeight: 600 }}>Selected file: {photoFile.name}</small>}
                   {photoState.message && <p className="db-form-success">{photoState.message}</p>}
                   {photoState.error && <p className="db-form-error">{photoState.error}</p>}
                   {photoFile && <button className="btn btn-primary" type="button" onClick={uploadPhoto} disabled={photoState.saving}>{photoState.saving ? 'Uploading...' : 'Save Profile Picture'}</button>}
