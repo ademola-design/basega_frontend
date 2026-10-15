@@ -54,7 +54,8 @@ export default function Footer() {
             <h4>Contact Us</h4>
             <ul>
               <li>BASEGA Secretariat, 15 Alumni Way, Victoria Island, Lagos, Nigeria</li>
-              <li><a href="tel:+2348001234567">+234 (0) 800 123 4567</a></li>
+              <li><a href="tel:+2347067714292">+234 706 771 4292</a></li>
+              <li><a href="tel:+447721878890">+44 7721 878890</a></li>
               <li><a href="mailto:info@basegaalumni.org">info@basegaalumni.org</a></li>
             </ul>
           </div>

@@ -533,7 +533,8 @@ export default function Register() {
                 <h4>Need help?</h4>
                 <ul>
                   <li><a href="mailto:info@basegaalumni.ng">info@basegaalumni.ng</a></li>
-                  <li>+234 800 100 0000</li>
+                  <li><a href="tel:+2347067714292">+234 706 771 4292</a></li>
+                  <li><a href="tel:+447721878890">+44 7721 878890</a></li>
                   <li>Mon – Fri, 9 am – 5 pm WAT</li>
                 </ul>
               </div>

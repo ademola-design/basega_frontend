@@ -13,7 +13,8 @@ const FAQS = [
 
 const contactDetails = [
   { title: 'Office Address', text: 'BASEGA Secretariat, 15 Alumni Way, Victoria Island, Lagos, Nigeria' },
-  { title: 'Phone',          text: '+234 800 100 0000' },
+  { title: 'Nigeria',        text: '+234 706 771 4292', href: 'tel:+2347067714292' },
+  { title: 'United Kingdom', text: '+44 7721 878890', href: 'tel:+447721878890' },
   { title: 'Email',          text: 'info@basegaalumni.ng' },
   { title: 'Office Hours',   text: 'Monday–Friday, 08:00–17:00 WAT' },
 ]
@@ -58,7 +59,7 @@ export default function Contact() {
                   <div key={d.title} className="contact-detail">
                     <div className="contact-detail-text">
                       <h4>{d.title}</h4>
-                      <p>{d.text}</p>
+                      <p>{d.href ? <a href={d.href}>{d.text}</a> : d.text}</p>
                     </div>
                   </div>
                 ))}
