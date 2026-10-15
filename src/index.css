@@ -2629,6 +2629,17 @@ input[type="radio"] {
   color: var(--gray-900);
   background: var(--white);
 }
+.tab-sw-btn:disabled {
+  cursor: not-allowed;
+  color: var(--gray-400);
+  background: var(--gray-100);
+  border-color: var(--gray-200);
+}
+.tab-unavailable-note {
+  margin-top: 0.55rem;
+  color: var(--gray-500);
+  font-size: 0.8rem;
+}
 .result-count {
   font-size: 0.845rem;
   color: var(--gray-500);

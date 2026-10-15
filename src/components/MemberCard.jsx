@@ -9,7 +9,7 @@ export default function MemberCard({ member }) {
 
   return (
     <div className="member-card">
-      {/* {isFin && <span className="member-bookmark" title="Financial Member">★</span>} */}
+      {isFin && <span className="member-bookmark" title="Financial Member">★</span>}
 
       <div className={`member-avatar-wrap`}>
         <div className="member-avatar">
@@ -36,9 +36,7 @@ export default function MemberCard({ member }) {
       </div>
 
       <div style={{ marginTop: '0.75rem', width: '100%', display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
-        {/* <span className={isFin ? 'badge-fin' : 'badge-inact'}>
-          {isFin ? 'Financial' : 'Inactive'}
-        </span> */}
+        {isFin && <span className="badge-fin">Financial Member</span>}
         <Link to={`/members/${member.id}`} className="btn btn-outline btn-xs">
           View Profile
         </Link>

@@ -28,17 +28,13 @@ export default function Members() {
           classYear: m.class_set,
           profession: m.profession,
           location: `${m.city}, ${m.state}`,
-          status: m.status === 'financial' ? 'Financial' : 'Inactive',
+          status: tab === 'financial' ? 'Financial' : 'Inactive',
         }))
         setMembersList(mapped)
       })
       .catch(err => console.error(err))
       .finally(() => setLoading(false))
   }, [search, setFilter, tab])
-
-  // Get count of financial members from fetched list if tab is all, or count total financial members
-  // For UI count, we can filter locally or just show count of current filtered
-  const financialCount = tab === 'financial' ? membersList.length : membersList.filter(m => m.status === 'Financial').length
 
   return (
     <div className="page-layout">
@@ -76,18 +72,25 @@ export default function Members() {
             </div>
             <div className="tab-switcher">
               <button
+                type="button"
                 className={`tab-sw-btn ${tab === 'all' ? 'active' : ''}`}
                 onClick={() => setTab('all')}
               >
                 All Approved Members
               </button>
-              {/* <button
-                className={`tab-sw-btn ${tab === 'financial' ? 'active' : ''}`}
-                onClick={() => setTab('financial')}
+              <button
+                type="button"
+                className="tab-sw-btn"
+                disabled
+                title="Available once annual dues payments are enabled."
+                aria-describedby="financial-members-unavailable"
               >
                 Financial Members
-              </button> */}
+              </button>
             </div>
+            <p id="financial-members-unavailable" className="tab-unavailable-note">
+              Financial membership will be available once annual dues payments are enabled.
+            </p>
           </div>
 
           <div className="result-count">
