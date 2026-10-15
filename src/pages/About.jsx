@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import PageHeader from '../components/PageHeader'
+import presidentPhoto from '../../Alumni President.jpeg'
 
 const milestones = [
   { year: '1985', side: 'left', title: 'Foundation', desc: 'BASEGA School was founded with a vision to provide world-class education rooted in discipline, moral values, and academic excellence.' },
@@ -17,14 +18,12 @@ const values = [
   { title: 'Community and Service', desc: 'We instil in every student a sense of responsibility to give back — to their community, and the nation at large.' },
 ]
 
+const president = {
+  name: 'Pharm Peter Abiodun Adedokun',
+  year: 1983,
+}
+
 const executive = [
-  {
-    name: 'Pharm Peter Abiodun Adedokun',
-    role: 'Alumni President',
-    year: 1983,
-    photo: '/exec/peter-adedokun.jpg',
-    bio: 'Trained Pharmacist & Independent Prescriber.',
-  },
   {
     name: 'Akeem Olatunji Adesina',
     role: 'Alumni Auditor',
@@ -240,6 +239,65 @@ export default function About() {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      <section className="president-section" aria-labelledby="president-name">
+        <div className="container">
+          <article className="president-feature">
+            <div className="president-portrait">
+              <img src={presidentPhoto} alt={`Portrait of ${president.name}`} />
+              <span className="president-set-badge">BASEGA · CLASS OF {president.year}</span>
+            </div>
+            <div className="president-content">
+              <div className="president-eyebrow">
+                <span className="president-eyebrow-mark" aria-hidden="true" />
+                Meet our Alumni President
+              </div>
+              <h2 id="president-name">{president.name}</h2>
+              <div className="president-credentials" aria-label="Professional credentials">
+                <span>MPSN</span>
+                <span>MRPhS</span>
+              </div>
+
+              <div className="president-bio">
+                <p>
+                  Peter trained and qualified as a pharmacist at the University of Lagos in 1989.
+                  He completed his internship at May &amp; Baker Nigeria PLC and served as a corps
+                  pharmacist at NITEL Health Centre, Ikoyi, Lagos.
+                </p>
+                <p>
+                  He began his career as a registered pharmacist at NAFDAC before joining the
+                  Federal Ministry of Sports in Abuja, where he rose to Principal Pharmacist. In
+                  2002, he travelled abroad to further his career.
+                </p>
+              </div>
+
+              <div className="president-career">
+                <div className="president-career-item">
+                  <span>2005</span>
+                  <p>Qualified and registered as a pharmacist in the United Kingdom</p>
+                </div>
+                <div className="president-career-item">
+                  <span>2018</span>
+                  <p>Became an Independent Prescriber</p>
+                </div>
+              </div>
+
+              <p className="president-bio president-bio-last">
+                His extensive UK experience spans community, secure-setting, hospital and general
+                practice pharmacies.
+              </p>
+
+              <div className="president-current-role">
+                <span>Healthcare leadership</span>
+                <p>
+                  He serves as Chairman of Pabidok Ventures Limited, a healthcare solutions
+                  company whose subsidiary is Villa Pharmacy and Supermarket.
+                </p>
+              </div>
+            </div>
+          </article>
         </div>
       </section>
 
