@@ -17,7 +17,7 @@ function getCategoryEmoji(category) {
 function formatDate(dateStr) {
   if (!dateStr) return ''
   const d = new Date(dateStr)
-  return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })
+  return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' })
 }
 
 export default function News() {
@@ -42,7 +42,7 @@ export default function News() {
     const matchCat = activeCategory === 'All' || (n.category || 'General') === activeCategory
     const matchSearch = !search ||
       n.title.toLowerCase().includes(search.toLowerCase()) ||
-      n.excerpt.toLowerCase().includes(search.toLowerCase())
+      (n.excerpt || '').toLowerCase().includes(search.toLowerCase())
     return matchCat && matchSearch
   })
 
@@ -75,7 +75,7 @@ export default function News() {
                     <h2>{featured.title}</h2>
                     <p className="excerpt">{featured.excerpt}</p>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                      <span style={{ fontSize: '0.82rem', color: 'var(--gray-500)' }}>{formatDate(featured.created_at)}</span>
+                      <span style={{ fontSize: '0.82rem', color: 'var(--gray-500)' }}>Posted on {formatDate(featured.created_at)}</span>
                       <Link to={`/news/${featured.id}`} className="btn btn-primary btn-sm">Read Full Story →</Link>
                     </div>
                   </div>
@@ -99,7 +99,7 @@ export default function News() {
                         <div className="news-list-body">
                           <div style={{ display: 'flex', gap: 8, marginBottom: 6 }}>
                             <span className="badge badge-green">{item.category || 'General'}</span>
-                            <span style={{ fontSize: '0.78rem', color: 'var(--gray-500)' }}>{formatDate(item.created_at)}</span>
+                            <span style={{ fontSize: '0.78rem', color: 'var(--gray-500)' }}>Posted {formatDate(item.created_at)}</span>
                           </div>
                           <h3>{item.title}</h3>
                           <p>{item.excerpt}</p>

@@ -5841,6 +5841,38 @@ a.current-featured:hover {
   line-height: 1.85;
   font-size: 0.975rem;
 }
+.news-videos {
+  padding: 0 24px 24px;
+}
+.news-videos h2 {
+  font-size: 1.2rem;
+  margin-bottom: 16px;
+}
+.news-videos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+  gap: 16px;
+}
+.news-video {
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: var(--gray-100);
+  border-radius: var(--radius);
+}
+.news-video iframe,
+.news-video video {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  object-fit: contain;
+}
+.news-video a {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
 .news-detail-footer {
   padding: 0 24px 24px;
 }

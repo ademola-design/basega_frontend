@@ -39,14 +39,14 @@ export default function Admin() {
 
   // Modals state
   const [showNewsModal, setShowNewsModal] = useState(false)
-  const [newsFormData, setNewsFormData] = useState({ title: '', excerpt: '', category: 'General', body: '', imageUrl: '' })
+  const [newsFormData, setNewsFormData] = useState({ title: '', excerpt: '', category: 'General', body: '', imageUrl: '', videoUrl1: '', videoUrl2: '' })
 
   async function handleCreateNews(e) {
     e.preventDefault()
     try {
       await newsAPI.create(newsFormData)
       setShowNewsModal(false)
-      setNewsFormData({ title: '', excerpt: '', category: 'General', body: '', imageUrl: '' })
+      setNewsFormData({ title: '', excerpt: '', category: 'General', body: '', imageUrl: '', videoUrl1: '', videoUrl2: '' })
       const updatedNews = await newsAPI.adminAll()
       setNewsList(updatedNews)
     } catch (err) {
@@ -639,7 +639,7 @@ export default function Admin() {
                 <div className="admin-card-body">
                   <table className="a-table">
                     <thead>
-                      <tr><th>Title</th><th>Category</th><th>Date</th><th>Status</th><th>Actions</th></tr>
+                      <tr><th>Title</th><th>Category</th><th>Posted on</th><th>Status</th><th>Actions</th></tr>
                     </thead>
                     <tbody>
                       {newsList.map(n => (
@@ -650,7 +650,7 @@ export default function Admin() {
                           </td>
                           <td><span className="badge badge-green">{n.category}</span></td>
                           <td style={{ fontSize: '0.85rem', color: 'var(--gray-500)' }}>
-                            {n.created_at ? new Date(n.created_at).toLocaleDateString('en-GB') : '—'}
+                            {n.created_at ? new Date(n.created_at).toLocaleDateString('en-GB', { timeZone: 'UTC' }) : '—'}
                           </td>
                           <td>
                             <span className={n.status === 'published' ? 'badge badge-green' : 'badge'} style={n.status !== 'published' ? { background: '#FFC107', color: '#000' } : {}}>
@@ -767,7 +767,7 @@ export default function Admin() {
 
       {showNewsModal && (
         <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.5)', zIndex: 9999, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-          <div style={{ background: '#fff', padding: '24px', borderRadius: '8px', width: '90%', maxWidth: '500px', boxShadow: '0 4px 20px rgba(0,0,0,0.1)' }}>
+          <div style={{ background: '#fff', padding: '24px', borderRadius: '8px', width: '90%', maxWidth: '500px', maxHeight: '90vh', overflowY: 'auto', boxShadow: '0 4px 20px rgba(0,0,0,0.1)' }}>
             <h3 style={{ marginBottom: '16px' }}>Create New Article</h3>
             <form onSubmit={handleCreateNews} style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
               <input required type="text" placeholder="Article Title" value={newsFormData.title} onChange={e => setNewsFormData({ ...newsFormData, title: e.target.value })} style={{ padding: '10px', border: '1px solid #ccc', borderRadius: '4px', fontSize: '1rem' }} />
@@ -778,6 +778,9 @@ export default function Admin() {
                 <option value="Careers">Careers</option>
               </select>
               <input type="text" placeholder="Cover Image URL (optional)" value={newsFormData.imageUrl} onChange={e => setNewsFormData({ ...newsFormData, imageUrl: e.target.value })} style={{ padding: '10px', border: '1px solid #ccc', borderRadius: '4px', fontSize: '1rem' }} />
+              <input type="url" maxLength={1000} placeholder="Video 1 URL (optional, HTTPS)" value={newsFormData.videoUrl1} onChange={e => setNewsFormData({ ...newsFormData, videoUrl1: e.target.value })} style={{ padding: '10px', border: '1px solid #ccc', borderRadius: '4px', fontSize: '1rem' }} />
+              <input type="url" maxLength={1000} placeholder="Video 2 URL (optional, HTTPS)" value={newsFormData.videoUrl2} onChange={e => setNewsFormData({ ...newsFormData, videoUrl2: e.target.value })} style={{ padding: '10px', border: '1px solid #ccc', borderRadius: '4px', fontSize: '1rem' }} />
+              <small style={{ color: 'var(--gray-500)' }}>Use YouTube, Vimeo, or direct HTTPS video links.</small>
               <textarea required placeholder="Full Article Body" value={newsFormData.body} onChange={e => setNewsFormData({ ...newsFormData, body: e.target.value })} style={{ padding: '10px', border: '1px solid #ccc', borderRadius: '4px', minHeight: '150px', fontSize: '1rem', fontFamily: 'inherit' }}></textarea>
               <div style={{ display: 'flex', gap: '12px', justifyContent: 'flex-end', marginTop: '12px' }}>
                 <button type="button" className="btn btn-outline" onClick={() => setShowNewsModal(false)}>Cancel</button>

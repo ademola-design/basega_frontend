@@ -1,6 +1,7 @@
 import { useParams, Link } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import { newsAPI } from '../api/client'
+import NewsVideos from '../components/NewsVideos'
 
 function getCategoryEmoji(category) {
   const cat = String(category).toLowerCase()
@@ -16,7 +17,7 @@ function getCategoryEmoji(category) {
 function formatDate(dateStr) {
   if (!dateStr) return ''
   const d = new Date(dateStr)
-  return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })
+  return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' })
 }
 
 export default function NewsDetail() {
@@ -84,7 +85,7 @@ export default function NewsDetail() {
           <h1 style={{ fontSize: 'clamp(1.5rem, 3vw, 2.2rem)', maxWidth: 720, margin: '0 auto 10px' }}>
             {article.title}
           </h1>
-          <p style={{ opacity: 0.75 }}>{formatDate(article.created_at)}</p>
+          <p style={{ opacity: 0.75 }}>Posted on {formatDate(article.created_at)}</p>
           <nav className="breadcrumb">
             <Link to="/">Home</Link>
             <span>›</span>
@@ -106,11 +107,12 @@ export default function NewsDetail() {
               </div>
               <div className="news-detail-meta">
                 <span className="badge badge-green">{article.category || 'General'}</span>
-                <span className="news-card-date">{formatDate(article.created_at)}</span>
+                <span className="news-card-date">Posted on {formatDate(article.created_at)}</span>
               </div>
               <div className="news-detail-body">
                 <p style={{ whiteSpace: 'pre-wrap' }}>{article.body || article.excerpt}</p>
               </div>
+              <NewsVideos article={article} />
               <div className="news-detail-footer">
                 <Link to="/news" className="btn btn-outline btn-sm">← Back to News</Link>
               </div>
