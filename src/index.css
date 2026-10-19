@@ -4661,7 +4661,11 @@ textarea.form-control {
 }
 .pay-card-wrap {
   width: 100%;
-  max-width: 440px;
+  max-width: 1040px;
+  display: grid;
+  grid-template-columns: minmax(0, 440px) minmax(0, 1fr);
+  align-items: start;
+  gap: 24px;
 }
 .pay-card {
   background: var(--white);
@@ -4802,6 +4806,76 @@ textarea.form-control {
 }
 .pay-btn:hover:not(:disabled) {
   background: var(--green-800);
+}
+.bank-accounts {
+  padding: 24px;
+  background: var(--white);
+  border-radius: 1.25rem;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.08);
+}
+.bank-accounts h2 {
+  color: var(--green-900);
+  font-size: 1.35rem;
+  margin-bottom: 8px;
+}
+.bank-accounts-intro {
+  color: var(--gray-600);
+  font-size: 0.9rem;
+  margin-bottom: 20px;
+}
+.bank-accounts-grid {
+  display: grid;
+  gap: 12px;
+}
+.bank-account {
+  padding: 16px;
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius);
+}
+.bank-account-primary {
+  border-color: var(--green-500);
+  background: var(--green-50);
+}
+.bank-account-purpose {
+  color: var(--green-700);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.bank-account h3 {
+  color: var(--gray-900);
+  font-size: 1rem;
+  margin: 4px 0 12px;
+}
+.bank-account dl,
+.bank-account dl div {
+  display: grid;
+  gap: 4px;
+}
+.bank-account dl {
+  gap: 10px;
+}
+.bank-account dt {
+  color: var(--gray-500);
+  font-size: 0.75rem;
+}
+.bank-account dd {
+  color: var(--gray-900);
+  font-size: 0.92rem;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+@media (max-width: 900px) {
+  .pay-card-wrap {
+    max-width: 520px;
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 480px) {
+  .bank-accounts {
+    padding: 18px;
+  }
 }
 .pay-btn:disabled {
   opacity: 0.7;

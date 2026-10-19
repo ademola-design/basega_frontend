@@ -105,6 +105,39 @@ export default function Payment() {
             )}
 
           </div>
+
+          <section className="bank-accounts" aria-labelledby="bank-accounts-title">
+            <h2 id="bank-accounts-title">Bank Transfer Details</h2>
+            <p className="bank-accounts-intro">
+              Use the First Bank account for annual alumni dues. The Wema and Zenith accounts are the other BASEGA school accounts.
+            </p>
+            <div className="bank-accounts-grid">
+              <article className="bank-account bank-account-primary">
+                <span className="bank-account-purpose">Annual Alumni Dues</span>
+                <h3>First Bank (FBN)</h3>
+                <dl>
+                  <div><dt>Account name</dt><dd>Old Students Association Basega</dd></div>
+                  <div><dt>Account number</dt><dd>2023532281</dd></div>
+                </dl>
+              </article>
+              <article className="bank-account">
+                <span className="bank-account-purpose">Other BASEGA School Account</span>
+                <h3>Wema Bank</h3>
+                <dl>
+                  <div><dt>Account name</dt><dd>Old Student’s Association BASEGA</dd></div>
+                  <div><dt>Account number</dt><dd>0447485219</dd></div>
+                </dl>
+              </article>
+              <article className="bank-account">
+                <span className="bank-account-purpose">Other BASEGA School Account</span>
+                <h3>Zenith Bank</h3>
+                <dl>
+                  <div><dt>Account name</dt><dd>BASEGA Alumni Association</dd></div>
+                  <div><dt>Account number</dt><dd>1312046537</dd></div>
+                </dl>
+              </article>
+            </div>
+          </section>
         </div>
       </section>
     </div>

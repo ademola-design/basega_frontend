@@ -2,6 +2,7 @@ import { useParams, Link } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import { newsAPI } from '../api/client'
 import NewsVideos from '../components/NewsVideos'
+import { excellenceAwardsAnnouncement } from '../data/announcements'
 
 function getCategoryEmoji(category) {
   const cat = String(category).toLowerCase()
@@ -29,6 +30,14 @@ export default function NewsDetail() {
 
   useEffect(() => {
     setLoading(true)
+    if (id === excellenceAwardsAnnouncement.id) {
+      setArticle(excellenceAwardsAnnouncement)
+      setOthers([])
+      setCategories([{ name: excellenceAwardsAnnouncement.category, count: 1 }])
+      setLoading(false)
+      return
+    }
+
     Promise.all([
       newsAPI.getById(id),
       newsAPI.list()
@@ -112,6 +121,18 @@ export default function NewsDetail() {
               <div className="news-detail-body">
                 <p style={{ whiteSpace: 'pre-wrap' }}>{article.body || article.excerpt}</p>
               </div>
+              {article.nominationWhatsAppUrl && (
+                <div className="news-detail-footer">
+                  <a
+                    className="btn btn-primary"
+                    href={article.nominationWhatsAppUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Submit a Nomination on WhatsApp
+                  </a>
+                </div>
+              )}
               <NewsVideos article={article} />
               <div className="news-detail-footer">
                 <Link to="/news" className="btn btn-outline btn-sm">← Back to News</Link>

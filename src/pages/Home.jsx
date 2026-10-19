@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import { newsAPI, nominationsAPI } from '../api/client'
 import Avatar from '../components/Avatar'
 import { honoree } from '../lib/honoree'
+import { excellenceAwardsAnnouncement, includeExcellenceAwardsAnnouncement } from '../data/announcements'
 
 const SLIDES = [
   { img: '/photos/school-assembly.jpg',   bgPos: 'center 40%' },
@@ -54,7 +55,7 @@ function HeroCarousel() {
 
 export default function Home() {
   const [featured, setFeatured] = useState(null)
-  const [latestNews, setLatestNews] = useState([])
+  const [latestNews, setLatestNews] = useState([excellenceAwardsAnnouncement])
 
   useEffect(() => {
     async function loadData() {
@@ -64,7 +65,7 @@ export default function Home() {
           newsAPI.list()
         ])
         setFeatured(current)
-        setLatestNews(articles.slice(0, 3))
+        setLatestNews(includeExcellenceAwardsAnnouncement(articles).slice(0, 3))
       } catch (err) {
         console.error(err)
       }
