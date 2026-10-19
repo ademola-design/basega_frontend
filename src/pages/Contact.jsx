@@ -7,12 +7,12 @@ const FAQS = [
   { q: 'How much is the annual subscription?', a: 'The annual subscription fee is ₦10,000. Life membership is available for ₦100,000 (one-time payment). Payments can be made via MTN MoMo, OPay, PalmPay, Paystack, or direct bank transfer.' },
   { q: 'Can I apply for a scholarship for my child?', a: 'The BASEGA Scholarship Fund supports current students of Basega Secondary School, not family members of alumni. Active paid-up alumni in good standing may nominate deserving students for consideration.' },
   { q: 'How do I join a committee?', a: 'Contact the secretariat expressing your interest and the committee you wish to join. Committees are open to all active members in good standing. Elections for leadership roles occur at the Annual General Meeting (AGM).' },
-  { q: 'Where is the BASEGA secretariat?', a: 'Our secretariat is located at 7 Adetokunbo Ademola Street, Victoria Island, Lagos, Nigeria. Office hours are Monday to Friday, 08:00–17:00 WAT. You can also reach us via email or WhatsApp.' },
+  { q: 'Where is Baptist Secondary Grammar School?', a: 'BAPTIST SECONDARY GRAMMAR SCHOOL, AGO-ARE, Saki Road, Ago-Are, ATISBO Local Govt. Oyo State. You can also reach us via email or WhatsApp.' },
   { q: 'How do I update my member profile?', a: 'Log in to the member portal and navigate to your profile settings. Alternatively, send your updated details (name, phone, company, profession, location) to info@basegaalumni.ng and we will update your record within 48 hours.' },
 ]
 
 const contactDetails = [
-  { title: 'Office Address', text: 'BASEGA Secretariat, 15 Alumni Way, Victoria Island, Lagos, Nigeria' },
+  { title: 'School Address', text: 'BAPTIST SECONDARY GRAMMAR SCHOOL, AGO-ARE, Saki Road, Ago-Are, ATISBO Local Govt. Oyo State' },
   { title: 'Nigeria',        text: '+234 706 771 4292', href: 'tel:+2347067714292' },
   { title: 'United Kingdom', text: '+44 7721 878890', href: 'tel:+447721878890' },
   { title: 'Email',          text: 'info@basegaalumni.ng' },
@@ -72,7 +72,7 @@ export default function Contact() {
               </div>
 
               <div className="map-placeholder">
-                <strong>BASEGA Alumni Nigeria — Victoria Island, Lagos</strong>
+                <strong>BAPTIST SECONDARY GRAMMAR SCHOOL, AGO-ARE, Saki Road, Ago-Are, ATISBO Local Govt. Oyo State</strong>
                 <p className="map-note">Google Maps integration would appear here in production</p>
               </div>
             </div>
