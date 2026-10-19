@@ -112,7 +112,9 @@ export default function NewsDetail() {
             {/* Main article */}
             <article className="news-detail-main">
               <div className="news-detail-thumb">
-                <span>{getCategoryEmoji(article.category)}</span>
+                {article.image_url
+                  ? <img src={article.image_url} alt="" />
+                  : <span>{getCategoryEmoji(article.category)}</span>}
               </div>
               <div className="news-detail-meta">
                 <span className="badge badge-green">{article.category || 'General'}</span>

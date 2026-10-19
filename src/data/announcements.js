@@ -4,6 +4,7 @@ export const excellenceAwardsAnnouncement = {
   date: '6 October 2026',
   created_at: '2026-10-06T00:00:00.000Z',
   category: 'Announcements',
+  image_url: '/photos/basega-50th.png',
   excerpt: 'Nominations are invited for seven Excellence Award categories as part of BASEGA’s 50th Anniversary celebrations. Submit nominations by WhatsApp within 72 hours.',
   body: `6 October 2026
 

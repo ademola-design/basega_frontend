@@ -72,7 +72,9 @@ export default function News() {
               {featured ? (
                 <div className="news-featured">
                   <div className="news-featured-img">
-                    <span style={{ fontSize: '4rem' }}>{getCategoryEmoji(featured.category)}</span>
+                    {featured.image_url
+                      ? <img src={featured.image_url} alt="" />
+                      : <span style={{ fontSize: '4rem' }}>{getCategoryEmoji(featured.category)}</span>}
                   </div>
                   <div className="news-featured-body">
                     <span className="badge badge-green">{featured.category || 'General'}</span>
@@ -98,7 +100,9 @@ export default function News() {
                     {rest.map(item => (
                       <div key={item.id} className="news-list-item">
                         <div className="news-list-img">
-                          <span>{getCategoryEmoji(item.category)}</span>
+                          {item.image_url
+                            ? <img src={item.image_url} alt="" />
+                            : <span>{getCategoryEmoji(item.category)}</span>}
                         </div>
                         <div className="news-list-body">
                           <div style={{ display: 'flex', gap: 8, marginBottom: 6 }}>
@@ -155,7 +159,11 @@ export default function News() {
                     <h4>Recent Articles</h4>
                     {newsList.slice(0, 4).map(item => (
                       <Link key={item.id} to={`/news/${item.id}`} className="sidebar-news-item">
-                        <div className="sidebar-news-thumb">{getCategoryEmoji(item.category)}</div>
+                        <div className="sidebar-news-thumb">
+                          {item.image_url
+                            ? <img src={item.image_url} alt="" />
+                            : getCategoryEmoji(item.category)}
+                        </div>
                         <div className="sidebar-news-info">
                           <h5>{item.title}</h5>
                           <span>{formatDate(item.created_at)}</span>
