@@ -6767,6 +6767,20 @@ a.current-featured:hover {
   box-shadow: var(--shadow-sm);
   border-left: 4px solid var(--gold);
 }
+.jubilee-update-thumb {
+  width: 140px;
+  min-height: 112px;
+  flex: 0 0 140px;
+  overflow: hidden;
+  border-radius: 0.6rem;
+  align-self: center;
+}
+.jubilee-update-thumb img {
+  width: 100%;
+  height: 100%;
+  min-height: 112px;
+  object-fit: cover;
+}
 .jubilee-update-left {
   flex-shrink: 0;
   width: 120px;
@@ -6808,6 +6822,15 @@ a.current-featured:hover {
   .jubilee-update-card {
     flex-direction: column;
     gap: 0.75rem;
+  }
+  .jubilee-update-thumb {
+    width: 100%;
+    min-height: 0;
+    height: 180px;
+    flex: none;
+  }
+  .jubilee-update-thumb img {
+    min-height: 0;
   }
   .jubilee-update-left {
     width: auto;

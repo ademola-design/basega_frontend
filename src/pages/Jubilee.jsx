@@ -1,4 +1,6 @@
 import PageHeader from '../components/PageHeader'
+import { Link } from 'react-router-dom'
+import { excellenceAwardsAnnouncement } from '../data/announcements'
 
 const UPDATES = [
   {
@@ -21,6 +23,16 @@ const UPDATES = [
     title: 'Anniversary Gala Night — Save the Date',
     body: 'A Gala Night dinner and awards ceremony will be held to celebrate 50 years of BASEGA\'s legacy. Outstanding alumni across various fields will be honoured. Venue and date TBC — watch this space.',
     tag: 'Event',
+  },
+  {
+    id: excellenceAwardsAnnouncement.id,
+    date: excellenceAwardsAnnouncement.date,
+    title: excellenceAwardsAnnouncement.title,
+    body: excellenceAwardsAnnouncement.excerpt,
+    tag: 'Announcement',
+    image: '/photos/basega-50th.png',
+    imageAlt: 'BASEGA 50th Anniversary emblem',
+    link: `/news/${excellenceAwardsAnnouncement.id}`,
   },
 ]
 
@@ -77,6 +89,11 @@ export default function Jubilee() {
               const tagStyle = TAG_COLORS[u.tag] || { bg: '#555', color: '#fff' }
               return (
                 <div key={u.id} className="jubilee-update-card">
+                  {u.image && (
+                    <Link to={u.link} className="jubilee-update-thumb">
+                      <img src={u.image} alt={u.imageAlt} />
+                    </Link>
+                  )}
                   <div className="jubilee-update-left">
                     <div className="jubilee-update-date">{u.date}</div>
                     <span
