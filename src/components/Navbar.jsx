@@ -6,7 +6,7 @@ import { imageUrl } from '../api/client'
 const links = [
   { to: '/', label: 'Home' },
   { to: '/about', label: 'About' },
-  // { to: '/payment',          label: 'Payments' }, // Delayed for now
+  { to: '/payment', label: 'Payment' },
   { to: '/members', label: 'Members' },
   { to: '/news', label: 'Announcements' },
   { to: '/alumni-of-month', label: 'Alumni of the Month' },
