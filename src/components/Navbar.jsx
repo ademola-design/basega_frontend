@@ -9,6 +9,7 @@ const links = [
   { to: '/payment', label: 'Payment' },
   { to: '/members', label: 'Members' },
   { to: '/news', label: 'Announcements' },
+  { to: '/contact', label: 'Contact' },
   { to: '/alumni-of-month', label: 'Alumni of the Month' },
   { to: '/jubilee', label: 'Jubilee', line2: '50th', highlight: true },
 ]

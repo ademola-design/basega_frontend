@@ -51,7 +51,7 @@ export default function Footer() {
           </div>
 
           <div className="footer-col">
-            <h4>Contact Us</h4>
+            <h4><Link to="/contact">Contact Us</Link></h4>
             <ul>
               <li>BAPTIST SECONDARY GRAMMAR SCHOOL, AGO-ARE, Saki Road, Ago-Are, ATISBO Local Govt. Oyo State</li>
               <li><a href="tel:+2347067714292">+234 706 771 4292</a></li>
