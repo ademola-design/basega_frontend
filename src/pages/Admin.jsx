@@ -49,11 +49,23 @@ export default function Admin() {
       await newsAPI.create(newsFormData)
       setShowNewsModal(false)
       setNewsFormData({ title: '', excerpt: '', category: 'General', body: '', imageUrl: '', videoUrl1: '', videoUrl2: '', status: 'published' })
+      const refreshErrors = []
       try {
         const updatedNews = await newsAPI.adminAll()
         setNewsList(updatedNews)
       } catch (err) {
-        alert(`Article saved, but the list could not be refreshed. ${err.message || ''}`)
+        console.error('Article saved, but news list refresh failed:', err)
+        refreshErrors.push('the news list')
+      }
+      try {
+        const updatedStats = await membersAPI.stats()
+        setStats(updatedStats)
+      } catch (err) {
+        console.error('Article saved, but dashboard refresh failed:', err)
+        refreshErrors.push('dashboard counts and activity')
+      }
+      if (refreshErrors.length) {
+        alert(`Article saved, but ${refreshErrors.join(' and ')} could not be refreshed. Reload the page to try again.`)
       }
     } catch (err) {
       alert(err.message || 'Failed to create article')
