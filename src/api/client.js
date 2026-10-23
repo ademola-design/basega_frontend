@@ -32,7 +32,7 @@ async function request(method, path, body = null, isFormData = false) {
   // Session gone: drop it and let AuthContext clear the UI and redirect.
   // Throwing (rather than returning undefined) means callers' catch blocks run
   // instead of them trying to render an undefined response.
-  if (res.status === 401) {
+  if (res.status === 401 && path !== "/api/auth/login") {
     clearSession();
     window.dispatchEvent(new CustomEvent("basega:unauthorized"));
     throw new Error("Your session has expired. Please log in again.");
