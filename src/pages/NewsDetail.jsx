@@ -1,6 +1,6 @@
 import { useParams, Link } from 'react-router-dom'
 import { useState, useEffect } from 'react'
-import { newsAPI } from '../api/client'
+import { imageUrl, newsAPI } from '../api/client'
 import NewsVideos from '../components/NewsVideos'
 import { excellenceAwardsAnnouncement } from '../data/announcements'
 
@@ -113,7 +113,7 @@ export default function NewsDetail() {
             <article className="news-detail-main">
               <div className="news-detail-thumb">
                 {article.image_url
-                  ? <img src={article.image_url} alt="" />
+                  ? <img src={imageUrl(article.image_url)} alt="" />
                   : <span>{getCategoryEmoji(article.category)}</span>}
               </div>
               <div className="news-detail-meta">
@@ -147,7 +147,7 @@ export default function NewsDetail() {
                 <h4>Related Articles</h4>
                 {others.map(item => (
                   <Link key={item.id} to={`/news/${item.id}`} className="sidebar-news-item">
-                    <div className="sidebar-news-thumb">{getCategoryEmoji(item.category)}</div>
+                    <div className="sidebar-news-thumb">{item.image_url ? <img src={imageUrl(item.image_url)} alt="" /> : getCategoryEmoji(item.category)}</div>
                     <div className="sidebar-news-info">
                       <h5>{item.title}</h5>
                       <span>{formatDate(item.created_at)}</span>

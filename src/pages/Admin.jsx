@@ -39,14 +39,14 @@ export default function Admin() {
 
   // Modals state
   const [showNewsModal, setShowNewsModal] = useState(false)
-  const [newsFormData, setNewsFormData] = useState({ title: '', excerpt: '', category: 'General', body: '', imageUrl: '', videoUrl1: '', videoUrl2: '' })
+  const [newsFormData, setNewsFormData] = useState({ title: '', excerpt: '', category: 'General', body: '', imageUrl: '', videoUrl1: '', videoUrl2: '', status: 'published' })
 
   async function handleCreateNews(e) {
     e.preventDefault()
     try {
       await newsAPI.create(newsFormData)
       setShowNewsModal(false)
-      setNewsFormData({ title: '', excerpt: '', category: 'General', body: '', imageUrl: '', videoUrl1: '', videoUrl2: '' })
+      setNewsFormData({ title: '', excerpt: '', category: 'General', body: '', imageUrl: '', videoUrl1: '', videoUrl2: '', status: 'published' })
       const updatedNews = await newsAPI.adminAll()
       setNewsList(updatedNews)
     } catch (err) {
@@ -770,21 +770,33 @@ export default function Admin() {
           <div style={{ background: '#fff', padding: '24px', borderRadius: '8px', width: '90%', maxWidth: '500px', maxHeight: '90vh', overflowY: 'auto', boxShadow: '0 4px 20px rgba(0,0,0,0.1)' }}>
             <h3 style={{ marginBottom: '16px' }}>Create New Article</h3>
             <form onSubmit={handleCreateNews} style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-              <input required type="text" placeholder="Article Title" value={newsFormData.title} onChange={e => setNewsFormData({ ...newsFormData, title: e.target.value })} style={{ padding: '10px', border: '1px solid #ccc', borderRadius: '4px', fontSize: '1rem' }} />
-              <input type="text" placeholder="Short Excerpt (optional)" value={newsFormData.excerpt} onChange={e => setNewsFormData({ ...newsFormData, excerpt: e.target.value })} style={{ padding: '10px', border: '1px solid #ccc', borderRadius: '4px', fontSize: '1rem' }} />
-              <select value={newsFormData.category} onChange={e => setNewsFormData({ ...newsFormData, category: e.target.value })} style={{ padding: '10px', border: '1px solid #ccc', borderRadius: '4px', fontSize: '1rem' }}>
+              <label htmlFor="news-title">Title (saved as `title` in news)</label>
+              <input id="news-title" required maxLength={250} type="text" placeholder="Article Title" value={newsFormData.title} onChange={e => setNewsFormData({ ...newsFormData, title: e.target.value })} style={{ padding: '10px', border: '1px solid #ccc', borderRadius: '4px', fontSize: '1rem' }} />
+              <label htmlFor="news-excerpt">Excerpt (saved as `excerpt`)</label>
+              <input id="news-excerpt" maxLength={5000} type="text" placeholder="Short Excerpt (optional)" value={newsFormData.excerpt} onChange={e => setNewsFormData({ ...newsFormData, excerpt: e.target.value })} style={{ padding: '10px', border: '1px solid #ccc', borderRadius: '4px', fontSize: '1rem' }} />
+              <label htmlFor="news-category">Category (saved as `category`)</label>
+              <select id="news-category" value={newsFormData.category} onChange={e => setNewsFormData({ ...newsFormData, category: e.target.value })} style={{ padding: '10px', border: '1px solid #ccc', borderRadius: '4px', fontSize: '1rem' }}>
                 <option value="General">General</option>
                 <option value="Announcements">Announcements</option>
                 <option value="Careers">Careers</option>
               </select>
-              <input type="text" placeholder="Cover Image URL (optional)" value={newsFormData.imageUrl} onChange={e => setNewsFormData({ ...newsFormData, imageUrl: e.target.value })} style={{ padding: '10px', border: '1px solid #ccc', borderRadius: '4px', fontSize: '1rem' }} />
-              <input type="url" maxLength={1000} placeholder="Video 1 URL (optional, HTTPS)" value={newsFormData.videoUrl1} onChange={e => setNewsFormData({ ...newsFormData, videoUrl1: e.target.value })} style={{ padding: '10px', border: '1px solid #ccc', borderRadius: '4px', fontSize: '1rem' }} />
-              <input type="url" maxLength={1000} placeholder="Video 2 URL (optional, HTTPS)" value={newsFormData.videoUrl2} onChange={e => setNewsFormData({ ...newsFormData, videoUrl2: e.target.value })} style={{ padding: '10px', border: '1px solid #ccc', borderRadius: '4px', fontSize: '1rem' }} />
+              <label htmlFor="news-image">Cover image URL (saved as `image_url`; HTTPS URL or backend `/uploads/...` path)</label>
+              <input id="news-image" type="text" maxLength={255} placeholder="https://example.com/photo.jpg or /uploads/photo.jpg" value={newsFormData.imageUrl} onChange={e => setNewsFormData({ ...newsFormData, imageUrl: e.target.value })} style={{ padding: '10px', border: '1px solid #ccc', borderRadius: '4px', fontSize: '1rem' }} />
+              <label htmlFor="news-video-1">Video 1 URL (saved as `video_url_1`)</label>
+              <input id="news-video-1" type="url" maxLength={1000} placeholder="Video 1 URL (optional, HTTPS)" value={newsFormData.videoUrl1} onChange={e => setNewsFormData({ ...newsFormData, videoUrl1: e.target.value })} style={{ padding: '10px', border: '1px solid #ccc', borderRadius: '4px', fontSize: '1rem' }} />
+              <label htmlFor="news-video-2">Video 2 URL (saved as `video_url_2`)</label>
+              <input id="news-video-2" type="url" maxLength={1000} placeholder="Video 2 URL (optional, HTTPS)" value={newsFormData.videoUrl2} onChange={e => setNewsFormData({ ...newsFormData, videoUrl2: e.target.value })} style={{ padding: '10px', border: '1px solid #ccc', borderRadius: '4px', fontSize: '1rem' }} />
               <small style={{ color: 'var(--gray-500)' }}>Use YouTube, Vimeo, or direct HTTPS video links.</small>
-              <textarea required placeholder="Full Article Body" value={newsFormData.body} onChange={e => setNewsFormData({ ...newsFormData, body: e.target.value })} style={{ padding: '10px', border: '1px solid #ccc', borderRadius: '4px', minHeight: '150px', fontSize: '1rem', fontFamily: 'inherit' }}></textarea>
+              <label htmlFor="news-body">Full article (saved as `body`)</label>
+              <textarea id="news-body" required maxLength={100000} placeholder="Full Article Body" value={newsFormData.body} onChange={e => setNewsFormData({ ...newsFormData, body: e.target.value })} style={{ padding: '10px', border: '1px solid #ccc', borderRadius: '4px', minHeight: '150px', fontSize: '1rem', fontFamily: 'inherit' }}></textarea>
+              <label htmlFor="news-status">Publication status</label>
+              <select id="news-status" value={newsFormData.status} onChange={e => setNewsFormData({ ...newsFormData, status: e.target.value })} style={{ padding: '10px', border: '1px solid #ccc', borderRadius: '4px', fontSize: '1rem' }}>
+                <option value="published">Published</option>
+                <option value="draft">Draft</option>
+              </select>
               <div style={{ display: 'flex', gap: '12px', justifyContent: 'flex-end', marginTop: '12px' }}>
                 <button type="button" className="btn btn-outline" onClick={() => setShowNewsModal(false)}>Cancel</button>
-                <button type="submit" className="btn btn-primary">Publish Article</button>
+                <button type="submit" className="btn btn-primary">{newsFormData.status === 'draft' ? 'Save Draft' : 'Publish Article'}</button>
               </div>
             </form>
           </div>

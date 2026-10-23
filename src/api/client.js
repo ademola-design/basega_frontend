@@ -5,7 +5,14 @@
 
 import { getToken, clearSession } from "./storage";
 
-const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+const configuredApiUrl = import.meta.env.VITE_API_URL;
+if (import.meta.env.PROD && !configuredApiUrl) {
+  throw new Error("VITE_API_URL must be configured for production builds.");
+}
+if (import.meta.env.PROD && !configuredApiUrl.startsWith("https://")) {
+  throw new Error("VITE_API_URL must use HTTPS in production.");
+}
+const BASE_URL = (configuredApiUrl || "http://localhost:5000").replace(/\/+$/, "");
 
 // ──────────────────────────────────────────
 // Core fetch wrapper
@@ -165,6 +172,6 @@ export const messagesAPI = {
 // ──────────────────────────────────────────
 export function imageUrl(path) {
   if (!path) return null;
-  if (/^(https?:|blob:|data:)/i.test(path)) return path
-  return `${BASE_URL}${path}`;
+  if (/^(https?:|blob:|data:)/i.test(path)) return path;
+  return path.startsWith("/uploads/") ? `${BASE_URL}${path}` : path;
 }

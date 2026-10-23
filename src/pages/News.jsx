@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import PageHeader from '../components/PageHeader'
-import { newsAPI } from '../api/client'
+import { imageUrl, newsAPI } from '../api/client'
 import { includeExcellenceAwardsAnnouncement } from '../data/announcements'
 
 function getCategoryEmoji(category) {
@@ -73,7 +73,7 @@ export default function News() {
                 <div className="news-featured">
                   <div className="news-featured-img">
                     {featured.image_url
-                      ? <img src={featured.image_url} alt="" />
+                      ? <img src={imageUrl(featured.image_url)} alt="" />
                       : <span style={{ fontSize: '4rem' }}>{getCategoryEmoji(featured.category)}</span>}
                   </div>
                   <div className="news-featured-body">
@@ -101,7 +101,7 @@ export default function News() {
                       <div key={item.id} className="news-list-item">
                         <div className="news-list-img">
                           {item.image_url
-                            ? <img src={item.image_url} alt="" />
+                            ? <img src={imageUrl(item.image_url)} alt="" />
                             : <span>{getCategoryEmoji(item.category)}</span>}
                         </div>
                         <div className="news-list-body">
@@ -161,7 +161,7 @@ export default function News() {
                       <Link key={item.id} to={`/news/${item.id}`} className="sidebar-news-item">
                         <div className="sidebar-news-thumb">
                           {item.image_url
-                            ? <img src={item.image_url} alt="" />
+                            ? <img src={imageUrl(item.image_url)} alt="" />
                             : getCategoryEmoji(item.category)}
                         </div>
                         <div className="sidebar-news-info">

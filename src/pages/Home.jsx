@@ -1,14 +1,14 @@
 import { Link } from 'react-router-dom'
 import { useState, useEffect } from 'react'
-import { newsAPI, nominationsAPI } from '../api/client'
+import { imageUrl, newsAPI, nominationsAPI } from '../api/client'
 import Avatar from '../components/Avatar'
 import { honoree } from '../lib/honoree'
 import { excellenceAwardsAnnouncement, includeExcellenceAwardsAnnouncement } from '../data/announcements'
 
 const SLIDES = [
-  { img: '/photos/school-assembly.jpg',   bgPos: 'center 40%' },
+  { img: '/photos/school-assembly.jpg', bgPos: 'center 40%' },
   { img: '/photos/students-pavilion.jpg', bgPos: 'center 45%' },
-  { img: '/photos/students-event.jpg',    bgPos: 'center 20%' },
+  { img: '/photos/students-event.jpg', bgPos: 'center 20%' },
 ]
 
 const THUMB_GRADIENTS = [
@@ -91,7 +91,7 @@ export default function Home() {
             </p>
             <div className="hero-buttons">
               {/* <Link to="/payment"  className="btn btn-hero-primary btn-lg">Pay Annual Dues →</Link> */}
-              <Link to="/members"  className="btn btn-hero-outline btn-lg">View Members Directory</Link>
+              <Link to="/members" className="btn btn-hero-outline btn-lg">View Members Directory</Link>
             </div>
             <div className="hero-jubilee-badge">
               <Link to="/jubilee">50th Founders' Day — Jubilee Anniversary Updates →</Link>
@@ -176,9 +176,9 @@ export default function Home() {
               <div key={n.id} className="news-home-card">
                 <div
                   className="news-home-thumb"
-                  style={{ 
+                  style={{
                     background: THUMB_GRADIENTS[i % THUMB_GRADIENTS.length],
-                    backgroundImage: n.image_url ? `url(${n.image_url})` : 'none',
+                    backgroundImage: n.image_url ? `url("${imageUrl(n.image_url)}")` : 'none',
                     backgroundSize: 'cover', backgroundPosition: 'center'
                   }}
                 >
