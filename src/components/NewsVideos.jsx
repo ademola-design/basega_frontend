@@ -32,7 +32,10 @@ function isDirectVideo(url) {
 }
 
 export default function NewsVideos({ article }) {
-  const videos = [article.video_url_1, article.video_url_2]
+  const videoUrls = Array.isArray(article.videos)
+    ? [...article.videos, article.video_url_1, article.video_url_2]
+    : [article.video_url_1, article.video_url_2]
+  const videos = [...new Set(videoUrls)]
     .map(getSafeVideoUrl)
     .filter(Boolean)
   if (!videos.length) return null

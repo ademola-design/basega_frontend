@@ -40,7 +40,7 @@ export default function Admin() {
   // Modals state
   const [showNewsModal, setShowNewsModal] = useState(false)
   const [savingNews, setSavingNews] = useState(false)
-  const [newsFormData, setNewsFormData] = useState({ title: '', excerpt: '', category: 'General', body: '', imageUrl: '', images: [''], videoUrl1: '', videoUrl2: '', status: 'published' })
+  const [newsFormData, setNewsFormData] = useState({ title: '', excerpt: '', category: 'General', body: '', imageUrl: '', images: [''], videos: ['', ''], status: 'published' })
 
   async function handleCreateNews(e) {
     e.preventDefault()
@@ -49,9 +49,12 @@ export default function Admin() {
       await newsAPI.create({
         ...newsFormData,
         images: newsFormData.images.map(url => url.trim()).filter(Boolean),
+        videos: newsFormData.videos.map(url => url.trim()).filter(Boolean),
+        videoUrl1: newsFormData.videos[0]?.trim() || '',
+        videoUrl2: newsFormData.videos[1]?.trim() || '',
       })
       setShowNewsModal(false)
-      setNewsFormData({ title: '', excerpt: '', category: 'General', body: '', imageUrl: '', images: [''], videoUrl1: '', videoUrl2: '', status: 'published' })
+      setNewsFormData({ title: '', excerpt: '', category: 'General', body: '', imageUrl: '', images: [''], videos: ['', ''], status: 'published' })
       const refreshErrors = []
       try {
         const updatedNews = await newsAPI.adminAll()
@@ -847,9 +850,9 @@ export default function Admin() {
                 </label>
                 <div className="news-form-field news-form-wide">
                   <span>Images in article <small>Optional</small></span>
-                  <div className="news-form-image-list">
+                  <div className="news-form-repeatable-list">
                     {newsFormData.images.map((image, index) => (
-                      <div className="news-form-image-row" key={index}>
+                      <div className="news-form-repeatable-row" key={index}>
                         <input
                           aria-label={`Article image ${index + 1} URL`}
                           className="form-control"
@@ -881,7 +884,7 @@ export default function Admin() {
                       </div>
                     ))}
                     <button
-                      className="btn btn-outline news-form-add-image"
+                      className="btn btn-outline news-form-add-item"
                       type="button"
                       onClick={() => setNewsFormData(current => ({ ...current, images: [...current.images, ''] }))}
                     >
@@ -892,11 +895,48 @@ export default function Admin() {
                 </div>
                 <div className="news-form-field news-form-wide">
                   <span>Videos <small>Optional</small></span>
-                  <div className="news-form-video-grid">
-                    <input aria-label="First video URL" className="form-control" type="url" maxLength={1000} placeholder="First video URL (HTTPS)" value={newsFormData.videoUrl1} onChange={e => setNewsFormData({ ...newsFormData, videoUrl1: e.target.value })} />
-                    <input aria-label="Second video URL" className="form-control" type="url" maxLength={1000} placeholder="Second video URL (HTTPS)" value={newsFormData.videoUrl2} onChange={e => setNewsFormData({ ...newsFormData, videoUrl2: e.target.value })} />
+                  <div className="news-form-repeatable-list">
+                    {newsFormData.videos.map((video, index) => (
+                      <div className="news-form-repeatable-row" key={index}>
+                        <input
+                          aria-label={`Video ${index + 1} URL`}
+                          className="form-control"
+                          type="url"
+                          maxLength={1000}
+                          placeholder="YouTube, Vimeo, or direct HTTPS video URL"
+                          value={video}
+                          onChange={event => {
+                            const value = event.target.value
+                            setNewsFormData(current => ({
+                              ...current,
+                              videos: current.videos.map((url, videoIndex) => videoIndex === index ? value : url),
+                            }))
+                          }}
+                        />
+                        <button
+                          className="btn btn-outline"
+                          type="button"
+                          aria-label={`Remove video ${index + 1}`}
+                          onClick={() => setNewsFormData(current => ({
+                            ...current,
+                            videos: current.videos.length <= 2
+                              ? current.videos.map((url, videoIndex) => videoIndex === index ? '' : url)
+                              : current.videos.filter((_, videoIndex) => videoIndex !== index),
+                          }))}
+                        >
+                          Remove
+                        </button>
+                      </div>
+                    ))}
+                    <button
+                      className="btn btn-outline news-form-add-item"
+                      type="button"
+                      onClick={() => setNewsFormData(current => ({ ...current, videos: [...current.videos, ''] }))}
+                    >
+                      Add another video
+                    </button>
                   </div>
-                  <small className="news-form-help">YouTube, Vimeo, or direct HTTPS video links.</small>
+                  <small className="news-form-help">Add YouTube, Vimeo, or direct HTTPS video links. The backend currently saves only the first two; additional videos will be saved after the backend is updated to support them.</small>
                 </div>
               </div>
               <footer className="news-modal-footer">
