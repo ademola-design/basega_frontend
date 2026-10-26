@@ -40,15 +40,18 @@ export default function Admin() {
   // Modals state
   const [showNewsModal, setShowNewsModal] = useState(false)
   const [savingNews, setSavingNews] = useState(false)
-  const [newsFormData, setNewsFormData] = useState({ title: '', excerpt: '', category: 'General', body: '', imageUrl: '', videoUrl1: '', videoUrl2: '', status: 'published' })
+  const [newsFormData, setNewsFormData] = useState({ title: '', excerpt: '', category: 'General', body: '', imageUrl: '', images: [''], videoUrl1: '', videoUrl2: '', status: 'published' })
 
   async function handleCreateNews(e) {
     e.preventDefault()
     setSavingNews(true)
     try {
-      await newsAPI.create(newsFormData)
+      await newsAPI.create({
+        ...newsFormData,
+        images: newsFormData.images.map(url => url.trim()).filter(Boolean),
+      })
       setShowNewsModal(false)
-      setNewsFormData({ title: '', excerpt: '', category: 'General', body: '', imageUrl: '', videoUrl1: '', videoUrl2: '', status: 'published' })
+      setNewsFormData({ title: '', excerpt: '', category: 'General', body: '', imageUrl: '', images: [''], videoUrl1: '', videoUrl2: '', status: 'published' })
       const refreshErrors = []
       try {
         const updatedNews = await newsAPI.adminAll()
@@ -842,6 +845,51 @@ export default function Admin() {
                   <input id="news-image" className="form-control" type="text" maxLength={255} placeholder="https://example.com/photo.jpg or /uploads/photo.jpg" value={newsFormData.imageUrl} onChange={e => setNewsFormData({ ...newsFormData, imageUrl: e.target.value })} />
                   <small className="news-form-help">Use an HTTPS image link or an image uploaded to the site.</small>
                 </label>
+                <div className="news-form-field news-form-wide">
+                  <span>Images in article <small>Optional</small></span>
+                  <div className="news-form-image-list">
+                    {newsFormData.images.map((image, index) => (
+                      <div className="news-form-image-row" key={index}>
+                        <input
+                          aria-label={`Article image ${index + 1} URL`}
+                          className="form-control"
+                          type="url"
+                          maxLength={1000}
+                          placeholder="https://... (Cloudinary or another image host)"
+                          value={image}
+                          onChange={event => {
+                            const value = event.target.value
+                            setNewsFormData(current => ({
+                              ...current,
+                              images: current.images.map((url, imageIndex) => imageIndex === index ? value : url),
+                            }))
+                          }}
+                        />
+                        <button
+                          className="btn btn-outline"
+                          type="button"
+                          aria-label={`Remove article image ${index + 1}`}
+                          onClick={() => setNewsFormData(current => ({
+                            ...current,
+                            images: current.images.length === 1
+                              ? ['']
+                              : current.images.filter((_, imageIndex) => imageIndex !== index),
+                          }))}
+                        >
+                          Remove
+                        </button>
+                      </div>
+                    ))}
+                    <button
+                      className="btn btn-outline news-form-add-image"
+                      type="button"
+                      onClick={() => setNewsFormData(current => ({ ...current, images: [...current.images, ''] }))}
+                    >
+                      Add another image
+                    </button>
+                  </div>
+                  <small className="news-form-help">Paste HTTPS image links from Cloudinary or another image host. Gallery images will be saved and displayed after the backend is updated to support them.</small>
+                </div>
                 <div className="news-form-field news-form-wide">
                   <span>Videos <small>Optional</small></span>
                   <div className="news-form-video-grid">

@@ -27,6 +27,9 @@ export default function NewsDetail() {
   const [others, setOthers] = useState([])
   const [categories, setCategories] = useState([])
   const [loading, setLoading] = useState(true)
+  const articleImages = Array.isArray(article?.images)
+    ? article.images.filter(image => typeof image === 'string' && image.trim())
+    : []
 
   useEffect(() => {
     setLoading(true)
@@ -123,6 +126,13 @@ export default function NewsDetail() {
               <div className="news-detail-body">
                 <p style={{ whiteSpace: 'pre-wrap' }}>{article.body || article.excerpt}</p>
               </div>
+              {articleImages.length > 0 && (
+                <div className="news-detail-gallery" aria-label="Article images">
+                  {articleImages.map((image, index) => (
+                    <img key={`${image}-${index}`} src={imageUrl(image)} alt={`${article.title} image ${index + 1}`} loading="lazy" />
+                  ))}
+                </div>
+              )}
               {article.nominationWhatsAppUrl && (
                 <div className="news-detail-footer">
                   <a
