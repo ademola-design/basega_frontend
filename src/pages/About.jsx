@@ -3,8 +3,8 @@ import PageHeader from '../components/PageHeader'
 import presidentPhoto from '../../Alumni President.jpeg'
 
 const milestones = [
-  { year: '1985', side: 'left', title: 'Foundation', desc: 'BASEGA School was founded with a vision to provide world-class education rooted in discipline, moral values, and academic excellence.' },
-  { year: '1992', side: 'right', title: 'First Graduating Set', desc: 'The pioneer set graduated with distinction, setting the standard for generations to come. 36% gained university admission.' },
+  { year: '1976', side: 'left', title: 'Foundation', desc: 'The First Baptist Church Ago-Are established the school to provide secondary education for the community.' },
+  { year: '1981', side: 'right', title: 'First Graduating Set', desc: 'The first set of students graduated, marking an important milestone in the school’s history.' },
   { year: '2000', side: 'left', title: 'New Campus Expansion', desc: 'A state-of-the-art science laboratory, library complex, and sports facilities were commissioned, transforming the learning environment.' },
   { year: '2005', side: 'right', title: 'Alumni Association Founded', desc: 'Former students officially formed the BASEGA Alumni Association to maintain bonds, give back to the school, and support current students.' },
   { year: '2012', side: 'left', title: 'International Recognition', desc: 'BASEGA School received accreditation from the Cambridge International Examinations board, opening doors for students globally.' },
@@ -78,31 +78,29 @@ export default function About() {
       <PageHeader
         title="About BASEGA School"
         eyebrow="Our Story"
-        subtitle="Four decades of empowering minds, building character and shaping leaders who transform communities."
+        subtitle="Since 1976, empowering minds, building character and shaping leaders who transform communities."
         breadcrumbs={[{ label: 'About' }]}
       />
 
       {/* ── Our History ── */}
       <div className="history-intro">
         <div style={{ maxWidth: '900px', margin: '0 auto' }}>
-          <p className="eyebrow-gold">Est. 1985</p>
+          <p className="eyebrow-gold">Est. 1976</p>
           <h2>Our History</h2>
           <p>
-            BASEGA School was established in 1985 by a group of visionary educators who believed that every
-            Nigerian child deserves access to world-class education. What began as a modest primary school with
-            45 students and 6 teachers has grown into one of the most respected educational institutions in the country.
+            The establishment of Baptist Secondary Grammar School Ago-Are in 1976 was a response to the
+            community’s need for high school education. The First Baptist Church Ago-Are took the initiative
+            to provide this essential service, as students had to travel far to other towns to access secondary
+            education. The Baptist Modern School, which had been serving the area, was becoming obsolete, and
+            its closure would have left the community without access to higher education. The church’s efforts
+            ensured that the community had a viable option for secondary education.
           </p>
           <p>
-            Over the decades, BASEGA has expanded to include a nursery, primary, secondary, and sixth form college —
-            all united by a shared commitment to academic excellence, moral integrity, and holistic development. Our
-            motto, <span className="highlight-green">"Knowledge, Discipline, Service"</span> continues to guide every
-            student who walks through our gates.
-          </p>
-          <p>
-            Today, BASEGA School stands as a beacon of educational excellence, with alumni making significant
-            contributions across every sector — from medicine and law to technology, the arts, and public service.
-            Our graduates carry the BASEGA spirit wherever they go: a relentless pursuit of excellence and a deep
-            commitment to community.
+            The church levied its members and made use of the modern school buildings to get started. Deacon
+            A.A. Afolabi and Mr. Ajayi were instrumental in the school’s early years, serving as the first
+            principal and vice principal, respectively. Deacon Afolabi led the school until the first set of
+            students graduated in 1981, after which he was transferred to head the teacher’s college at Saki.
+            Mr. Ajayi’s tenure lasted only a few years.
           </p>
         </div>
       </div>
