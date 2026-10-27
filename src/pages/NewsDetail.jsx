@@ -2,7 +2,6 @@ import { useParams, Link } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import { imageUrl, newsAPI } from '../api/client'
 import NewsVideos from '../components/NewsVideos'
-import { excellenceAwardsAnnouncement } from '../data/announcements'
 
 function getCategoryEmoji(category) {
   const cat = String(category).toLowerCase()
@@ -33,14 +32,6 @@ export default function NewsDetail() {
 
   useEffect(() => {
     setLoading(true)
-    if (id === excellenceAwardsAnnouncement.id) {
-      setArticle(excellenceAwardsAnnouncement)
-      setOthers([])
-      setCategories([{ name: excellenceAwardsAnnouncement.category, count: 1 }])
-      setLoading(false)
-      return
-    }
-
     Promise.all([
       newsAPI.getById(id),
       newsAPI.list()

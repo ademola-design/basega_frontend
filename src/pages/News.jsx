@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import PageHeader from '../components/PageHeader'
 import { imageUrl, newsAPI } from '../api/client'
-import { includeExcellenceAwardsAnnouncement } from '../data/announcements'
 
 function getCategoryEmoji(category) {
   const cat = String(category).toLowerCase()
@@ -31,11 +30,11 @@ export default function News() {
     setLoading(true)
     newsAPI.list()
       .then(data => {
-        setNewsList(includeExcellenceAwardsAnnouncement(data))
+        setNewsList(data)
       })
       .catch(err => {
         console.error(err)
-        setNewsList(includeExcellenceAwardsAnnouncement())
+        setNewsList([])
       })
       .finally(() => setLoading(false))
   }, [])
