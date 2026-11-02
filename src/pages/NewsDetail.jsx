@@ -1,5 +1,6 @@
 import { useParams, Link } from 'react-router-dom'
 import { useState, useEffect } from 'react'
+import { createPortal } from 'react-dom'
 import { imageUrl, newsAPI } from '../api/client'
 import NewsVideos from '../components/NewsVideos'
 
@@ -213,7 +214,7 @@ export default function NewsDetail() {
           </div>
         </div>
       </section>
-      {lightboxImage && (
+      {lightboxImage && createPortal(
         <div
           className="news-lightbox"
           role="presentation"
@@ -233,7 +234,8 @@ export default function NewsDetail() {
             <img src={lightboxImage.src} alt={lightboxImage.alt} />
             <p>{lightboxImage.alt}</p>
           </section>
-        </div>
+        </div>,
+        document.body
       )}
     </div>
   )
