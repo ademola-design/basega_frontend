@@ -5945,6 +5945,102 @@ a.current-featured:hover {
   background: var(--gray-100);
   object-fit: contain;
 }
+.news-image-trigger {
+  display: block;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: zoom-in;
+}
+.news-image-trigger:focus-visible {
+  outline: 3px solid var(--green-600);
+  outline-offset: -3px;
+}
+.news-detail-cover-trigger {
+  width: 100%;
+  height: 100%;
+}
+.news-detail-cover-trigger img {
+  transition: transform 180ms ease;
+}
+.news-detail-cover-trigger:hover img {
+  transform: scale(1.025);
+}
+.news-detail-gallery-trigger img {
+  display: block;
+  transition: transform 180ms ease;
+}
+.news-detail-gallery-trigger:hover img {
+  transform: scale(1.025);
+}
+.news-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgb(8 14 12 / 88%);
+  backdrop-filter: blur(6px);
+}
+.news-lightbox-dialog {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: min(1200px, 100%);
+  max-height: 100%;
+  padding: 16px;
+  border: 1px solid rgb(255 255 255 / 16%);
+  border-radius: 16px;
+  background: #101614;
+  box-shadow: 0 24px 80px rgb(0 0 0 / 45%);
+}
+.news-lightbox-dialog img {
+  display: block;
+  max-width: 100%;
+  max-height: calc(100vh - 112px);
+  border-radius: 8px;
+  object-fit: contain;
+}
+.news-lightbox-dialog p {
+  max-width: 100%;
+  margin: 12px 40px 0;
+  color: #fff;
+  text-align: center;
+}
+.news-lightbox-close {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 1;
+  display: grid;
+  width: 40px;
+  height: 40px;
+  place-items: center;
+  border: 1px solid rgb(255 255 255 / 35%);
+  border-radius: 50%;
+  background: rgb(0 0 0 / 60%);
+  color: #fff;
+  font-size: 1.8rem;
+  line-height: 1;
+  cursor: pointer;
+}
+.news-lightbox-close:hover {
+  background: rgb(255 255 255 / 20%);
+}
+@media (max-width: 600px) {
+  .news-lightbox {
+    padding: 12px;
+  }
+  .news-lightbox-dialog {
+    padding: 10px;
+  }
+  .news-lightbox-dialog img {
+    max-height: calc(100vh - 92px);
+  }
+}
 .news-videos {
   padding: 0 24px 24px;
 }

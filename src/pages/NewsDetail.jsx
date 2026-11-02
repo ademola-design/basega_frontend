@@ -26,9 +26,26 @@ export default function NewsDetail() {
   const [others, setOthers] = useState([])
   const [categories, setCategories] = useState([])
   const [loading, setLoading] = useState(true)
+  const [lightboxImage, setLightboxImage] = useState(null)
   const articleImages = Array.isArray(article?.images)
     ? article.images.filter(image => typeof image === 'string' && image.trim())
     : []
+
+  useEffect(() => {
+    if (!lightboxImage) return undefined
+
+    const handleKeyDown = event => {
+      if (event.key === 'Escape') setLightboxImage(null)
+    }
+
+    const previousBodyOverflow = document.body.style.overflow
+    document.addEventListener('keydown', handleKeyDown)
+    document.body.style.overflow = 'hidden'
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown)
+      document.body.style.overflow = previousBodyOverflow
+    }
+  }, [lightboxImage])
 
   useEffect(() => {
     setLoading(true)
@@ -107,7 +124,19 @@ export default function NewsDetail() {
             <article className="news-detail-main">
               <div className="news-detail-thumb">
                 {article.image_url
-                  ? <img src={imageUrl(article.image_url)} alt="" />
+                  ? (
+                    <button
+                      type="button"
+                      className="news-image-trigger news-detail-cover-trigger"
+                      aria-label={`View image: ${article.title}`}
+                      onClick={() => setLightboxImage({
+                        src: imageUrl(article.image_url),
+                        alt: article.title,
+                      })}
+                    >
+                      <img src={imageUrl(article.image_url)} alt={article.title} />
+                    </button>
+                  )
                   : <span>{getCategoryEmoji(article.category)}</span>}
               </div>
               <div className="news-detail-meta">
@@ -120,7 +149,18 @@ export default function NewsDetail() {
               {articleImages.length > 0 && (
                 <div className="news-detail-gallery" aria-label="Article images">
                   {articleImages.map((image, index) => (
-                    <img key={`${image}-${index}`} src={imageUrl(image)} alt={`${article.title} image ${index + 1}`} loading="lazy" />
+                    <button
+                      key={`${image}-${index}`}
+                      type="button"
+                      className="news-image-trigger news-detail-gallery-trigger"
+                      aria-label={`View image ${index + 1} of ${article.title}`}
+                      onClick={() => setLightboxImage({
+                        src: imageUrl(image),
+                        alt: `${article.title} image ${index + 1}`,
+                      })}
+                    >
+                      <img src={imageUrl(image)} alt={`${article.title} image ${index + 1}`} loading="lazy" />
+                    </button>
                   ))}
                 </div>
               )}
@@ -173,6 +213,28 @@ export default function NewsDetail() {
           </div>
         </div>
       </section>
+      {lightboxImage && (
+        <div
+          className="news-lightbox"
+          role="presentation"
+          onClick={event => {
+            if (event.target === event.currentTarget) setLightboxImage(null)
+          }}
+        >
+          <section className="news-lightbox-dialog" role="dialog" aria-modal="true" aria-label="Article image">
+            <button
+              type="button"
+              className="news-lightbox-close"
+              aria-label="Close image"
+              onClick={() => setLightboxImage(null)}
+            >
+              &times;
+            </button>
+            <img src={lightboxImage.src} alt={lightboxImage.alt} />
+            <p>{lightboxImage.alt}</p>
+          </section>
+        </div>
+      )}
     </div>
   )
 }
