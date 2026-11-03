@@ -7,9 +7,8 @@ const milestones = [
   { year: '1981', side: 'right', title: 'First Graduating Set', desc: 'The first set of students graduated, marking an important milestone in the school’s history.' },
   { year: '2000', side: 'left', title: 'New Campus Expansion', desc: 'A state-of-the-art science laboratory, library complex, and sports facilities were commissioned, transforming the learning environment.' },
   { year: '2005', side: 'right', title: 'Alumni Association Founded', desc: 'Former students officially formed the BASEGA Alumni Association to maintain bonds, give back to the school, and support current students.' },
-  { year: '2012', side: 'left', title: 'International Recognition', desc: 'BASEGA School received accreditation from the Cambridge International Examinations board, opening doors for students globally.' },
-  { year: '2018', side: 'right', title: 'Scholarship Fund Launch', desc: 'The Alumni Association launched a ₦50M scholarship endowment fund to sponsor brilliant students from underprivileged backgrounds.' },
-  { year: '2024', side: 'left', title: '₦100M Milestone', desc: 'Combined alumni contributions surpassed ₦100 Million — funding infrastructure, scholarships, and community outreach programs.' },
+  { year: '2024', side: 'left', title: 'Selected as a Model School', desc: 'BASEGA was selected by the Executive Governor as one of the 33 model schools in Oyo State.' },
+  { year: '2025', side: 'right', title: 'School Chapel Reconstruction', desc: 'The alumni embarked on reconstructing the school chapel into a smart hall.' },
 ]
 
 const values = [
