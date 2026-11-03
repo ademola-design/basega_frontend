@@ -195,12 +195,12 @@ export default function About() {
               <div className="assoc-eyebrow">The Association</div>
               <h2 className="assoc-title">BASEGA Alumni Association</h2>
               <p className="assoc-body">
-                Founded in 2005 by a passionate group of former students, the BASEGA Alumni Association exists
-                to maintain the bonds forged during our school years and to channel the collective strength of
-                our alumni toward meaningful impact.
+                The BASEGA Old Students Association was first formed in 1983 and formally organised in 1985.
+                It brings former students together to maintain the bonds forged during our school years and
+                channel the collective strength of our alumni toward meaningful impact.
               </p>
               <p className="assoc-body">
-                With over <span className="assoc-highlight">5,000 registered members</span> across Nigeria and
+                With over <span className="assoc-highlight">2,000 registered members</span> at present across Nigeria and
                 the diaspora, the association organises annual reunions, mentorship programs, career networking
                 events, and fundraising drives for school development.
               </p>

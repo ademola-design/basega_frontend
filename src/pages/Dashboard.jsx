@@ -167,6 +167,12 @@ export default function Dashboard() {
         </div>
 
         <div className="container db-body">
+          <nav className="db-section-nav" aria-label="Dashboard sections">
+            <a href="#dashboard-overview">Overview</a>
+            <a href="#dashboard-quick-access">Quick Access</a>
+            <a href="#dashboard-profile">Edit Profile</a>
+            <a href="#dashboard-password">Password</a>
+          </nav>
 
           {/* ── Pending approval notice ── */}
           {memberStatus === 'pending' && (
@@ -180,7 +186,7 @@ export default function Dashboard() {
           )}
 
           {/* ── Status cards ── */}
-          <div className="db-status-row">
+          <div className="db-status-row" id="dashboard-overview">
             {/* <div className="db-status-card">
             <div className={`db-status-dot ${duesPaid ? 'active-dot' : 'pending-dot'}`} />
             <div>
@@ -214,7 +220,7 @@ export default function Dashboard() {
           </div>
 
           {/* ── Quick links ── */}
-          <div className="db-section-head">
+          <div className="db-section-head" id="dashboard-quick-access">
             <h2>Quick Access</h2>
           </div>
           <div className="db-links-grid">
@@ -227,7 +233,7 @@ export default function Dashboard() {
           </div>
 
           <div className="db-settings-grid">
-            <section className="db-settings-card">
+            <section className="db-settings-card" id="dashboard-profile">
               <div className="db-section-head">
                 <h2>Edit Profile</h2>
                 <p>Keep your member information current.</p>
@@ -266,7 +272,7 @@ export default function Dashboard() {
               </form>
             </section>
 
-            <section className="db-settings-card">
+            <section className="db-settings-card" id="dashboard-password">
               <div className="db-section-head">
                 <h2>Reset Password</h2>
                 <p>Choose a new password for your account.</p>
