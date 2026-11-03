@@ -8,6 +8,7 @@ const SLIDES = [
   { img: '/photos/school-assembly.jpg', bgPos: 'center 40%' },
   { img: '/photos/students-pavilion.jpg', bgPos: 'center 45%' },
   { img: '/photos/students-event.jpg', bgPos: 'center 20%' },
+  { img: '/photos/gate.jpeg', bgPos: 'center 50%' },
 ]
 
 const THUMB_GRADIENTS = [
