@@ -5,8 +5,8 @@ import presidentPhoto from '../../Alumni President.jpeg'
 const milestones = [
   { year: '1976', side: 'left', title: 'Foundation', desc: 'The First Baptist Church Ago-Are established the school to provide secondary education for the community.' },
   { year: '1981', side: 'right', title: 'First Graduating Set', desc: 'The first set of students graduated, marking an important milestone in the school’s history.' },
-  { year: '2000', side: 'left', title: 'New Campus Expansion', desc: 'A state-of-the-art science laboratory, library complex, and sports facilities were commissioned, transforming the learning environment.' },
-  { year: '2005', side: 'right', title: 'Alumni Association Founded', desc: 'Former students officially formed the BASEGA Alumni Association to maintain bonds, give back to the school, and support current students.' },
+  { year: '1983 / 1985', side: 'left', title: 'Old Students Association Formed and Organised', desc: 'The BASEGA Old Students Association was first formed in 1983 and organised in 1985.' },
+  { year: '2000', side: 'right', title: 'New Campus Expansion', desc: 'A state-of-the-art science laboratory, library complex, and sports facilities were commissioned, transforming the learning environment.' },
   { year: '2024', side: 'left', title: 'Selected as a Model School', desc: 'BASEGA was selected by the Executive Governor as one of the 33 model schools in Oyo State.' },
   { year: '2025', side: 'right', title: 'School Chapel Reconstruction', desc: 'The alumni embarked on reconstructing the school chapel into a smart hall.' },
 ]
