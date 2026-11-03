@@ -3,6 +3,41 @@ import { Link } from 'react-router-dom'
 
 const UPDATES = [
   {
+    id: 4,
+    date: 'Golden Jubilee · 2026',
+    title: 'Official Golden Jubilee Logo Unveiled',
+    body: 'The school and its global alumni association launched the Golden Jubilee logo, kicking off countdown activities and bringing Old Basegites together worldwide.',
+    tag: 'Achievement',
+  },
+  {
+    id: 5,
+    date: 'Golden Jubilee · 2026',
+    title: 'Alumni-Driven Infrastructure',
+    body: 'The old students’ body is supporting infrastructure improvements through fundraising and projects focused on upgrading learning facilities. Discussions are also underway about a more active role for the national old students’ body in the school’s ongoing administration.',
+    tag: 'Achievement',
+  },
+  {
+    id: 6,
+    date: 'Golden Jubilee · 2026',
+    title: 'Celebrating Oyo State at 50',
+    body: 'As Oyo State marked its 50th anniversary, BASEGA students joined the celebrations with a road walk through Ago-Are.',
+    tag: 'Achievement',
+  },
+  {
+    id: 7,
+    date: 'Golden Jubilee · 2026',
+    title: 'State-Level Recognition for BASEGA Students',
+    body: 'Governor Seyi Makinde presented prizes and recognition to BASEGA students for their achievements, including third place in the State Female Football Competition and a spoken-word poem titled “A Pacesetter at 50.”',
+    tag: 'Achievement',
+  },
+  {
+    id: 8,
+    date: 'Recent Achievement',
+    title: 'Academic Excellence',
+    body: 'The school recently secured second place in a competition, continuing its strong record of achievement.',
+    tag: 'Achievement',
+  },
+  {
     id: 1,
     date: 'June 2026',
     title: '50th Founders\' Day Planning Committee Constituted',
@@ -29,6 +64,7 @@ const TAG_COLORS = {
   'Announcement': { bg: '#0a3d10', color: '#f1f0e8' },
   'Call to Action': { bg: '#b8860b', color: '#fff' },
   'Event': { bg: '#8b0000', color: '#fff' },
+  'Achievement': { bg: '#1b6b35', color: '#fff' },
 }
 
 export default function Jubilee() {
@@ -69,7 +105,7 @@ export default function Jubilee() {
       <section className="jubilee-updates">
         <div className="container">
           <div className="jubilee-section-head">
-            <h2>Anniversary Updates</h2>
+            <h2>Jubilee Highlights &amp; Updates</h2>
             <p>Stay up to date with all 50th anniversary activities, events, and calls to action.</p>
           </div>
 
