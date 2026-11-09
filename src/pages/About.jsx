@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom'
-import PageHeader from '../components/PageHeader'
 import { historySections } from '../data/history'
 import presidentPhoto from '../../Alumni President.jpeg'
 
@@ -65,68 +64,87 @@ function getInitials(name) {
 
 export default function About() {
   return (
-    <div className="page-layout">
-      <PageHeader
-        title="About BASEGA School"
-        eyebrow="Our Story"
-        subtitle="Since 1976, empowering minds, building character and shaping leaders who transform communities."
-        breadcrumbs={[{ label: 'About' }]}
-      />
-
-      {/* ── Our History ── */}
-      <div className="history-intro">
-        <div className="history-content">
-          <p className="eyebrow-gold">Est. 1976</p>
-          <h2>Our History</h2>
-          {historySections.map(section => (
-            <section className="history-section" key={section.title}>
-              <h3>{section.title}</h3>
-              {section.paragraphs?.map((paragraph, index) => <p key={index}>{paragraph}</p>)}
-              {section.subsections?.map(subsection => (
-                <div className="history-subsection" key={subsection.title}>
-                  <h4>{subsection.title}</h4>
-                  {subsection.paragraphs?.map((paragraph, index) => <p key={index}>{paragraph}</p>)}
-                  {subsection.items && (
-                    <ul>
-                      {subsection.items.map(item => <li key={item}>{item}</li>)}
-                    </ul>
-                  )}
-                </div>
-              ))}
-            </section>
-          ))}
+    <div className="page-layout about-page">
+      <section className="about-hero" aria-labelledby="about-title">
+        <div className="container about-hero-inner">
+          <nav className="about-breadcrumb" aria-label="Breadcrumb">
+            <Link to="/">Home</Link><span aria-hidden="true">/</span><span>About</span>
+          </nav>
+          <div className="about-hero-grid">
+            <div className="about-hero-copy">
+              <p className="about-eyebrow"><span /> Our story · Ago-Are, Oyo State</p>
+              <h1 id="about-title">A legacy of learning.<br /><span>A future of possibility.</span></h1>
+              <p className="about-hero-lead">
+                Since 1976, Baptist Secondary Grammar School, Ago-Are has helped generations
+                of students grow in knowledge, character, and service.
+              </p>
+              <a className="about-hero-link" href="#about-history">
+                Discover our history <span aria-hidden="true">↓</span>
+              </a>
+            </div>
+            <div className="about-hero-art" aria-label="BASEGA was established in 1976">
+              <div className="about-hero-orbit about-hero-orbit-one" />
+              <div className="about-hero-orbit about-hero-orbit-two" />
+              <div className="about-hero-seal">
+                <span>ESTABLISHED</span>
+                <img src="/basega-crest.png" alt="BASEGA school crest" />
+                <strong>1976</strong>
+                <small>AGO-ARE · NIGERIA</small>
+              </div>
+              <span className="about-hero-spark about-hero-spark-one" aria-hidden="true">✦</span>
+              <span className="about-hero-spark about-hero-spark-two" aria-hidden="true">✧</span>
+            </div>
+          </div>
+          <div className="about-stat-strip" aria-label="BASEGA at a glance">
+            <div className="about-stat">
+              <strong>1976</strong><span>Year established</span>
+            </div>
+            <div className="about-stat">
+              <strong>108</strong><span>Students in the first intake</span>
+            </div>
+            <div className="about-stat">
+              <strong>3</strong><span>Form One classes at the start</span>
+            </div>
+          </div>
         </div>
-      </div>
+      </section>
 
       {/* ── Mission & Core Values ── */}
-      <section className="section">
+      <section className="section about-info-section">
         <div className="container">
-          <div className="text-center">
-            <div className="eyebrow-gold">What We Stand For</div>
-            <h2 className="section-title">Mission and Core Values</h2>
-            <p className="section-subtitle" style={{ margin: '0 auto 2.5rem' }}>
-              The principles that guide everything we do as an association
+          <div className="about-section-heading">
+            <div>
+              <p className="about-section-eyebrow">The foundation</p>
+              <h2 className="section-title">What we stand for</h2>
+            </div>
+            <p>
+              The principles that shape the BASEGA experience and guide the people who carry
+              its legacy forward.
             </p>
           </div>
           <div className="purpose-grid">
-            {values.map(v => (
-              <div key={v.title} className="purpose-card">
+            {values.map((v, index) => (
+              <article key={v.title} className="purpose-card about-purpose-card">
+                <span className="about-card-index">0{index + 1}</span>
                 <h3>{v.title}</h3>
                 <p>{v.desc}</p>
-              </div>
+              </article>
             ))}
           </div>
         </div>
       </section>
 
       {/* ── School Achievements ── */}
-      <section className="section achievements-section">
+      <section className="section achievements-section about-achievements">
         <div className="container">
-          <div className="text-center">
-            <div className="eyebrow-gold">Track Record</div>
-            <h2 className="section-title">School Achievements</h2>
-            <p className="section-subtitle" style={{ margin: '0 auto 0' }}>
-              Decades of excellence, impact, and recognition
+          <div className="about-section-heading about-section-heading-light">
+            <div>
+              <p className="about-section-eyebrow">A tradition of distinction</p>
+              <h2 className="section-title">Excellence in action</h2>
+            </div>
+            <p>
+              A proud record of achievement built by generations of students, educators, and
+              alumni.
             </p>
           </div>
           <div className="achievements-grid">
@@ -135,21 +153,62 @@ export default function About() {
               { title: 'Outstanding Alumni', desc: 'Over four decades, BASEGA has produced thousands of graduates excelling in medicine, law, engineering, business, and the arts.' },
               { title: 'Global Recognition', desc: 'Multiple students ranked among the top performers worldwide in Cambridge International Examinations.' },
             ].map(a => (
-              <div key={a.title} className="purpose-card">
+              <article key={a.title} className="purpose-card about-achievement-card">
+                <span aria-hidden="true">✦</span>
                 <h3>{a.title}</h3>
                 <p>{a.desc}</p>
-              </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Our History ── */}
+      <section className="section about-history-section" id="about-history">
+        <div className="container">
+          <div className="about-history-heading">
+            <div>
+              <p className="about-section-eyebrow">The story so far</p>
+              <h2 className="section-title">Rooted in community.<br />Growing through generations.</h2>
+            </div>
+            <p>
+              From a community’s need for secondary education grew a school whose story is
+              shaped by dedicated teachers, curious students, and a lasting sense of belonging.
+            </p>
+          </div>
+          <div className="history-content">
+            {historySections.map((section, index) => (
+              <article className="history-section" key={section.title}>
+                <div className="history-section-marker" aria-hidden="true">
+                  <span>{String(index + 1).padStart(2, '0')}</span>
+                </div>
+                <div className="history-section-body">
+                  <h3>{section.title}</h3>
+                  {section.paragraphs?.map((paragraph, paragraphIndex) => <p key={paragraphIndex}>{paragraph}</p>)}
+                  {section.subsections?.map(subsection => (
+                    <div className="history-subsection" key={subsection.title}>
+                      <h4>{subsection.title}</h4>
+                      {subsection.paragraphs?.map((paragraph, paragraphIndex) => <p key={paragraphIndex}>{paragraph}</p>)}
+                      {subsection.items && (
+                        <ul>
+                          {subsection.items.map(item => <li key={item}>{item}</li>)}
+                        </ul>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </article>
             ))}
           </div>
         </div>
       </section>
 
       {/* ── Association Section ── */}
-      <section className="section">
+      <section className="section about-association">
         <div className="container">
           <div className="assoc-layout">
             <div>
-              <div className="assoc-eyebrow">The Association</div>
+              <div className="assoc-eyebrow">The people behind the legacy</div>
               <h2 className="assoc-title">BASEGA Alumni Association</h2>
               <p className="assoc-body">
                 The BASEGA Old Students Association was first formed in 1983 and formally organised in 1985.
@@ -175,7 +234,7 @@ export default function About() {
       </section>
 
       {/* ── Values (dark gradient bg, frosted cards) ── */}
-      <section className="section values-section">
+      <section className="section values-section about-values">
         <div className="container">
           <div className="text-center" style={{ marginBottom: '2rem' }}>
             <div className="eyebrow-gold">What we believe</div>
@@ -196,7 +255,7 @@ export default function About() {
         </div>
       </section>
 
-      <section className="president-section" aria-labelledby="president-name">
+      <section className="president-section about-president-section" aria-labelledby="president-name">
         <div className="container">
           <article className="president-feature">
             <div className="president-portrait">
@@ -256,7 +315,7 @@ export default function About() {
       </section>
 
       {/* ── Executive Committee ── */}
-      <section className="section">
+      <section className="section about-executives">
         <div className="container">
           <div className="text-center">
             <div className="eyebrow-gold">Leadership</div>

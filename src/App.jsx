@@ -54,7 +54,7 @@ function Layout({ children }) {
       }, { threshold: 0.08, rootMargin: '0px 0px 50px 0px' })
     }
 
-    const selector = '.section, .profile-card, .member-card, .news-card, .news-home-card, .events-card, .purpose-card, .value-card, .leader-card, .staff-card, .contact-info-card'
+    const selector = '.section, .history-section, .profile-card, .member-card, .news-card, .news-home-card, .events-card, .purpose-card, .value-card, .leader-card, .staff-card, .contact-info-card'
 
     // Initial batch
     const initialElements = root.querySelectorAll(selector)
