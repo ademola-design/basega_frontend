@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import SupportBankDetails from './SupportBankDetails'
 
 export default function Footer() {
   return (
@@ -61,6 +62,10 @@ export default function Footer() {
           </div>
 
         </div>
+      </div>
+
+      <div className="container">
+        <SupportBankDetails variant="footer" />
       </div>
 
       <hr className="footer-divider" />

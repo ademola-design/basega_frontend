@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import { imageUrl, newsAPI, nominationsAPI } from '../api/client'
 import Avatar from '../components/Avatar'
 import { honoree } from '../lib/honoree'
+import { isScholarshipContent } from '../lib/publicContent'
 
 const SLIDES = [
   { img: '/photos/school-assembly.jpg', bgPos: 'center 40%' },
@@ -65,7 +66,7 @@ export default function Home() {
           newsAPI.list()
         ])
         setFeatured(current)
-        setLatestNews(articles.slice(0, 3))
+        setLatestNews(articles.filter(item => !isScholarshipContent(item)).slice(0, 3))
       } catch (err) {
         console.error(err)
       }
@@ -206,7 +207,7 @@ export default function Home() {
         <div className="container">
           <h2>Are you a Financial Member?</h2>
           <p>
-            Your annual dues power our initiatives, scholarships, and events. Ensure
+            Your annual dues power our initiatives and events. Ensure
             your status is active to enjoy full membership benefits and voting rights.
           </p>
           <Link to="/payment" className="btn-gold-cta">Pay 2026 Dues Now (₦25,000)</Link>

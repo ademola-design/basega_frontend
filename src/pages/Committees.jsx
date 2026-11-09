@@ -14,7 +14,7 @@ const executive = [
 
 const committees = [
   { name: 'Finance Committee',   chair: 'Tokunbo Adekiss',        members: ['Babatunde Festus', 'Emeka Nnamdi', 'Adebayo Johnson'],       icon: '💰', desc: 'Oversees financial planning, dues collection, and investment of association funds.' },
-  { name: 'Education Committee', chair: 'Zainab Usman',           members: ['Alana Belle', 'Dandola Ogundiyan'],                          icon: '🎓', desc: 'Manages the scholarship programme and alumni mentorship initiatives.' },
+  { name: 'Education Committee', chair: 'Zainab Usman',           members: ['Alana Belle', 'Dandola Ogundiyan'],                          icon: '🎓', desc: 'Coordinates alumni mentorship initiatives.' },
   { name: 'Health Committee',    chair: 'Dr. Titilawale Adekiya', members: ['Fatima Ibrahim', 'Kabiru Abubakar'],                         icon: '🏥', desc: 'Coordinates free medical outreach and health advocacy for BASEGA communities.' },
   { name: 'ICT Committee',       chair: 'Adebayo Johnson',        members: ['Dandola Ogundiyan', 'Alana Belle'],                          icon: '💻', desc: "Drives the association's digital transformation and online presence." },
   { name: 'Community Committee', chair: 'Oluwaseun Peters',       members: ['Babatunde Festus', 'Ngozi Eze'],                             icon: '🤝', desc: 'Leads community service initiatives and environmental projects nationwide.' },

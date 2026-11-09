@@ -151,10 +151,6 @@ export default function MemberProfile() {
                   </li>
                   <li style={{ display: 'flex', gap: 10, fontSize: '0.9rem', color: 'var(--gray-700)' }}>
                     <span style={{ color: 'var(--green-600)' }}>✓</span>
-                    Contributed to Scholarship Fund
-                  </li>
-                  <li style={{ display: 'flex', gap: 10, fontSize: '0.9rem', color: 'var(--gray-700)' }}>
-                    <span style={{ color: 'var(--green-600)' }}>✓</span>
                     Mentor in the Alumni Mentorship Programme
                   </li>
                 </ul>

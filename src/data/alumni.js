@@ -16,7 +16,6 @@ export const alumniOfMonth = {
     'First in her graduating class — University of Lagos College of Medicine',
     'WHO Africa Region Young Scientist Award, 2023',
     'Founder, Free Maternal Healthcare Initiative — Lagos State',
-    'BASEGA Scholarship Recipient, Class of 2015',
     'Published researcher in the Lancet Infectious Diseases (2024)',
   ],
 }

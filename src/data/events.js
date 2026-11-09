@@ -3,7 +3,7 @@ export const upcomingEvents = [
     id: 1, day: '14', month: 'Jun', year: '2025',
     title: 'BASEGA Golf Day 2025',
     location: 'Ikoyi Golf Club, Lagos',
-    description: 'Annual charity golf tournament raising funds for the BASEGA Scholarship Fund. Open to all alumni and friends.',
+    description: 'Annual charity golf tournament open to all alumni and friends.',
     type: 'Fundraiser',
   },
   {

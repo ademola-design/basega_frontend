@@ -3955,9 +3955,8 @@ input[type="radio"] {
 
 /* ===== Contact Page ===== */
 .contact-layout {
-  display: grid;
-  grid-template-columns: 1fr 400px;
-  gap: 2rem;
+  max-width: 760px;
+  margin: 0 auto;
 }
 .contact-info-card {
   background: linear-gradient(135deg, var(--green-900), var(--green-700));
@@ -4150,7 +4149,7 @@ textarea.form-control {
 }
 @media (max-width: 960px) {
   .contact-layout {
-    grid-template-columns: 1fr;
+    max-width: 100%;
   }
 }
 
@@ -4876,6 +4875,87 @@ textarea.form-control {
   font-size: 0.92rem;
   font-weight: 600;
   overflow-wrap: anywhere;
+}
+.support-bank-section {
+  background: var(--white);
+}
+.support-bank-details {
+  padding: 24px;
+  background: var(--white);
+  border: 1px solid var(--gray-200);
+  border-radius: 1.25rem;
+  box-shadow: var(--shadow-sm);
+}
+.support-bank-details h2 {
+  color: var(--green-900);
+  font-size: 1.35rem;
+  margin-bottom: 8px;
+}
+.support-bank-details > p {
+  color: var(--gray-600);
+  font-size: 0.9rem;
+  margin-bottom: 20px;
+}
+.support-bank-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+.support-bank-account {
+  padding: 16px;
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius);
+}
+.support-bank-account h3 {
+  color: var(--gray-900);
+  font-size: 1rem;
+  margin: 0 0 12px;
+}
+.support-bank-account dl,
+.support-bank-account dl div {
+  display: grid;
+  gap: 4px;
+}
+.support-bank-account dl {
+  gap: 10px;
+}
+.support-bank-account dt {
+  color: var(--gray-500);
+  font-size: 0.75rem;
+}
+.support-bank-account dd {
+  color: var(--gray-900);
+  font-size: 0.92rem;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+.support-bank-details--footer {
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.12);
+  box-shadow: none;
+}
+.support-bank-details--footer h2 {
+  color: var(--white);
+}
+.support-bank-details--footer > p {
+  color: rgba(255, 255, 255, 0.65);
+}
+.support-bank-details--footer .support-bank-account {
+  border-color: rgba(255, 255, 255, 0.12);
+}
+.support-bank-details--footer .support-bank-account h3,
+.support-bank-details--footer .support-bank-account dd {
+  color: var(--white);
+}
+.support-bank-details--footer .support-bank-account dt {
+  color: rgba(255, 255, 255, 0.55);
+}
+@media (max-width: 600px) {
+  .support-bank-grid {
+    grid-template-columns: 1fr;
+  }
 }
 @media (max-width: 900px) {
   .pay-card-wrap {

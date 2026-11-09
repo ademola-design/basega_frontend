@@ -5,17 +5,8 @@ export const news = [
     date: '10 May 2025',
     category: 'Events',
     excerpt: 'Over 300 alumni gathered in Lagos for the most successful annual reunion in the association\'s history, celebrating decades of brotherhood and achievement.',
-    content: 'The BASEGA Annual Reunion 2025 brought together graduates from across Nigeria and the diaspora. Key highlights included keynote addresses, networking sessions, and the inaugural scholarship fund launch.',
+    content: 'The BASEGA Annual Reunion 2025 brought together graduates from across Nigeria and the diaspora. Key highlights included keynote addresses and networking sessions.',
     emoji: '🎓',
-  },
-  {
-    id: 2,
-    title: 'Scholarship Fund Awards First Recipients',
-    date: '2 Apr 2025',
-    category: 'Scholarships',
-    excerpt: 'Five deserving students from BASEGA School have been awarded full scholarships funded entirely by alumni contributions.',
-    content: 'The BASEGA Scholarship Fund, established in 2024, awarded its first five full bursaries to outstanding students who demonstrated both academic excellence and financial need.',
-    emoji: '📚',
   },
   {
     id: 3,

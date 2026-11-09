@@ -140,7 +140,6 @@ export default function About() {
               { title: 'Academic Excellence', desc: 'BASEGA students have consistently dominated national science olympiads, debate competitions, and inter-school championships.' },
               { title: 'Outstanding Alumni', desc: 'Over four decades, BASEGA has produced thousands of graduates excelling in medicine, law, engineering, business, and the arts.' },
               { title: 'Global Recognition', desc: 'Multiple students ranked among the top performers worldwide in Cambridge International Examinations.' },
-              { title: 'Scholarship Impact', desc: 'Through the alumni scholarship fund, over 200 students have received full or partial tuition support.' },
             ].map(a => (
               <div key={a.title} className="purpose-card">
                 <h3>{a.title}</h3>
@@ -204,8 +203,7 @@ export default function About() {
                 events, and fundraising drives for school development.
               </p>
               <p className="assoc-body">
-                Our flagship initiatives include the <span className="assoc-link">Alumni Scholarship Fund</span> (which
-                has awarded over 200 scholarships), the <span className="assoc-link">Annual Sports Festival</span>, and
+                Our flagship initiatives include the <span className="assoc-link">Annual Sports Festival</span> and
                 the <span className="assoc-link">Outstanding Alumni of the Month</span> recognition program.
               </p>
               <div className="assoc-btns">

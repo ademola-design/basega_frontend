@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import PageHeader from '../components/PageHeader'
+import SupportBankDetails from '../components/SupportBankDetails'
 import { imageUrl, newsAPI } from '../api/client'
+import { isScholarshipContent } from '../lib/publicContent'
 
 function getCategoryEmoji(category) {
   const cat = String(category).toLowerCase()
   if (cat.includes('event')) return '🎓'
-  if (cat.includes('scholar')) return '📚'
   if (cat.includes('elect') || cat.includes('assoc') || cat.includes('exec')) return '🗳️'
   if (cat.includes('career')) return '💼'
   if (cat.includes('commun')) return '📖'
@@ -30,7 +31,7 @@ export default function News() {
     setLoading(true)
     newsAPI.list()
       .then(data => {
-        setNewsList(data)
+        setNewsList(data.filter(item => !isScholarshipContent(item)))
       })
       .catch(err => {
         console.error(err)
@@ -58,6 +59,12 @@ export default function News() {
         subtitle="The latest updates from the BASEGA Alumni Association."
         breadcrumbs={[{ label: 'News' }]}
       />
+
+      <section className="section support-bank-section">
+        <div className="container">
+          <SupportBankDetails />
+        </div>
+      </section>
 
       <section className="section" style={{ background: 'var(--gray-100)' }}>
         <div className="container">

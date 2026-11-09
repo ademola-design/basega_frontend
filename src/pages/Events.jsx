@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import PageHeader from '../components/PageHeader'
 import { eventsAPI } from '../api/client'
+import { isScholarshipContent } from '../lib/publicContent'
 
 export default function Events() {
   const [tab, setTab] = useState('upcoming')
@@ -12,7 +13,7 @@ export default function Events() {
     setLoading(true)
     eventsAPI.list()
       .then(data => {
-        setEventsList(data)
+        setEventsList(data.filter(event => !isScholarshipContent(event)))
       })
       .catch(err => console.error(err))
       .finally(() => setLoading(false))

@@ -1,4 +1,5 @@
 import PageHeader from '../components/PageHeader'
+import { supportBankAccounts } from '../data/bankAccounts'
 
 export default function Payment() {
   return (
@@ -38,22 +39,16 @@ export default function Payment() {
                   <div><dt>Account number</dt><dd>2023532281</dd></div>
                 </dl>
               </article>
-              <article className="bank-account">
-                <span className="bank-account-purpose">Other BASEGA School Account</span>
-                <h3>Wema Bank</h3>
-                <dl>
-                  <div><dt>Account name</dt><dd>Old Student’s Association BASEGA</dd></div>
-                  <div><dt>Account number</dt><dd>0447485219</dd></div>
-                </dl>
-              </article>
-              <article className="bank-account">
-                <span className="bank-account-purpose">Other BASEGA School Account</span>
-                <h3>Zenith Bank</h3>
-                <dl>
-                  <div><dt>Account name</dt><dd>BASEGA Alumni Association</dd></div>
-                  <div><dt>Account number</dt><dd>1312046537</dd></div>
-                </dl>
-              </article>
+              {supportBankAccounts.map(account => (
+                <article className="bank-account" key={account.bank}>
+                  <span className="bank-account-purpose">Other BASEGA School Account</span>
+                  <h3>{account.bank}</h3>
+                  <dl>
+                    <div><dt>Account name</dt><dd>{account.accountName}</dd></div>
+                    <div><dt>Account number</dt><dd>{account.accountNumber}</dd></div>
+                  </dl>
+                </article>
+              ))}
             </div>
           </section>
         </div>

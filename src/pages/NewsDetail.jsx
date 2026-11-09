@@ -3,11 +3,11 @@ import { useState, useEffect } from 'react'
 import { createPortal } from 'react-dom'
 import { imageUrl, newsAPI } from '../api/client'
 import NewsVideos from '../components/NewsVideos'
+import { isScholarshipContent } from '../lib/publicContent'
 
 function getCategoryEmoji(category) {
   const cat = String(category).toLowerCase()
   if (cat.includes('event')) return '🎓'
-  if (cat.includes('scholar')) return '📚'
   if (cat.includes('elect') || cat.includes('assoc') || cat.includes('exec')) return '🗳️'
   if (cat.includes('career')) return '💼'
   if (cat.includes('commun')) return '📖'
@@ -55,12 +55,13 @@ export default function NewsDetail() {
       newsAPI.list()
     ])
       .then(([data, list]) => {
-        setArticle(data)
-        setOthers(list.filter(n => String(n.id) !== String(id)).slice(0, 3))
+        setArticle(isScholarshipContent(data) ? null : data)
+        const publicArticles = list.filter(item => !isScholarshipContent(item))
+        setOthers(publicArticles.filter(n => String(n.id) !== String(id)).slice(0, 3))
         
         // Count categories dynamically
         const catMap = {}
-        list.forEach(item => {
+        publicArticles.forEach(item => {
           const cat = item.category || 'General'
           catMap[cat] = (catMap[cat] || 0) + 1
         })

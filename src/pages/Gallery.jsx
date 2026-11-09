@@ -6,7 +6,6 @@ const filters = ['All', '2025', '2024', '2023', 'Reunions', 'School Events', 'Co
 const photos = [
   { id: 1, emoji: '🎓', caption: 'Annual Reunion 2025', year: '2025', cat: 'Reunions', h: 'h-240' },
   { id: 2, emoji: '🏆', caption: 'Sports Day Champions', year: '2025', cat: 'School Events', h: 'h-180' },
-  { id: 3, emoji: '📚', caption: 'Scholarship Ceremony', year: '2025', cat: '2025', h: 'h-300' },
   { id: 4, emoji: '🤝', caption: 'Mentorship Workshop', year: '2025', cat: 'Community', h: 'h-180' },
   { id: 5, emoji: '🌍', caption: 'UK Chapter Launch 2024', year: '2024', cat: '2024', h: 'h-240' },
   { id: 6, emoji: '⚽', caption: 'Alumni vs Students Match', year: '2024', cat: 'School Events', h: 'h-300' },
