@@ -2014,6 +2014,39 @@ input[type="radio"] {
   background: var(--white);
   padding: 2rem 2.5rem 2.5rem;
 }
+.history-content {
+  max-width: 900px;
+  margin: 0 auto;
+}
+.history-section {
+  margin-top: 2rem;
+}
+.history-section + .history-section {
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--gray-200);
+}
+.history-section h3 {
+  color: var(--green-800);
+  font-size: 1.2rem;
+  margin-bottom: 0.875rem;
+}
+.history-subsection {
+  margin-top: 1.25rem;
+}
+.history-subsection h4 {
+  color: var(--gray-800);
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+.history-subsection ul {
+  display: grid;
+  gap: 0.4rem;
+  margin: 0.5rem 0 1rem;
+  padding-left: 1.25rem;
+  color: var(--gray-700);
+  font-size: 0.9rem;
+  line-height: 1.7;
+}
 .history-intro .eyebrow-gold {
   color: var(--gold);
   display: block;
@@ -2142,126 +2175,6 @@ input[type="radio"] {
   .achievements-section .purpose-card p {
     font-size: 0.75rem;
     line-height: 1.5;
-  }
-}
-
-/* Key Milestones — alternating centre timeline */
-.ms-timeline {
-  position: relative;
-  margin: 3rem auto 0;
-}
-.ms-timeline::before {
-  content: "";
-  position: absolute;
-  left: 50%;
-  top: 0;
-  bottom: 0;
-  width: 2px;
-  background: linear-gradient(to bottom, var(--green-500), var(--green-100));
-  transform: translateX(-50%);
-}
-.ms-item {
-  display: grid;
-  grid-template-columns: 1fr 80px 1fr;
-  align-items: center;
-  margin-bottom: 2.75rem;
-}
-.ms-node {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  z-index: 1;
-}
-.ms-dot {
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  background: var(--green-500);
-  border: 3px solid var(--white);
-  box-shadow: 0 0 0 3px rgba(82, 183, 136, 0.25);
-}
-.ms-year {
-  font-size: 0.7rem;
-  font-weight: 700;
-  color: var(--green-600);
-  background: rgba(82, 183, 136, 0.12);
-  border-radius: 12px;
-  padding: 2px 8px;
-  letter-spacing: 0.05em;
-}
-.ms-year-tag {
-  display: none;
-}
-.ms-content {
-  padding: 0 1.25rem;
-}
-.ms-left .ms-content {
-  text-align: right;
-}
-.ms-right .ms-content {
-  text-align: left;
-}
-.ms-content h3 {
-  font-size: 0.97rem;
-  font-weight: 700;
-  color: var(--gray-900);
-  margin-bottom: 0.3rem;
-}
-.ms-content p {
-  font-size: 0.845rem;
-  color: var(--gray-500);
-  line-height: 1.65;
-}
-.ms-spacer {
-  display: flex;
-  align-items: center;
-}
-.ms-left .ms-spacer {
-  justify-content: flex-start;
-  padding-left: 0.75rem;
-}
-.ms-right .ms-spacer {
-  justify-content: flex-end;
-  padding-right: 0.75rem;
-}
-@media (max-width: 640px) {
-  .ms-timeline::before {
-    left: 20px;
-  }
-  .ms-item {
-    grid-template-columns: 40px 1fr;
-    align-items: start;
-  }
-  .ms-left .ms-content,
-  .ms-right .ms-content {
-    text-align: left;
-    grid-column: 2;
-    grid-row: 1;
-    padding-top: 2px;
-  }
-  .ms-node {
-    grid-column: 1;
-    grid-row: 1;
-    padding-top: 4px;
-    justify-content: flex-start;
-  }
-  .ms-year {
-    display: none;
-  }
-  .ms-year-tag {
-    display: inline-flex;
-    align-items: center;
-    font-size: 0.7rem;
-    font-weight: 700;
-    color: var(--green-600);
-    background: rgba(82, 183, 136, 0.15);
-    border-radius: 12px;
-    padding: 2px 10px;
-    margin-bottom: 5px;
-    letter-spacing: 0.05em;
-  }
-  .ms-spacer {
-    display: none;
   }
 }
 
@@ -6447,9 +6360,6 @@ a.current-featured:hover {
     letter-spacing: 0.03em;
   }
   .alumni-label {
-    letter-spacing: 0.02em;
-  }
-  .ms-year-tag {
     letter-spacing: 0.02em;
   }
   .news-home-cat {

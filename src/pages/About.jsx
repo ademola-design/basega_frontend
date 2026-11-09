@@ -1,15 +1,7 @@
 import { Link } from 'react-router-dom'
 import PageHeader from '../components/PageHeader'
+import { historySections } from '../data/history'
 import presidentPhoto from '../../Alumni President.jpeg'
-
-const milestones = [
-  { year: '1976', side: 'left', title: 'Foundation', desc: 'The First Baptist Church Ago-Are established the school to provide secondary education for the community.' },
-  { year: '1981', side: 'right', title: 'First Graduating Set', desc: 'The first set of students graduated, marking an important milestone in the school’s history.' },
-  { year: '1983 / 1985', side: 'left', title: 'Old Students Association Formed and Organised', desc: 'The BASEGA Old Students Association was first formed in 1983 and organised in 1985.' },
-  { year: '2000', side: 'right', title: 'New Campus Expansion', desc: 'A state-of-the-art science laboratory, library complex, and sports facilities were commissioned, transforming the learning environment.' },
-  { year: '2024', side: 'left', title: 'Selected as a Model School', desc: 'BASEGA was selected by the Executive Governor as one of the 33 model schools in Oyo State.' },
-  { year: '2025', side: 'right', title: 'School Chapel Reconstruction', desc: 'The alumni embarked on reconstructing the school chapel into a smart hall.' },
-]
 
 const values = [
   { title: 'Our Mission', desc: 'To nurture well-rounded individuals equipped with knowledge, character and the confidence to lead in a rapidly changing world.' },
@@ -83,24 +75,26 @@ export default function About() {
 
       {/* ── Our History ── */}
       <div className="history-intro">
-        <div style={{ maxWidth: '900px', margin: '0 auto' }}>
+        <div className="history-content">
           <p className="eyebrow-gold">Est. 1976</p>
           <h2>Our History</h2>
-          <p>
-            The establishment of Baptist Secondary Grammar School Ago-Are in 1976 was a response to the
-            community’s need for high school education. The First Baptist Church Ago-Are took the initiative
-            to provide this essential service, as students had to travel far to other towns to access secondary
-            education. The Baptist Modern School, which had been serving the area, was becoming obsolete, and
-            its closure would have left the community without access to higher education. The church’s efforts
-            ensured that the community had a viable option for secondary education.
-          </p>
-          <p>
-            The church levied its members and made use of the modern school buildings to get started. Deacon
-            A.A. Afolabi and Mr. Ajayi were instrumental in the school’s early years, serving as the first
-            principal and vice principal, respectively. Deacon Afolabi led the school until the first set of
-            students graduated in 1981, after which he was transferred to head the teacher’s college at Saki.
-            Mr. Ajayi’s tenure lasted only a few years.
-          </p>
+          {historySections.map(section => (
+            <section className="history-section" key={section.title}>
+              <h3>{section.title}</h3>
+              {section.paragraphs?.map((paragraph, index) => <p key={index}>{paragraph}</p>)}
+              {section.subsections?.map(subsection => (
+                <div className="history-subsection" key={subsection.title}>
+                  <h4>{subsection.title}</h4>
+                  {subsection.paragraphs?.map((paragraph, index) => <p key={index}>{paragraph}</p>)}
+                  {subsection.items && (
+                    <ul>
+                      {subsection.items.map(item => <li key={item}>{item}</li>)}
+                    </ul>
+                  )}
+                </div>
+              ))}
+            </section>
+          ))}
         </div>
       </div>
 
@@ -144,41 +138,6 @@ export default function About() {
               <div key={a.title} className="purpose-card">
                 <h3>{a.title}</h3>
                 <p>{a.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── Key Milestones Timeline ── */}
-      <section className="section">
-        <div className="container">
-          <div className="text-center">
-            <div className="section-label">Our Journey</div>
-            <h2 className="section-title">Key Milestones</h2>
-          </div>
-          <div className="ms-timeline">
-            {milestones.map(m => (
-              <div key={m.year} className={`ms-item ms-${m.side}`}>
-                {m.side === 'left' ? (
-                  <>
-                    <div className="ms-content">
-                      <div className="ms-year-tag">{m.year}</div>
-                      <h3>{m.title}</h3><p>{m.desc}</p>
-                    </div>
-                    <div className="ms-node"><div className="ms-dot" /></div>
-                    <div className="ms-spacer"><span className="ms-year">{m.year}</span></div>
-                  </>
-                ) : (
-                  <>
-                    <div className="ms-spacer"><span className="ms-year">{m.year}</span></div>
-                    <div className="ms-node"><div className="ms-dot" /></div>
-                    <div className="ms-content">
-                      <div className="ms-year-tag">{m.year}</div>
-                      <h3>{m.title}</h3><p>{m.desc}</p>
-                    </div>
-                  </>
-                )}
               </div>
             ))}
           </div>
