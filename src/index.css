@@ -3801,7 +3801,7 @@ input[type="radio"] {
   object-fit: contain;
 }
 .news-featured-body {
-  padding: 40px;
+  padding: 24px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -3817,6 +3817,10 @@ input[type="radio"] {
   color: var(--gray-700);
   line-height: 1.75;
   margin-bottom: 20px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+  overflow: hidden;
 }
 @media (max-width: 768px) {
   .news-featured {
