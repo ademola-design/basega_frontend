@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { historySections } from '../data/history'
 import presidentPhoto from '../../Alumni President.jpeg'
+import anthemPoster from '../../Basega Anthem Commemorative Poster.png'
 
 const values = [
   { title: 'Our Mission', desc: 'To nurture well-rounded individuals equipped with knowledge, character and the confidence to lead in a rapidly changing world.' },
@@ -200,6 +201,30 @@ export default function About() {
               </article>
             ))}
           </div>
+        </div>
+      </section>
+
+      <section className="section about-anthem" aria-labelledby="anthem-title">
+        <div className="container about-anthem-layout">
+          <div className="about-anthem-copy">
+            <p className="about-section-eyebrow">A song of unity and pride</p>
+            <h2 className="section-title" id="anthem-title">The BASEGA Anthem</h2>
+            <p>
+              The school anthem celebrates service, unity, peace and progress — values that
+              continue to connect BASEGites across generations.
+            </p>
+            <p>
+              Explore the commemorative poster featuring the anthem’s verses and refrain.
+            </p>
+          </div>
+          <figure className="about-anthem-figure">
+            <img
+              src={anthemPoster}
+              alt="Commemorative BASEGA anthem poster featuring its verses, refrain and the Nigerian flag"
+              loading="lazy"
+            />
+            <figcaption>Baptist Secondary Grammar School, Ago-Are</figcaption>
+          </figure>
         </div>
       </section>
 
