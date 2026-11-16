@@ -1,4 +1,3 @@
-import PageHeader from '../components/PageHeader'
 import { Link } from 'react-router-dom'
 
 const UPDATES = [
@@ -60,6 +59,27 @@ const UPDATES = [
   },
 ]
 
+const MEMORABILIA = [
+  {
+    name: 'Anniversary Sash (Idaasa)',
+    price: '₦5,000 / ₦5,500',
+    detail: 'A keepsake sash for celebrating BASEGA’s Golden Jubilee.',
+    mark: '50',
+  },
+  {
+    name: 'Anniversary Towels',
+    price: '₦6,000',
+    detail: 'A practical Jubilee keepsake, made to remember the milestone.',
+    mark: '✦',
+  },
+  {
+    name: 'Anniversary Mugs',
+    price: '₦2,500',
+    detail: 'Enjoy your favourite drink with an official anniversary mug.',
+    mark: 'MUG',
+  },
+]
+
 const TAG_COLORS = {
   'Announcement': { bg: '#0a3d10', color: '#f1f0e8' },
   'Call to Action': { bg: '#b8860b', color: '#fff' },
@@ -69,44 +89,83 @@ const TAG_COLORS = {
 
 export default function Jubilee() {
   return (
-    <div className="page-layout">
-      <PageHeader
-        title="Jubilee Anniversary"
-        eyebrow="50th Founders' Day"
-        subtitle="Celebrating 50 years of excellence, peace and progress at BASEGA Secondary School, Ago-Are."
-        breadcrumbs={[{ label: 'Jubilee Anniversary' }]}
-      />
-
-      {/* ── Logo Banner ── */}
-      <section className="jubilee-banner">
-        <div className="container">
-          <div className="jubilee-banner-inner">
-            <img
-              src="/photos/basega-50th.png"
-              alt="BASEGA 50th Anniversary"
-              className="jubilee-logo"
-              onError={e => { e.target.style.display = 'none' }}
-            />
-            <div className="jubilee-banner-text">
-              <div className="jubilee-eyebrow">BSGS · Ago-Are · Est. 1976</div>
-              <h2>50 Years of Excellence</h2>
-              <p>
-                From 1976 to 2026 — half a century of shaping outstanding citizens, nurturing
-                talent, and building a community bound by the values of <strong>Peace</strong> and <strong>Progress</strong>.
-                The BASEGA Alumni Association joins the school in celebrating this historic milestone.
+    <div className="page-layout jubilee-page">
+      <section className="jubilee-hero" aria-labelledby="jubilee-title">
+        <div className="container jubilee-hero-inner">
+          <nav className="about-breadcrumb jubilee-breadcrumb" aria-label="Breadcrumb">
+            <Link to="/">Home</Link><span aria-hidden="true">/</span><span>Jubilee Anniversary</span>
+          </nav>
+          <div className="jubilee-hero-grid">
+            <div className="jubilee-hero-copy">
+              <p className="about-eyebrow"><span /> 50th Founders’ Day · Ago-Are, Oyo State</p>
+              <h1 id="jubilee-title">50 years of excellence.<br /><span>A legacy still growing.</span></h1>
+              <p className="jubilee-hero-lead">
+                From 1976 to 2026, generations of BASEGites have carried forward a tradition
+                of learning, service, peace and progress. Join us in celebrating this golden milestone.
               </p>
-              <div className="jubilee-countdown-label">Founders' Day Celebration · 2026</div>
+              <a className="about-hero-link" href="#jubilee-memorabilia">
+                Explore Jubilee keepsakes <span aria-hidden="true">↓</span>
+              </a>
+            </div>
+            <div className="jubilee-hero-art">
+              <div className="jubilee-logo-frame">
+                <img
+                  src="/photos/basega-50th.png"
+                  alt="BASEGA Golden Jubilee anniversary emblem"
+                  className="jubilee-logo"
+                  onError={e => { e.currentTarget.style.display = 'none' }}
+                />
+                <span>Golden Jubilee</span>
+                <strong>1976 <i aria-hidden="true">—</i> 2026</strong>
+              </div>
+              <span className="jubilee-hero-spark jubilee-hero-spark-one" aria-hidden="true">✦</span>
+              <span className="jubilee-hero-spark jubilee-hero-spark-two" aria-hidden="true">✧</span>
             </div>
           </div>
+          <div className="about-stat-strip jubilee-stat-strip" aria-label="Golden Jubilee at a glance">
+            <div className="about-stat"><strong>1976</strong><span>School established</span></div>
+            <div className="about-stat"><strong>50</strong><span>Years of shared history</span></div>
+            <div className="about-stat"><strong>2026</strong><span>Golden Jubilee year</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section className="jubilee-memorabilia section" id="jubilee-memorabilia">
+        <div className="container">
+          <div className="about-section-heading jubilee-section-heading">
+            <div>
+              <p className="about-section-eyebrow">Official Jubilee keepsakes</p>
+              <h2 className="section-title">Take a piece of the celebration home.</h2>
+            </div>
+            <p>Commemorate 50 years of BASEGA with anniversary memorabilia, available to purchase from the association.</p>
+          </div>
+          <div className="jubilee-product-grid">
+            {MEMORABILIA.map((item, index) => (
+              <article className="jubilee-product-card" key={item.name}>
+                <div className="jubilee-product-mark" aria-hidden="true">{item.mark}</div>
+                <span className="jubilee-product-index">KEEPSAKE · 0{index + 1}</span>
+                <h3>{item.name}</h3>
+                <p>{item.detail}</p>
+                <strong className="jubilee-product-price">{item.price}</strong>
+                <a href="mailto:info@basegaalumni.ng?subject=Golden%20Jubilee%20Memorabilia%20Order" className="jubilee-order-link">
+                  Enquire to order <span aria-hidden="true">→</span>
+                </a>
+              </article>
+            ))}
+          </div>
+          <p className="jubilee-order-note">For availability and ordering, contact the BASEGA Alumni Association Secretariat.</p>
         </div>
       </section>
 
       {/* ── Updates ── */}
       <section className="jubilee-updates">
         <div className="container">
-          <div className="jubilee-section-head">
-            <h2>Jubilee Highlights &amp; Updates</h2>
-            <p>Stay up to date with all 50th anniversary activities, events, and calls to action.</p>
+          <div className="about-section-heading jubilee-section-heading">
+            <div>
+              <p className="about-section-eyebrow">The celebration so far</p>
+              <h2 className="section-title">Jubilee highlights &amp; updates</h2>
+            </div>
+            <p>Stay up to date with anniversary activities, events, and calls to action.</p>
           </div>
 
           <div className="jubilee-updates-list">
@@ -142,11 +201,12 @@ export default function Jubilee() {
       {/* ── CTA ── */}
       <section className="jubilee-cta">
         <div className="container">
-          <h2>Be Part of the Celebration</h2>
+          <p className="about-section-eyebrow">A milestone made by all of us</p>
+          <h2>Be part of the celebration.</h2>
           <p>Register as an alumni member and join thousands of BASEGA graduates marking this golden jubilee together.</p>
-          <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap', marginTop: '1.5rem' }}>
+          <div className="jubilee-cta-buttons">
             <a href="/register" className="btn btn-hero-primary btn-lg">Register Now</a>
-            <a href="/contact"  className="btn btn-hero-outline btn-lg">Contact Secretariat</a>
+            <a href="/contact" className="btn btn-hero-outline btn-lg">Contact Secretariat</a>
           </div>
         </div>
       </section>

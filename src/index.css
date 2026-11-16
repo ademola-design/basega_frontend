@@ -7402,102 +7402,264 @@ a.current-featured:hover {
 }
 
 /* ── Jubilee Anniversary page ── */
-.jubilee-banner {
-  background: linear-gradient(135deg, #0a3d10 0%, #1a5c1a 60%, #0a2a0a 100%);
-  padding: 4rem 0;
-  border-bottom: 4px solid var(--gold);
+.jubilee-hero {
+  position: relative;
+  overflow: hidden;
+  color: var(--white);
+  background:
+    radial-gradient(ellipse at 82% 16%, rgba(116, 198, 157, 0.2), transparent 30%),
+    radial-gradient(ellipse at 2% 100%, rgba(212, 168, 67, 0.12), transparent 34%),
+    linear-gradient(122deg, #0d2117 0%, #163b2b 58%, #1b4332 100%);
 }
-.jubilee-banner-inner {
-  display: flex;
+.jubilee-hero::before {
+  position: absolute;
+  inset: 0;
+  content: "";
+  opacity: 0.13;
+  pointer-events: none;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.6) 0.65px, transparent 0.65px);
+  background-size: 18px 18px;
+  mask-image: linear-gradient(90deg, transparent, #000);
+}
+.jubilee-hero-inner {
+  position: relative;
+  z-index: 1;
+}
+.jubilee-breadcrumb {
+  position: relative;
+}
+.jubilee-hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
   align-items: center;
-  gap: 3rem;
-  flex-wrap: wrap;
+  gap: clamp(2rem, 7vw, 6rem);
+  min-height: 440px;
+  padding: 3.25rem 0 2.5rem;
+}
+.jubilee-hero-copy {
+  max-width: 700px;
+  animation: aboutHeroEnter 720ms var(--ease-enter) both;
+}
+.jubilee-hero h1 {
+  color: var(--white);
+  font-size: clamp(2.65rem, 5.2vw, 4.65rem);
+  font-weight: 800;
+  letter-spacing: -0.055em;
+  line-height: 1.04;
+}
+.jubilee-hero h1 span {
+  color: #b7e4c7;
+}
+.jubilee-hero-lead {
+  max-width: 570px;
+  margin-top: 1.35rem;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: clamp(1rem, 1.6vw, 1.15rem);
+  line-height: 1.8;
+}
+.jubilee-hero-art {
+  position: relative;
+  display: grid;
+  min-height: 330px;
+  place-items: center;
+  animation: aboutHeroEnter 900ms var(--ease-enter) 100ms both;
+}
+.jubilee-logo-frame {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  width: min(100%, 340px);
+  min-height: 320px;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
+  padding: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  border-radius: 180px 180px 28px 28px;
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.13), rgba(255, 255, 255, 0.045));
+  box-shadow: 0 26px 70px rgba(0, 0, 0, 0.18), inset 0 0 0 7px rgba(255, 255, 255, 0.035);
+  backdrop-filter: blur(8px);
 }
 .jubilee-logo {
-  width: 220px;
-  height: auto;
-  filter: drop-shadow(0 4px 24px rgba(0, 0, 0, 0.4));
-  flex-shrink: 0;
+  width: min(100%, 220px);
+  max-height: 220px;
+  object-fit: contain;
+  filter: drop-shadow(0 8px 22px rgba(0, 0, 0, 0.22));
 }
-.jubilee-banner-text {
-  color: #fff;
-  max-width: 560px;
-}
-.jubilee-eyebrow {
-  font-size: 0.72rem;
+.jubilee-logo-frame > span {
+  margin-top: 0.75rem;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.62rem;
   font-weight: 700;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--gold);
-  margin-bottom: 0.75rem;
 }
-.jubilee-banner-text h2 {
-  font-size: clamp(1.8rem, 4vw, 2.8rem);
-  font-weight: 900;
-  color: var(--gold);
-  margin-bottom: 1rem;
-  line-height: 1.1;
+.jubilee-logo-frame > strong {
+  margin-top: 0.2rem;
+  color: #f0d48a;
+  font-size: 1.25rem;
+  letter-spacing: 0.08em;
 }
-.jubilee-banner-text p {
-  color: rgba(255, 255, 255, 0.85);
-  line-height: 1.8;
-  font-size: 0.975rem;
-  margin-bottom: 1.25rem;
+.jubilee-logo-frame i {
+  color: var(--green-300);
+  font-style: normal;
 }
-.jubilee-countdown-label {
-  display: inline-block;
-  background: rgba(217, 169, 60, 0.18);
-  border: 1px solid var(--gold);
-  color: var(--gold);
-  padding: 0.4rem 1rem;
-  border-radius: var(--r-full);
-  font-size: 0.8rem;
-  font-weight: 700;
+.jubilee-hero-spark {
+  position: absolute;
+  color: #f0d48a;
+  font-size: 1.5rem;
+}
+.jubilee-hero-spark-one {
+  top: 16%;
+  right: 7%;
+}
+.jubilee-hero-spark-two {
+  bottom: 13%;
+  left: 8%;
+  color: var(--green-300);
+  font-size: 1.8rem;
+}
+.jubilee-stat-strip {
+  border-top-color: rgba(255, 255, 255, 0.15);
+}
+.jubilee-stat-strip .about-stat + .about-stat {
+  border-left-color: rgba(255, 255, 255, 0.15);
+}
+.jubilee-stat-strip .about-stat strong {
+  color: #f0d48a;
+}
+.jubilee-stat-strip .about-stat span {
+  color: rgba(255, 255, 255, 0.65);
+}
+.jubilee-memorabilia {
+  background: #f7f8f5;
+}
+.jubilee-section-heading {
+  margin-bottom: 2rem;
+}
+.jubilee-section-heading .section-title {
+  max-width: 620px;
+}
+.jubilee-product-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.15rem;
+}
+.jubilee-product-card {
+  position: relative;
+  display: flex;
+  min-height: 320px;
+  flex-direction: column;
+  align-items: flex-start;
+  overflow: hidden;
+  padding: 1.65rem;
+  border: 1px solid #e4e9e2;
+  border-radius: var(--r-lg);
+  background: linear-gradient(145deg, #fff, #f8faf7);
+  box-shadow: 0 8px 25px rgba(15, 36, 25, 0.045);
+  transition: transform 280ms var(--ease), box-shadow 280ms var(--ease);
+}
+.jubilee-product-card::before {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 4px;
+  background: linear-gradient(var(--gold), var(--green-500));
+  content: "";
+}
+.jubilee-product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 18px 38px rgba(15, 36, 25, 0.12);
+}
+.jubilee-product-mark {
+  display: grid;
+  width: 62px;
+  height: 62px;
+  margin-bottom: 1.4rem;
+  place-items: center;
+  border: 1px solid rgba(212, 168, 67, 0.38);
+  border-radius: 50%;
+  background: #fbf5e5;
+  color: var(--green-800);
+  font-size: 1.4rem;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+}
+.jubilee-product-card:nth-child(3) .jubilee-product-mark {
+  font-size: 0.75rem;
   letter-spacing: 0.04em;
 }
-@media (max-width: 700px) {
-  .jubilee-logo {
-    width: 160px;
-  }
-  .jubilee-banner {
-    padding: 2.5rem 0;
-  }
-}
-
-.jubilee-updates {
-  padding: 4.5rem 0;
-  background: var(--gray-50);
-}
-.jubilee-section-head {
-  text-align: center;
-  margin-bottom: 2.5rem;
-}
-.jubilee-section-head h2 {
-  font-size: clamp(1.5rem, 3vw, 2.2rem);
+.jubilee-product-index {
+  margin-bottom: 0.45rem;
+  color: var(--gold-dk);
+  font-size: 0.68rem;
   font-weight: 800;
-  color: var(--gray-900);
-  margin-bottom: 0.5rem;
+  letter-spacing: 0.13em;
 }
-.jubilee-section-head p {
+.jubilee-product-card h3 {
+  color: var(--green-900);
+  font-size: 1.12rem;
+  letter-spacing: -0.02em;
+}
+.jubilee-product-card > p {
+  margin-top: 0.55rem;
+  color: var(--gray-600);
+  font-size: 0.88rem;
+  line-height: 1.7;
+}
+.jubilee-product-price {
+  margin-top: auto;
+  padding-top: 1.25rem;
+  color: var(--green-800);
+  font-size: 1.35rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+.jubilee-order-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin-top: 0.7rem;
+  color: var(--green-700);
+  font-size: 0.84rem;
+  font-weight: 750;
+}
+.jubilee-order-link span {
+  color: var(--gold-dk);
+  transition: transform var(--dur) var(--ease);
+}
+.jubilee-order-link:hover span {
+  transform: translateX(4px);
+}
+.jubilee-order-link:focus-visible {
+  outline: 2px solid var(--green-600);
+  outline-offset: 4px;
+}
+.jubilee-order-note {
+  margin-top: 1.2rem;
   color: var(--gray-500);
-  font-size: 0.95rem;
+  font-size: 0.82rem;
+  text-align: center;
+}
+.jubilee-updates {
+  padding: 5rem 0;
+  background: #fff;
 }
 .jubilee-updates-list {
   display: flex;
+  max-width: 960px;
   flex-direction: column;
-  gap: 1.25rem;
-  max-width: 800px;
+  gap: 1rem;
   margin: 0 auto;
 }
 .jubilee-update-card {
   display: flex;
   gap: 1.5rem;
-  background: var(--white);
-  border-radius: 1rem;
-  padding: 1.5rem;
-  box-shadow: var(--shadow-sm);
-  border-left: 4px solid var(--gold);
+  padding: 1.45rem 1.55rem;
+  border: 1px solid #e7ebe5;
+  border-left: 3px solid var(--gold);
+  border-radius: var(--r-lg);
+  background: linear-gradient(145deg, #fff, #fafbf9);
+  box-shadow: 0 8px 25px rgba(15, 36, 25, 0.04);
 }
 .jubilee-update-thumb {
   width: 140px;
@@ -7514,43 +7676,125 @@ a.current-featured:hover {
   object-fit: cover;
 }
 .jubilee-update-left {
-  flex-shrink: 0;
-  width: 120px;
   display: flex;
+  width: 130px;
+  flex-shrink: 0;
   flex-direction: column;
   gap: 0.5rem;
 }
 .jubilee-update-date {
-  font-size: 0.78rem;
-  font-weight: 700;
   color: var(--gray-500);
-  text-transform: uppercase;
+  font-size: 0.73rem;
+  font-weight: 700;
   letter-spacing: 0.06em;
+  text-transform: uppercase;
 }
 .jubilee-update-tag {
   display: inline-block;
-  font-size: 0.7rem;
-  font-weight: 700;
+  width: fit-content;
   padding: 0.25rem 0.6rem;
   border-radius: var(--r-full);
-  text-transform: uppercase;
+  font-size: 0.66rem;
+  font-weight: 700;
   letter-spacing: 0.04em;
-  width: fit-content;
+  text-transform: uppercase;
 }
 .jubilee-update-body h3 {
+  margin-bottom: 0.5rem;
+  color: var(--green-900);
   font-size: 1rem;
   font-weight: 800;
-  color: var(--gray-900);
-  margin-bottom: 0.5rem;
-  line-height: 1.3;
+  line-height: 1.35;
 }
 .jubilee-update-body p {
-  font-size: 0.875rem;
-  color: var(--gray-600);
-  line-height: 1.75;
   margin: 0;
+  color: var(--gray-600);
+  font-size: 0.875rem;
+  line-height: 1.75;
 }
-@media (max-width: 600px) {
+.jubilee-cta {
+  padding: 4.5rem 0;
+  border-top: 1px solid rgba(212, 168, 67, 0.55);
+  background:
+    radial-gradient(ellipse at 90% 0%, rgba(116, 198, 157, 0.15), transparent 35%),
+    linear-gradient(130deg, #10271b, #1b4332);
+  color: var(--white);
+  text-align: center;
+}
+.jubilee-cta .about-section-eyebrow {
+  justify-content: center;
+  margin-bottom: 0.65rem;
+  color: #efcf7a;
+}
+.jubilee-cta h2 {
+  margin-bottom: 0.75rem;
+  color: var(--white);
+  font-size: clamp(1.7rem, 3vw, 2.5rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+}
+.jubilee-cta > .container > p:not(.about-section-eyebrow) {
+  max-width: 560px;
+  margin: 0 auto;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 0.975rem;
+  line-height: 1.8;
+}
+.jubilee-cta-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+@media (max-width: 900px) {
+  .jubilee-hero-grid {
+    grid-template-columns: minmax(0, 1.2fr) minmax(220px, 0.8fr);
+    gap: 1.5rem;
+    min-height: 400px;
+  }
+  .jubilee-product-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .jubilee-product-card:last-child {
+    grid-column: 1 / -1;
+    min-height: 275px;
+  }
+}
+@media (max-width: 640px) {
+  .jubilee-hero-grid {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+    min-height: 0;
+    padding: 3rem 0 1.75rem;
+  }
+  .jubilee-hero h1 {
+    font-size: clamp(2.5rem, 10vw, 3.7rem);
+  }
+  .jubilee-hero-art {
+    min-height: 300px;
+  }
+  .jubilee-logo-frame {
+    width: min(100%, 290px);
+    min-height: 280px;
+  }
+  .jubilee-stat-strip .about-stat {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    padding: 0 0.7rem;
+  }
+  .jubilee-product-grid {
+    grid-template-columns: 1fr;
+  }
+  .jubilee-product-card,
+  .jubilee-product-card:last-child {
+    min-height: 0;
+    grid-column: auto;
+  }
+  .jubilee-product-price {
+    margin-top: 0;
+  }
   .jubilee-update-card {
     flex-direction: column;
     gap: 0.75rem;
@@ -7569,26 +7813,6 @@ a.current-featured:hover {
     flex-direction: row;
     align-items: center;
   }
-}
-
-.jubilee-cta {
-  background: #0a3d10;
-  padding: 4rem 0;
-  text-align: center;
-  color: var(--white);
-  border-top: 4px solid var(--gold);
-}
-.jubilee-cta h2 {
-  font-size: clamp(1.5rem, 3vw, 2.2rem);
-  font-weight: 800;
-  margin-bottom: 0.75rem;
-}
-.jubilee-cta p {
-  color: rgba(255, 255, 255, 0.78);
-  font-size: 0.975rem;
-  max-width: 520px;
-  margin: 0 auto;
-  line-height: 1.8;
 }
 
 /* ===== Login Page ===== */
