@@ -147,9 +147,6 @@ export default function Jubilee() {
                 <h3>{item.name}</h3>
                 <p>{item.detail}</p>
                 <strong className="jubilee-product-price">{item.price}</strong>
-                <a href="mailto:info@basegaalumni.ng?subject=Golden%20Jubilee%20Memorabilia%20Order" className="jubilee-order-link">
-                  Enquire to order <span aria-hidden="true">→</span>
-                </a>
               </article>
             ))}
           </div>

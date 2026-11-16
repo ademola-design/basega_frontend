@@ -7614,26 +7614,6 @@ a.current-featured:hover {
   font-weight: 800;
   letter-spacing: -0.03em;
 }
-.jubilee-order-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.55rem;
-  margin-top: 0.7rem;
-  color: var(--green-700);
-  font-size: 0.84rem;
-  font-weight: 750;
-}
-.jubilee-order-link span {
-  color: var(--gold-dk);
-  transition: transform var(--dur) var(--ease);
-}
-.jubilee-order-link:hover span {
-  transform: translateX(4px);
-}
-.jubilee-order-link:focus-visible {
-  outline: 2px solid var(--green-600);
-  outline-offset: 4px;
-}
 .jubilee-order-note {
   margin-top: 1.2rem;
   color: var(--gray-500);
