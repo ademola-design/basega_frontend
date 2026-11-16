@@ -4,7 +4,7 @@ import presidentPhoto from '../../Alumni President.jpeg'
 
 const values = [
   { title: 'Our Mission', desc: 'To nurture well-rounded individuals equipped with knowledge, character and the confidence to lead in a rapidly changing world.' },
-  { title: 'Academic Excellence', desc: 'We maintain rigorous academic standards, blending the Nigerian and Cambridge curricula to prepare students for both local and international success.' },
+  { title: 'Academic Excellence', desc: 'We maintain rigorous academic standards, blending the Nigerian and international curricula to prepare students for both local and global success.' },
   { title: 'Community and Service', desc: 'We instil in every student a sense of responsibility to give back — to their community, and the nation at large.' },
 ]
 
